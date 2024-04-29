@@ -8,3 +8,6 @@
     <img src="https://github.com/augustojulio-code/postechrepo/blob/master/solution_architecture.PNG" width="700px" height="500px"/>    
 </p>
 <br>
+
+## Project Status
+* concluded
