@@ -12,13 +12,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.aquiteturahexa.techchallenge.core.model.User;
+import com.aquiteturahexa.techchallenge.core.ports.UserServicePort;
+
+import lombok.AllArgsConstructor;
+
 @RestController
-@RequestMapping("/")
+@RequestMapping("/user")
+@AllArgsConstructor
 public class UserController {
 
-    @GetMapping("/ola")
-    public String testeTeste() {
-        return "Ola imbecil";
+    private final UserServicePort userServicePort;
+
+    @PostMapping()
+    public User creatUser(@RequestBody User user) {
+
+        return userServicePort.saveUser(user);
     }
+
+    @GetMapping()
+    public List<User> findAll() {
+
+        return userServicePort.findAll();
+    }
+    /*
+     * @GetMapping("/ola")
+     * public String testeTeste() {
+     * return "Ola imbecil";
+     * }
+     */
 
 }
