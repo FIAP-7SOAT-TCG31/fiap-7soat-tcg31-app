@@ -1,6 +1,7 @@
 package com.aquiteturahexa.techchallenge.adapters.repositories;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -37,6 +38,13 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
                 .stream()
                 .map(userEntity -> modelMapper.map(userEntity, User.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public User findByid(Long id) {
+        Optional<UserEntity> obj = userRepository.findById(id);
+        return obj.get().toUser();
+
     }
 
 }
