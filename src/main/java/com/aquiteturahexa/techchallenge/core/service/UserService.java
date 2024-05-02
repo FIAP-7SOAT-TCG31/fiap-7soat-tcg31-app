@@ -35,4 +35,9 @@ public class UserService implements UserServicePort {
         return userRepositoryPort.updateUser(id, user);
     }
 
+    @Override
+    public void deleteById(Long id) {
+        userRepositoryPort.deleteByid(id);
+    }
+
 }

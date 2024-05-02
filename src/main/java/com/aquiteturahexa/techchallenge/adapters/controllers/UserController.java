@@ -45,6 +45,12 @@ public class UserController {
     public User updateUser(@PathVariable Long id, @RequestBody User user) {
         return userServicePort.updateUser(id, user);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable Long id) {
+
+        userServicePort.deleteById(id);
+    }
     /*
      * @GetMapping("/ola")
      * public String testeTeste() {

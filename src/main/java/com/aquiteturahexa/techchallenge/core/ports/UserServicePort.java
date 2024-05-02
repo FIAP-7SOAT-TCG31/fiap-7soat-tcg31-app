@@ -13,4 +13,6 @@ public interface UserServicePort {
     User findById(Long id);
 
     User updateUser(Long id, User user);
+
+    void deleteById(Long id);
 }
