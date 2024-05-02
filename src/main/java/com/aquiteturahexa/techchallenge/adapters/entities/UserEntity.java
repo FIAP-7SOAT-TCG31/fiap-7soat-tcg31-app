@@ -1,5 +1,7 @@
 package com.aquiteturahexa.techchallenge.adapters.entities;
 
+import com.aquiteturahexa.techchallenge.core.model.User;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,4 +22,9 @@ public class UserEntity {
     private Long id;
     private String name;
     private String email;
+
+    public User toUser() {
+
+        return new User(this.id, this.name, this.email);
+    }
 }

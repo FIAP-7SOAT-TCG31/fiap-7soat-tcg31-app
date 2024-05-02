@@ -25,4 +25,9 @@ public class UserService implements UserServicePort {
         return userRepositoryPort.save(user);
     }
 
+    @Override
+    public User findById(Long id) {
+        return userRepositoryPort.findByid(id);
+    }
+
 }

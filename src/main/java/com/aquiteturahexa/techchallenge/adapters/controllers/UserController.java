@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aquiteturahexa.techchallenge.core.model.User;
@@ -34,6 +35,12 @@ public class UserController {
     public List<User> findAll() {
 
         return userServicePort.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public User findById(@RequestParam Long id) {
+
+        return userServicePort.findById(id);
     }
     /*
      * @GetMapping("/ola")

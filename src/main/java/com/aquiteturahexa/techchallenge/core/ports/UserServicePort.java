@@ -9,4 +9,6 @@ public interface UserServicePort {
     List<User> findAll();
 
     User saveUser(User user);
+
+    User findById(Long id);
 }
