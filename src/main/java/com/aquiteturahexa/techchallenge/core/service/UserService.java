@@ -30,4 +30,9 @@ public class UserService implements UserServicePort {
         return userRepositoryPort.findByid(id);
     }
 
+    @Override
+    public User updateUser(Long id, User user) {
+        return userRepositoryPort.updateUser(id, user);
+    }
+
 }
