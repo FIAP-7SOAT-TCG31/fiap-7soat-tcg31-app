@@ -40,6 +40,11 @@ public class UserController {
 
         return userServicePort.findById(id);
     }
+
+    @PutMapping("/{id}")
+    public User updateUser(@PathVariable Long id, @RequestBody User user) {
+        return userServicePort.updateUser(id, user);
+    }
     /*
      * @GetMapping("/ola")
      * public String testeTeste() {

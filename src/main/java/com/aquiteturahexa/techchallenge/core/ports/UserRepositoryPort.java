@@ -10,4 +10,6 @@ public interface UserRepositoryPort {
     List<User> findAll();
 
     User findByid(Long id);
+
+    User updateUser(Long id, User user);
 }

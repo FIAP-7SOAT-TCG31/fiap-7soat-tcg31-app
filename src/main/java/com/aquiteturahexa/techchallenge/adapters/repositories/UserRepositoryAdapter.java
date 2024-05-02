@@ -43,8 +43,19 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     @Override
     public User findByid(Long id) {
         Optional<UserEntity> obj = userRepository.findById(id);
-        return obj.get().toUser();
 
+        return obj.map(userEntity -> modelMapper.map(userEntity, User.class))
+                .orElse(null);
+        // return obj.get().toUser();
+
+    }
+
+    @Override
+    public User updateUser(Long id, User updateUser) {
+        User existuser = findByid(id);
+        existuser.setName(updateUser.getName());
+        existuser.setEmail(updateUser.getEmail());
+        return save(existuser);
     }
 
 }

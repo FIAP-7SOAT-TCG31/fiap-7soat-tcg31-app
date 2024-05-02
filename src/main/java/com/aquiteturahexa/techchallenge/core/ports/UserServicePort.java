@@ -11,4 +11,6 @@ public interface UserServicePort {
     User saveUser(User user);
 
     User findById(Long id);
+
+    User updateUser(Long id, User user);
 }
