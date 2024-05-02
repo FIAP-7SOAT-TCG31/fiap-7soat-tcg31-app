@@ -58,4 +58,10 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
         return save(existuser);
     }
 
+    @Override
+    public void deleteByid(Long id) {
+
+        userRepository.deleteById(id);
+    }
+
 }
