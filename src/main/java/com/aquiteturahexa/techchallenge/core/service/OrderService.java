@@ -26,16 +26,16 @@ public class OrderService implements OrderServicePort {
 
     @Override
     public Order findById(Long id) {
-        return null;
+        return orderRepositoryPort.findById(id);
     }
 
     @Override
     public Order updateOrder(Long id, Order order) {
-        return null;
+        return orderRepositoryPort.updateOrder(id, order);
     }
 
     @Override
     public Order updateStatus(Long id, Order order) {
-        return null;
+        return orderRepositoryPort.updateStatus(id, order);
     }
 }

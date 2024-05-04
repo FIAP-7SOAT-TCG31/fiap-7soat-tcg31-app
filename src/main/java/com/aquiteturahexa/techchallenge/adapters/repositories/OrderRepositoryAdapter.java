@@ -1,6 +1,7 @@
 package com.aquiteturahexa.techchallenge.adapters.repositories;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -37,17 +38,26 @@ public class OrderRepositoryAdapter implements OrderRepositoryPort {
 
     @Override
     public Order findById(Long id) {
-        return null;
+        Optional<OrderEntity> obj = orderRepository.findById(id);
+
+        return obj.map(orderEntity -> modelMapper.map(orderEntity, Order.class))
+                .orElse(null);
     }
 
     @Override
     public Order updateOrder(Long id, Order order) {
-        return null;
+        Order existOrder = findById(id);
+        existOrder.setTotalPrice(order.getTotalPrice());
+        existOrder.setCombos(order.getCombos());
+
+        return saveOrder(existOrder);
     }
 
     @Override
     public Order updateStatus(Long id, Order order) {
-        return null;
+        Order existOrder = findById(id);
+        existOrder.setStatus(order.getStatus());
+        return saveOrder(existOrder);
     }
 
 }

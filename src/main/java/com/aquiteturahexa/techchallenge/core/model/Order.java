@@ -4,17 +4,17 @@ public class Order {
 
     private Long id;
     private Long reqUser;
-    // private List<Combo> combos;
+    private Long combos;
     private Float totalPrice;
     private Integer status;
 
     public Order() {
     }
 
-    public Order(Long id, Long reqUser /* List<Combo> combos */, Float totalPrice, Integer status) {
+    public Order(Long id, Long reqUser, Long combos, Float totalPrice, Integer status) {
         this.id = id;
         this.reqUser = reqUser;
-        // this.combos = combos;
+        this.combos = combos;
         this.totalPrice = totalPrice;
         this.status = status;
     }
@@ -33,6 +33,14 @@ public class Order {
 
     public void setReqUser(Long reqUser) {
         this.reqUser = reqUser;
+    }
+
+    public Long getCombos() {
+        return combos;
+    }
+
+    public void setCombos(Long combos) {
+        this.combos = combos;
     }
 
     public Float getTotalPrice() {
