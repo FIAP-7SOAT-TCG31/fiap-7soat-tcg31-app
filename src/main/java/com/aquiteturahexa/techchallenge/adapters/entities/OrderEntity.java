@@ -25,8 +25,8 @@ public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    // private User reqUser;
-    // private List<Combo> combos;
+    private Long reqUser;
+    private Long combos;
     private Float totalPrice;
-    // private Status status;
+    private Integer status;
 }

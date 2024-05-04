@@ -2,7 +2,7 @@ package com.aquiteturahexa.techchallenge.core.model;
 
 public class Item {
 
-    private Long id;
+    private User id;
     private String name;
     private ItemType type;
     private Float price;
@@ -12,7 +12,7 @@ public class Item {
 
     }
 
-    public Item(Long id, String name, ItemType type, Float price, Float quantity) {
+    public Item(User id, String name, ItemType type, Float price, Float quantity) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -21,11 +21,11 @@ public class Item {
 
     }
 
-    public Long getId() {
+    public User getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(User id) {
         this.id = id;
     }
 

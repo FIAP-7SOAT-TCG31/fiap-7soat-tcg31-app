@@ -1,19 +1,17 @@
 package com.aquiteturahexa.techchallenge.core.model;
 
-import java.util.List;
-
 public class Order {
 
     private Long id;
-    private User reqUser;
-    private List<Combo> combos;
+    private Long reqUser;
+    private Long combos;
     private Float totalPrice;
-    private Status status;
+    private Integer status;
 
     public Order() {
     }
 
-    public Order(Long id, User reqUser, List<Combo> combos, Float totalPrice, Status status) {
+    public Order(Long id, Long reqUser, Long combos, Float totalPrice, Integer status) {
         this.id = id;
         this.reqUser = reqUser;
         this.combos = combos;
@@ -29,19 +27,19 @@ public class Order {
         this.id = id;
     }
 
-    public User getReqUser() {
+    public Long getReqUser() {
         return reqUser;
     }
 
-    public void setReqUser(User reqUser) {
+    public void setReqUser(Long reqUser) {
         this.reqUser = reqUser;
     }
 
-    public List<Combo> getCombos() {
+    public Long getCombos() {
         return combos;
     }
 
-    public void setCombos(List<Combo> combos) {
+    public void setCombos(Long combos) {
         this.combos = combos;
     }
 
@@ -53,11 +51,11 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
-    public Status getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

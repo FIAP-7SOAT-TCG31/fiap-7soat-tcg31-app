@@ -23,8 +23,4 @@ public class UserEntity {
     private String name;
     private String email;
 
-    public User toUser() {
-
-        return new User(this.id, this.name, this.email);
-    }
 }
