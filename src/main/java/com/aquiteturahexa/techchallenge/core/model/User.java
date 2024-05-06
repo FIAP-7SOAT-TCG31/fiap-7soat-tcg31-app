@@ -2,6 +2,7 @@ package com.aquiteturahexa.techchallenge.core.model;
 
 public class User {
     private Long id;
+    private Long CPF;
     private String name;
     private String email;
 
@@ -9,8 +10,9 @@ public class User {
 
     }
 
-    public User(Long id, String name, String email) {
+    public User(Long id, Long CPF, String name, String email) {
         this.id = id;
+        this.CPF = CPF;
         this.name = name;
         this.email = email;
 
@@ -38,5 +40,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Long getCPF() {
+        return CPF;
+    }
+
+    public void setCPF(Long CPF) {
+        this.CPF = CPF;
     }
 }
