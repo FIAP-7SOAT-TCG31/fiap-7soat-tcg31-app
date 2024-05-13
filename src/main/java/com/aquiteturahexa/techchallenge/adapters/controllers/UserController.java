@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aquiteturahexa.techchallenge.core.model.User;
-import com.aquiteturahexa.techchallenge.core.ports.UserServicePort;
+import com.aquiteturahexa.techchallenge.core.ports.in.UserServicePort;
 
 import lombok.AllArgsConstructor;
 

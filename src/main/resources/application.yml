@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: orders
+  datasource:
+    url: jdbc:h2:mem:test
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate.ddl-auto: create
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+        globally_quoted_identifiers_skip_column_definitions: true
+  h2:
+    console:
+      enabled: true
+      path: /h2
+      settings.trace: false
+      settings.web-allow-others: false
+
+server:
+  port: 8080
