@@ -34,7 +34,7 @@ public class OrderEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "requester", referencedColumnName = "cpf")
+    @JoinColumn(name = "requester")
     private UserEntity requester;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)

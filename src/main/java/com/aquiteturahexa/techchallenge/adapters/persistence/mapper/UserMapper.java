@@ -12,7 +12,7 @@ public class UserMapper {
                 ? null
                 : UserEntity
                 .builder()
-                //.withId(requester.getId())
+                .withId(requester.getId())
                 .withCpf(String.valueOf(requester.getCPF()))
                 .withName(requester.getName())
                 .withEmail(requester.getEmail())
@@ -22,6 +22,6 @@ public class UserMapper {
     public static User toDomain(UserEntity requester) {
         return isNull(requester)
                 ? null
-                : new User(Long.valueOf(requester.getCpf()), requester.getName(), requester.getEmail());
+                : new User(requester.getId(), Long.valueOf(requester.getCpf()), requester.getName(), requester.getEmail());
     }
 }
