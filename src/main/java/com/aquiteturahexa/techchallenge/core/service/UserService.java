@@ -3,8 +3,8 @@ package com.aquiteturahexa.techchallenge.core.service;
 import java.util.List;
 
 import com.aquiteturahexa.techchallenge.core.model.User;
-import com.aquiteturahexa.techchallenge.core.ports.UserRepositoryPort;
-import com.aquiteturahexa.techchallenge.core.ports.UserServicePort;
+import com.aquiteturahexa.techchallenge.core.ports.out.UserRepositoryPort;
+import com.aquiteturahexa.techchallenge.core.ports.in.UserServicePort;
 
 public class UserService implements UserServicePort {
 

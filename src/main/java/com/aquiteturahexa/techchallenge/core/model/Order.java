@@ -1,21 +1,23 @@
 package com.aquiteturahexa.techchallenge.core.model;
 
+import java.math.BigDecimal;
+import java.time.Instant;
+
 public class Order {
 
     private Long id;
-    private Long reqUser;
-    private Long combos;
-    private Float totalPrice;
-    private Integer status;
+    private User requester;
+    private Combo combo;
+    private Instant requestedAt;
+    private BigDecimal amount;
+    private Status status;
 
-    public Order() {
-    }
-
-    public Order(Long id, Long reqUser, Long combos, Float totalPrice, Integer status) {
+    public Order(Long id, User requester, Combo combo, Instant requestedAt, BigDecimal amount, Status status) {
         this.id = id;
-        this.reqUser = reqUser;
-        this.combos = combos;
-        this.totalPrice = totalPrice;
+        this.requester = requester;
+        this.combo = combo;
+        this.requestedAt = requestedAt;
+        this.amount = amount;
         this.status = status;
     }
 
@@ -23,40 +25,36 @@ public class Order {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public User getRequester() {
+        return requester;
     }
 
-    public Long getReqUser() {
-        return reqUser;
+    public Combo getCombo() {
+        return combo;
     }
 
-    public void setReqUser(Long reqUser) {
-        this.reqUser = reqUser;
+    public void setCombo(Combo combo) {
+        this.combo = combo;
     }
 
-    public Long getCombos() {
-        return combos;
+    public Instant getRequestedAt() {
+        return requestedAt;
     }
 
-    public void setCombos(Long combos) {
-        this.combos = combos;
+    public BigDecimal getAmount() {
+        return amount;
     }
 
-    public Float getTotalPrice() {
-        return totalPrice;
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
-    public void setTotalPrice(Float totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public Integer getStatus() {
+    public Status getStatus() {
         return status;
     }
-
-    public void setStatus(Integer status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
+
 
 }

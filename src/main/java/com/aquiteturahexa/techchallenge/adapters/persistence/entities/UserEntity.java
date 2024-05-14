@@ -1,27 +1,31 @@
-package com.aquiteturahexa.techchallenge.adapters.entities;
+package com.aquiteturahexa.techchallenge.adapters.persistence.entities;
 
-import com.aquiteturahexa.techchallenge.core.model.User;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data
-@AllArgsConstructor
+@Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "tb_users")
+@Builder(setterPrefix = "with")
 public class UserEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long CPF;
+
+    @Column(unique = true)
+    private String cpf;
+
     private String name;
     private String email;
-
 }

@@ -1,4 +1,4 @@
-package com.aquiteturahexa.techchallenge.core.ports;
+package com.aquiteturahexa.techchallenge.core.ports.in;
 
 import java.util.List;
 

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aquiteturahexa.techchallenge.core.model.Order;
-import com.aquiteturahexa.techchallenge.core.ports.OrderServicePort;
+import com.aquiteturahexa.techchallenge.core.ports.in.OrderServicePort;
 import lombok.AllArgsConstructor;
 
 @RestController

@@ -1,4 +1,4 @@
-package com.aquiteturahexa.techchallenge.adapters.repositories;
+package com.aquiteturahexa.techchallenge.adapters.persistence.repositories;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
-import com.aquiteturahexa.techchallenge.adapters.entities.UserEntity;
+import com.aquiteturahexa.techchallenge.adapters.persistence.entities.UserEntity;
 import com.aquiteturahexa.techchallenge.core.model.User;
-import com.aquiteturahexa.techchallenge.core.ports.UserRepositoryPort;
+import com.aquiteturahexa.techchallenge.core.ports.out.UserRepositoryPort;
 
 import lombok.AllArgsConstructor;
 

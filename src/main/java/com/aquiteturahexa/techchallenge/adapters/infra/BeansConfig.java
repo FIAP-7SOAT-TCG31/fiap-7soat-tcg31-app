@@ -1,15 +1,23 @@
 package com.aquiteturahexa.techchallenge.adapters.infra;
 
+import com.aquiteturahexa.techchallenge.core.ports.in.CreateOrderPortIn;
+import com.aquiteturahexa.techchallenge.core.ports.in.GetOrderPortIn;
+import com.aquiteturahexa.techchallenge.core.ports.in.OrderServicePort;
+import com.aquiteturahexa.techchallenge.core.ports.in.UpdateOrderPortIn;
+import com.aquiteturahexa.techchallenge.core.ports.in.UserServicePort;
+import com.aquiteturahexa.techchallenge.core.ports.out.GetOrderByIdPortOut;
+import com.aquiteturahexa.techchallenge.core.ports.out.OrderRepositoryPort;
+import com.aquiteturahexa.techchallenge.core.ports.out.SaveOrderPort;
+import com.aquiteturahexa.techchallenge.core.ports.out.UpdateOrderPortOut;
+import com.aquiteturahexa.techchallenge.core.ports.out.UserRepositoryPort;
+import com.aquiteturahexa.techchallenge.core.service.CreateOrderService;
+import com.aquiteturahexa.techchallenge.core.service.GetOrderService;
+import com.aquiteturahexa.techchallenge.core.service.OrderService;
+import com.aquiteturahexa.techchallenge.core.service.UpdateOrderService;
+import com.aquiteturahexa.techchallenge.core.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import com.aquiteturahexa.techchallenge.core.ports.OrderRepositoryPort;
-import com.aquiteturahexa.techchallenge.core.ports.OrderServicePort;
-import com.aquiteturahexa.techchallenge.core.ports.UserRepositoryPort;
-import com.aquiteturahexa.techchallenge.core.ports.UserServicePort;
-import com.aquiteturahexa.techchallenge.core.service.OrderService;
-import com.aquiteturahexa.techchallenge.core.service.UserService;
 
 @Configuration
 public class BeansConfig {
@@ -29,4 +37,20 @@ public class BeansConfig {
 
         return new OrderService(orderRepositoryPort);
     }
+
+    @Bean
+    public CreateOrderPortIn beanCreateOrderPortIn(SaveOrderPort saveOrderPort) {
+        return new CreateOrderService(saveOrderPort);
+    }
+
+    @Bean
+    public GetOrderPortIn beanGetOrderPortIn(GetOrderByIdPortOut getOrderByIdPortOut) {
+        return new GetOrderService(getOrderByIdPortOut);
+    }
+
+    @Bean
+    public UpdateOrderPortIn beanUpdateOrderPortIn(UpdateOrderPortOut updateOrderPortOut) {
+        return new UpdateOrderService(updateOrderPortOut);
+    }
+
 }

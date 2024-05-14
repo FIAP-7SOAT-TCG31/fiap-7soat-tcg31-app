@@ -3,8 +3,8 @@ package com.aquiteturahexa.techchallenge.core.service;
 import java.util.List;
 
 import com.aquiteturahexa.techchallenge.core.model.Order;
-import com.aquiteturahexa.techchallenge.core.ports.OrderRepositoryPort;
-import com.aquiteturahexa.techchallenge.core.ports.OrderServicePort;
+import com.aquiteturahexa.techchallenge.core.ports.out.OrderRepositoryPort;
+import com.aquiteturahexa.techchallenge.core.ports.in.OrderServicePort;
 
 public class OrderService implements OrderServicePort {
 

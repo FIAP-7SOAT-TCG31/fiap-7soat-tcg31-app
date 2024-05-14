@@ -1,4 +1,4 @@
-package com.aquiteturahexa.techchallenge.adapters.repositories;
+package com.aquiteturahexa.techchallenge.adapters.persistence.repositories;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
-import com.aquiteturahexa.techchallenge.adapters.entities.OrderEntity;
+import com.aquiteturahexa.techchallenge.adapters.persistence.entities.OrderEntity;
 import com.aquiteturahexa.techchallenge.core.model.Order;
-import com.aquiteturahexa.techchallenge.core.ports.OrderRepositoryPort;
+import com.aquiteturahexa.techchallenge.core.ports.out.OrderRepositoryPort;
 
 import lombok.AllArgsConstructor;
 
@@ -47,8 +47,8 @@ public class OrderRepositoryAdapter implements OrderRepositoryPort {
     @Override
     public Order updateOrder(Long id, Order order) {
         Order existOrder = findById(id);
-        existOrder.setTotalPrice(order.getTotalPrice());
-        existOrder.setCombos(order.getCombos());
+        existOrder.setAmount(order.getCombo().calculate());
+        existOrder.setCombo(order.getCombo());
 
         return saveOrder(existOrder);
     }
