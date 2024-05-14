@@ -15,6 +15,8 @@ import org.springframework.stereotype.Component;
 import java.time.ZonedDateTime;
 import java.util.List;
 
+import static java.util.Objects.isNull;
+
 @Component
 @RequiredArgsConstructor
 public class SearchOrderPersistenceAdapterOut implements SearchOrderPortOut {
@@ -29,7 +31,7 @@ public class SearchOrderPersistenceAdapterOut implements SearchOrderPortOut {
 
         var orders = orderRepository.findAll(Specification
                 .where(OrderSpecification.hasRequestedAtBetween(start, end))
-                .and(OrderSpecification.hasStatus(status.name()))
+                .and(OrderSpecification.hasStatus(isNull(status) ? null : status.name()))
                 .and(OrderSpecification.hasRequester(UserMapper.toEntity(requester))));
 
         return orders
