@@ -25,7 +25,6 @@ public class UserController {
 
     @PostMapping()
     public User creatUser(@RequestBody User user) {
-        System.out.println("" + user.getName());
         return userServicePort.saveUser(user);
     }
 

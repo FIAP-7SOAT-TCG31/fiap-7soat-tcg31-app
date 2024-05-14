@@ -22,10 +22,12 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
 
     @Override
     public User save(User user) {
+        System.out.println("" + user.getName());
         // Convertendo dominio em uma entidade
         UserEntity entity = modelMapper.map(user, UserEntity.class);
         UserEntity save = userRepository.save(entity);
         // Convertendo entity para domino
+        System.out.println("" + save.getEmail());
 
         return modelMapper.map(save, User.class);
 
