@@ -1,5 +1,7 @@
 package com.aquiteturahexa.techchallenge.adapters.persistence.entities;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,8 +11,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.math.BigDecimal;
 
 @Entity
 @Getter
@@ -26,4 +26,5 @@ public class ItemEntity {
     private String name;
     private String type;
     private BigDecimal price;
+    private Float quantity;
 }
