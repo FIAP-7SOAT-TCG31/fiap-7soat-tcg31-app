@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import com.aquiteturahexa.techchallenge.adapters.persistence.entities.UserEntity;
+import com.aquiteturahexa.techchallenge.adapters.persistence.mapper.UserMapper;
 import com.aquiteturahexa.techchallenge.core.model.User;
 import com.aquiteturahexa.techchallenge.core.ports.out.UserRepositoryPort;
 
@@ -22,14 +23,8 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
 
     @Override
     public User save(User user) {
-        System.out.println("" + user.getName());
-        // Convertendo dominio em uma entidade
-        UserEntity entity = modelMapper.map(user, UserEntity.class);
-        UserEntity save = userRepository.save(entity);
-        // Convertendo entity para domino
-        System.out.println("" + save.getEmail());
-
-        return modelMapper.map(save, User.class);
+        UserEntity entity = UserMapper.toEntity(user);
+        return UserMapper.toDomain(userRepository.save(entity));
 
     }
 
