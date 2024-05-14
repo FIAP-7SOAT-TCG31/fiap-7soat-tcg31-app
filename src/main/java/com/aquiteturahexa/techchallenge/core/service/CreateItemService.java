@@ -6,15 +6,15 @@ import com.aquiteturahexa.techchallenge.core.ports.out.CreateItemPortOut;
 
 public class CreateItemService implements CreateItemPortIn {
 
-    private final CreateItemPortOut createOrderPortOut;
+    private final CreateItemPortOut createItemPortOut;
 
     public CreateItemService(CreateItemPortOut createItemPortOut) {
-        createOrderPortOut = createItemPortOut;
+        this.createItemPortOut = createItemPortOut;
     }
 
     @Override
     public Item create(Item item) {
-        return createOrderPortOut.create(item);
+        return createItemPortOut.create(item);
 
     }
 
