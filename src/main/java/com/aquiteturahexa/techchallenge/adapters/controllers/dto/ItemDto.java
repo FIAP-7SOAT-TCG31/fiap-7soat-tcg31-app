@@ -1,12 +1,13 @@
 package com.aquiteturahexa.techchallenge.adapters.controllers.dto;
 
+import java.math.BigDecimal;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.math.BigDecimal;
 
 @Getter
 @Builder(toBuilder = true, setterPrefix = "with")
