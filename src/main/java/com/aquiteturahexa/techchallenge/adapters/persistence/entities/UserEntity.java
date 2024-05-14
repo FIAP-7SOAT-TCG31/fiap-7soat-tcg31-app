@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tb_users")
-
+@Builder(setterPrefix = "with")
 public class UserEntity {
 
     @Id

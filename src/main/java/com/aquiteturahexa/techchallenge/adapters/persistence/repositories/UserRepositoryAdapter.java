@@ -26,7 +26,9 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
         UserEntity entity = modelMapper.map(user, UserEntity.class);
         UserEntity save = userRepository.save(entity);
         // Convertendo entity para domino
+
         return modelMapper.map(save, User.class);
+
     }
 
     @Override
