@@ -5,13 +5,13 @@ import com.aquiteturahexa.techchallenge.adapters.persistence.entities.OrderItemE
 import com.aquiteturahexa.techchallenge.adapters.persistence.mapper.OrderMapper;
 import com.aquiteturahexa.techchallenge.adapters.persistence.repositories.OrderRepository;
 import com.aquiteturahexa.techchallenge.core.model.Order;
-import com.aquiteturahexa.techchallenge.core.ports.out.SaveOrderPort;
+import com.aquiteturahexa.techchallenge.core.ports.out.SaveOrderPortOut;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class SaveOrderPersistenceAdapter implements SaveOrderPort {
+public class SaveOrderPersistenceAdapterOut implements SaveOrderPortOut {
 
     private final OrderRepository orderRepository;
 
