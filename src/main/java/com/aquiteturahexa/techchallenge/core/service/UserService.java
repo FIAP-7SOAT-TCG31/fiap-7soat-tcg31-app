@@ -22,6 +22,7 @@ public class UserService implements UserServicePort {
 
     @Override
     public User saveUser(User user) {
+        System.out.println(user.getName());
         return userRepositoryPort.save(user);
     }
 
