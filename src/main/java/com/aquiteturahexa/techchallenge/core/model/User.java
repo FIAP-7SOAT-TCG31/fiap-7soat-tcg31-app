@@ -10,13 +10,6 @@ public class User {
 
     }
 
-    public User(Long CPF, String name, String email) {
-        this.CPF = CPF;
-        this.name = name;
-        this.email = email;
-
-    }
-
     public User(Long id, Long CPF, String name, String email) {
         this.id = id;
         this.CPF = CPF;
