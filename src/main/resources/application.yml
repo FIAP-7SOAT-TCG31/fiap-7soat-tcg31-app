@@ -21,5 +21,11 @@ spring:
       settings.trace: false
       settings.web-allow-others: false
 
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
 server:
   port: ${port:8080}

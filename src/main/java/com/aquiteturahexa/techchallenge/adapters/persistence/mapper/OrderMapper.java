@@ -6,6 +6,8 @@ import com.aquiteturahexa.techchallenge.core.model.Status;
 
 import java.time.ZoneId;
 
+import static java.util.Objects.isNull;
+
 public class OrderMapper {
 
     public static OrderEntity toEntity(Order order) {
@@ -16,11 +18,12 @@ public class OrderMapper {
                 .withStatus(order.getStatus().name())
                 .withAmount(order.getAmount())
                 .withRequester(UserMapper.toEntity(order.getRequester()))
+                .withUpdatedAt(isNull(order.getUpdatedAt()) ? null : order.getUpdatedAt().atZone(ZoneId.systemDefault()))
                 .withItens(ItemMapper.toEntity(order.getCombo()))
                 .build();
     }
 
     public static Order toDomain(OrderEntity order) {
-        return new Order(order.getId(), UserMapper.toDomain(order.getRequester()), ItemMapper.toDomain(order.getItens()), order.getRequestedAt().toInstant(), order.getAmount(), Status.valueOf(order.getStatus()));
+        return new Order(order.getId(), UserMapper.toDomain(order.getRequester()), ItemMapper.toDomain(order.getItens()), order.getRequestedAt().toInstant(), isNull(order.getUpdatedAt()) ? null : order.getUpdatedAt().toInstant(), order.getAmount(), Status.valueOf(order.getStatus()));
     }
 }

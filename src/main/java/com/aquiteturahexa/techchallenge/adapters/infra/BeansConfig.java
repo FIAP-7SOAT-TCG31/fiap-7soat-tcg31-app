@@ -60,4 +60,6 @@ public class BeansConfig {
     public SearchOrderPortIn beanSearchOrderService(SearchOrderPortOut searchOrderPortOut) {
         return new SearchOrderService(searchOrderPortOut);
     }
+
+
 }

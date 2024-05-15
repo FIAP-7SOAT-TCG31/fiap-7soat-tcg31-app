@@ -19,7 +19,7 @@ public class CreateOrderService implements CreateOrderPortIn {
 
     @Override
     public Order create(Combo combo, User user) {
-        var order = new Order(null, user, combo, Instant.now(), combo.calculate(), Status.CREATED);
+        var order = new Order(null, user, combo, Instant.now(), null, combo.calculate(), Status.CREATED);
         return saveOrderPortOut.create(order);
     }
 }

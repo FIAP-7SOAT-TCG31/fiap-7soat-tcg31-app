@@ -38,9 +38,10 @@ public class OrderEntity {
     private UserEntity requester;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<OrderItemEntity> itens = new ArrayList<>();
+    private List<OrderItemEntity> itens;
 
     private ZonedDateTime requestedAt;
+    private ZonedDateTime updatedAt;
     private BigDecimal amount;
     private String status;
 }

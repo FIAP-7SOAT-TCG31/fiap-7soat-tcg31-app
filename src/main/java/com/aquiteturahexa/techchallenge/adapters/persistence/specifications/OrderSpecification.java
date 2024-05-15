@@ -5,6 +5,7 @@ import com.aquiteturahexa.techchallenge.adapters.persistence.entities.UserEntity
 import org.springframework.data.jpa.domain.Specification;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 
 public class OrderSpecification {
 
@@ -17,12 +18,12 @@ public class OrderSpecification {
         };
     }
 
-    public static Specification<OrderEntity> hasStatus(String status) {
+    public static Specification<OrderEntity> hasStatus(List<String> statusList) {
         return (root, query, criteriaBuilder) -> {
-            if (status == null) {
+            if (statusList == null || statusList.isEmpty()) {
                 return criteriaBuilder.conjunction();
             }
-            return criteriaBuilder.equal(root.get("status"), status);
+            return root.get("status").in(statusList);
         };
     }
 
