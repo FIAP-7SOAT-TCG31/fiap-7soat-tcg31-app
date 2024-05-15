@@ -8,6 +8,7 @@ import com.aquiteturahexa.techchallenge.core.ports.in.CreateItemPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.CreateOrderPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.GetItemPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.GetOrderPortIn;
+import com.aquiteturahexa.techchallenge.core.ports.in.ListItemsPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.OrderServicePort;
 import com.aquiteturahexa.techchallenge.core.ports.in.SearchOrderPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.UpdateOrderPortIn;
@@ -15,6 +16,7 @@ import com.aquiteturahexa.techchallenge.core.ports.in.UserServicePort;
 import com.aquiteturahexa.techchallenge.core.ports.out.CreateItemPortOut;
 import com.aquiteturahexa.techchallenge.core.ports.out.GetItemPortOut;
 import com.aquiteturahexa.techchallenge.core.ports.out.GetOrderByIdPortOut;
+import com.aquiteturahexa.techchallenge.core.ports.out.ListItemsPortOut;
 import com.aquiteturahexa.techchallenge.core.ports.out.OrderRepositoryPort;
 import com.aquiteturahexa.techchallenge.core.ports.out.SaveOrderPortOut;
 import com.aquiteturahexa.techchallenge.core.ports.out.SearchOrderPortOut;
@@ -24,6 +26,7 @@ import com.aquiteturahexa.techchallenge.core.service.CreateItemService;
 import com.aquiteturahexa.techchallenge.core.service.CreateOrderService;
 import com.aquiteturahexa.techchallenge.core.service.GetItemService;
 import com.aquiteturahexa.techchallenge.core.service.GetOrderService;
+import com.aquiteturahexa.techchallenge.core.service.ListItemsService;
 import com.aquiteturahexa.techchallenge.core.service.OrderService;
 import com.aquiteturahexa.techchallenge.core.service.SearchOrderService;
 import com.aquiteturahexa.techchallenge.core.service.UpdateOrderService;
@@ -76,5 +79,10 @@ public class BeansConfig {
     @Bean
     public GetItemPortIn beanGetItemPortIn(GetItemPortOut getItemPortOut) {
         return new GetItemService(getItemPortOut);
+    }
+
+    @Bean
+    public ListItemsPortIn beanListItemsPortIn(ListItemsPortOut listItemsPortOut) {
+        return new ListItemsService(listItemsPortOut);
     }
 }
