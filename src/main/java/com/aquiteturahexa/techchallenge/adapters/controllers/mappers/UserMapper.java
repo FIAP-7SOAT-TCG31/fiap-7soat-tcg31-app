@@ -10,6 +10,10 @@ public class UserMapper {
     public static User toDomain(UserDto user) {
         return isNull(user)
                 ? null
-                : new User(user.getId(), Long.valueOf(user.getCpf()), user.getName(), user.getEmail());
+                : new User(user.getId(),
+                isNull(user.getCpf()) ? null : Long.valueOf(user.getCpf()),
+                user.getName(),
+                user.getEmail());
     }
 }
+

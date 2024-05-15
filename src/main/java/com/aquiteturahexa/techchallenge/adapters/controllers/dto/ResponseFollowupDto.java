@@ -18,5 +18,6 @@ public class ResponseFollowupDto {
     private String orderId;
     private BigDecimal amount;
     private String status;
+    private String name;
     private String waitingTime;
 }
