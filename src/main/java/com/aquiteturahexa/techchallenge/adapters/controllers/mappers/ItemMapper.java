@@ -1,10 +1,10 @@
 package com.aquiteturahexa.techchallenge.adapters.controllers.mappers;
 
+import java.util.List;
+
 import com.aquiteturahexa.techchallenge.adapters.controllers.dto.ItemDto;
 import com.aquiteturahexa.techchallenge.core.model.Item;
 import com.aquiteturahexa.techchallenge.core.model.ItemType;
-
-import java.util.List;
 
 public class ItemMapper {
 
@@ -12,14 +12,22 @@ public class ItemMapper {
         return items == null || items.isEmpty()
                 ? List.of()
                 : items
-                .stream()
-                .map(item ->
-                        new Item(
+                        .stream()
+                        .map(item -> new Item(
                                 item.getId(),
                                 item.getName(),
                                 ItemType.valueOf(item.getType()),
                                 item.getPrice(),
                                 item.getQuantity()))
-                .toList();
+                        .toList();
+    }
+
+    public static Item toDomain(ItemDto item) {
+        return new Item(
+                item.getId(),
+                item.getName(),
+                ItemType.valueOf(item.getType()),
+                item.getPrice(),
+                item.getQuantity());
     }
 }
