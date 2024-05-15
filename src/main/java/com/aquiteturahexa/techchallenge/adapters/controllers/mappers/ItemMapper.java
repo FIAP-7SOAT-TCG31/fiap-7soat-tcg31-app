@@ -13,7 +13,6 @@ public class ItemMapper {
                 ? List.of()
                 : items
                 .stream()
-                .filter(item -> item.getQuantity() > 0)
                 .map(item ->
                         new Item(
                                 item.getId(),
@@ -22,5 +21,14 @@ public class ItemMapper {
                                 item.getPrice(),
                                 item.getQuantity()))
                 .toList();
+    }
+
+    public static Item toDomain(ItemDto item) {
+        return new Item(
+                item.getId(),
+                item.getName(),
+                ItemType.valueOf(item.getType()),
+                item.getPrice(),
+                item.getQuantity());
     }
 }
