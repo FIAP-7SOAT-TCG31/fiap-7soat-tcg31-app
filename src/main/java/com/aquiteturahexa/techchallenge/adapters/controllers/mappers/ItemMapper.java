@@ -13,6 +13,7 @@ public class ItemMapper {
                 ? List.of()
                 : items
                 .stream()
+                .filter(item -> item.getQuantity() > 0)
                 .map(item ->
                         new Item(
                                 item.getId(),
