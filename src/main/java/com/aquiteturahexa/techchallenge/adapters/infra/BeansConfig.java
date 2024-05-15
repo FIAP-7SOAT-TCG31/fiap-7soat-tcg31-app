@@ -1,5 +1,8 @@
 package com.aquiteturahexa.techchallenge.adapters.infra;
 
+import com.aquiteturahexa.techchallenge.core.ports.in.GetUserByDocumentPortIn;
+import com.aquiteturahexa.techchallenge.core.ports.out.GetUserByDocumentPortOut;
+import com.aquiteturahexa.techchallenge.core.service.GetUserByDocumentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,13 +47,16 @@ public class BeansConfig {
 
     @Bean
     public UserServicePort userServicePort(UserRepositoryPort userRepositoryPort) {
-
         return new UserService(userRepositoryPort);
     }
 
     @Bean
-    public OrderServicePort orderServicePort(OrderRepositoryPort orderRepositoryPort) {
+    public GetUserByDocumentPortIn beanGetUserByDocumentPortIn(GetUserByDocumentPortOut getUserByDocumentPortOut) {
+        return new GetUserByDocumentService(getUserByDocumentPortOut);
+    }
 
+    @Bean
+    public OrderServicePort orderServicePort(OrderRepositoryPort orderRepositoryPort) {
         return new OrderService(orderRepositoryPort);
     }
 
