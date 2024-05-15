@@ -1,26 +1,30 @@
 package com.aquiteturahexa.techchallenge.adapters.infra;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import com.aquiteturahexa.techchallenge.core.ports.in.CreateItemPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.CreateOrderPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.GetOrderPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.OrderServicePort;
 import com.aquiteturahexa.techchallenge.core.ports.in.SearchOrderPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.UpdateOrderPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.UserServicePort;
+import com.aquiteturahexa.techchallenge.core.ports.out.CreateItemPortOut;
 import com.aquiteturahexa.techchallenge.core.ports.out.GetOrderByIdPortOut;
 import com.aquiteturahexa.techchallenge.core.ports.out.OrderRepositoryPort;
 import com.aquiteturahexa.techchallenge.core.ports.out.SaveOrderPortOut;
 import com.aquiteturahexa.techchallenge.core.ports.out.SearchOrderPortOut;
 import com.aquiteturahexa.techchallenge.core.ports.out.UpdateOrderPortOut;
 import com.aquiteturahexa.techchallenge.core.ports.out.UserRepositoryPort;
+import com.aquiteturahexa.techchallenge.core.service.CreateItemService;
 import com.aquiteturahexa.techchallenge.core.service.CreateOrderService;
 import com.aquiteturahexa.techchallenge.core.service.GetOrderService;
 import com.aquiteturahexa.techchallenge.core.service.OrderService;
 import com.aquiteturahexa.techchallenge.core.service.SearchOrderService;
 import com.aquiteturahexa.techchallenge.core.service.UpdateOrderService;
 import com.aquiteturahexa.techchallenge.core.service.UserService;
-import org.modelmapper.ModelMapper;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class BeansConfig {
@@ -61,5 +65,8 @@ public class BeansConfig {
         return new SearchOrderService(searchOrderPortOut);
     }
 
-
+    @Bean
+    public CreateItemPortIn beanCreateItemPortIn(CreateItemPortOut createItemPortOut) {
+        return new CreateItemService(createItemPortOut);
+    }
 }
