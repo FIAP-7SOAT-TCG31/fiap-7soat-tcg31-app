@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aquiteturahexa.techchallenge.adapters.persistence.PaymentAdapter;
+import com.google.zxing.WriterException;
 
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -19,6 +20,11 @@ public class PaymentController {
     @GetMapping("payment")
     public void paymentChekout(HttpServletResponse response) throws IOException {
         paymentAdapter.paymentChekout(response);
+    }
+
+    @GetMapping("pay")
+    public void teste(HttpServletResponse response) throws IOException, WriterException {
+        paymentAdapter.convertToQRCode(response);
     }
 
 }
