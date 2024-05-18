@@ -1,8 +1,11 @@
 package com.aquiteturahexa.techchallenge.adapters.infra;
 
 import com.aquiteturahexa.techchallenge.core.ports.in.GetClientByDocumentPortIn;
+import com.aquiteturahexa.techchallenge.core.ports.in.GetUserPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.out.GetClientByDocumentPortOut;
+import com.aquiteturahexa.techchallenge.core.ports.out.GetUserPortOut;
 import com.aquiteturahexa.techchallenge.core.service.GetClientByDocumentService;
+import com.aquiteturahexa.techchallenge.core.service.GetUserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -98,5 +101,10 @@ public class BeansConfig {
     @Bean
     public UpdateItemPortIn beanUpdateItemPortIn(UpdateItemPortOut updateItemPortOut) {
         return new UpdateItemService(updateItemPortOut);
+    }
+
+    @Bean
+    public GetUserPortIn beanGetUserPortIn(GetUserPortOut getUserPortOut) {
+        return new GetUserService(getUserPortOut);
     }
 }
