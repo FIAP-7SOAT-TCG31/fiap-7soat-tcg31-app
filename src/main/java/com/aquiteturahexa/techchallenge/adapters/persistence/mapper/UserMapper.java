@@ -1,6 +1,7 @@
 package com.aquiteturahexa.techchallenge.adapters.persistence.mapper;
 
 import com.aquiteturahexa.techchallenge.adapters.persistence.entities.UserEntity;
+import com.aquiteturahexa.techchallenge.core.model.Email;
 import com.aquiteturahexa.techchallenge.core.model.User;
 
 import static java.util.Objects.isNull;
@@ -14,7 +15,7 @@ public class UserMapper {
                 .builder()
                 .withId(user.getId())
                 .withUsername(user.getUsername())
-                .withEmail(user.getEmail())
+                .withEmail(user.getEmail().getEmail())
                 .withName(user.getName())
                 .withPassword(user.getPassword())
                 .withRole(user.getRole())
@@ -27,7 +28,7 @@ public class UserMapper {
                 : new User(
                 user.getId(),
                 user.getName(),
-                user.getEmail(),
+                new Email(user.getEmail()),
                 user.getUsername(),
                 user.getPassword(),
                 user.getRole()

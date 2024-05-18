@@ -4,7 +4,7 @@ public class User {
 
     private Long id;
     private String name;
-    private String email;
+    private Email email;
     private String username;
     private String password;
     private String role;
@@ -12,7 +12,7 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String name, String email, String username, String password, String role) {
+    public User(Long id, String name, Email email, String username, String password, String role) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -29,7 +29,7 @@ public class User {
         return name;
     }
 
-    public String getEmail() {
+    public Email getEmail() {
         return email;
     }
 
