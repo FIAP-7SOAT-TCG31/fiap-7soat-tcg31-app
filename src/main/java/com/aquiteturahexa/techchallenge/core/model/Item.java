@@ -29,15 +29,31 @@ public class Item {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public ItemType getType() {
         return type;
+    }
+
+    public void setType(ItemType type) {
+        this.type = type;
     }
 
     public BigDecimal getPrice() {
         return price;
     }
 
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
     public Float getQuantity() {
         return quantity;
+    }
+
+    public void setQuantity(Float quantity) {
+        this.quantity = quantity;
     }
 }

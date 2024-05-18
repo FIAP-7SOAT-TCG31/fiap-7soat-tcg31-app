@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.aquiteturahexa.techchallenge.adapters.persistence.entities.OrderEntity;
 import com.aquiteturahexa.techchallenge.core.model.Order;
+import com.aquiteturahexa.techchallenge.core.model.Status;
 import com.aquiteturahexa.techchallenge.core.ports.out.OrderRepositoryPort;
 
 import lombok.AllArgsConstructor;
@@ -54,9 +55,9 @@ public class OrderRepositoryAdapter implements OrderRepositoryPort {
     }
 
     @Override
-    public Order updateStatus(Long id, Order order) {
+    public Order updateStatus(Long id, Order order, Status status) {
         Order existOrder = findById(id);
-        existOrder.setStatus(order.getStatus());
+        existOrder.setStatus(status);
         return saveOrder(existOrder);
     }
 
