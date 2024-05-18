@@ -2,7 +2,6 @@ package com.aquiteturahexa.techchallenge.adapters.persistence.entities;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -35,7 +34,7 @@ public class OrderEntity {
 
     @ManyToOne
     @JoinColumn(name = "requester")
-    private UserEntity requester;
+    private ClientEntity requester;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItemEntity> itens;

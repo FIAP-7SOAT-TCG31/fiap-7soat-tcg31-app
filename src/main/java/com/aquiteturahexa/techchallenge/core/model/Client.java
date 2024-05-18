@@ -1,16 +1,16 @@
 package com.aquiteturahexa.techchallenge.core.model;
 
-public class User {
+public class Client {
     private Long id;
     private Long CPF;
     private String name;
     private String email;
 
-    public User() {
+    public Client() {
 
     }
 
-    public User(Long id, Long CPF, String name, String email) {
+    public Client(Long id, Long CPF, String name, String email) {
         this.id = id;
         this.CPF = CPF;
         this.name = name;
