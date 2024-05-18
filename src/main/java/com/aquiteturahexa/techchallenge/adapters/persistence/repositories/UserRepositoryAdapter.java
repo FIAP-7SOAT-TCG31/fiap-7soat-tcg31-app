@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import com.aquiteturahexa.techchallenge.adapters.persistence.entities.UserEntity;
+import com.aquiteturahexa.techchallenge.adapters.persistence.mapper.UserMapper;
 import com.aquiteturahexa.techchallenge.core.model.User;
 import com.aquiteturahexa.techchallenge.core.ports.out.UserRepositoryPort;
 
