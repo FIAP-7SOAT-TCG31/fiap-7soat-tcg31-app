@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aquiteturahexa.techchallenge.core.model.Order;
+import com.aquiteturahexa.techchallenge.core.model.Status;
 import com.aquiteturahexa.techchallenge.core.ports.in.OrderServicePort;
 import lombok.AllArgsConstructor;
 
@@ -50,8 +51,8 @@ public class OrderController {
     }
 
     @PutMapping("/status/{id}")
-    public Order updateStatus(Long id, Order order) {
-        return orderServicePort.updateStatus(id, order);
+    public Order updateStatus(Long id, Order order, Status status) {
+        return orderServicePort.updateStatus(id, order, status);
     }
 
 }

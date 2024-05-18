@@ -3,6 +3,7 @@ package com.aquiteturahexa.techchallenge.core.service;
 import java.util.List;
 
 import com.aquiteturahexa.techchallenge.core.model.Order;
+import com.aquiteturahexa.techchallenge.core.model.Status;
 import com.aquiteturahexa.techchallenge.core.ports.out.OrderRepositoryPort;
 import com.aquiteturahexa.techchallenge.core.ports.in.OrderServicePort;
 
@@ -35,7 +36,7 @@ public class OrderService implements OrderServicePort {
     }
 
     @Override
-    public Order updateStatus(Long id, Order order) {
-        return orderRepositoryPort.updateStatus(id, order);
+    public Order updateStatus(Long id, Order order, Status status) {
+        return orderRepositoryPort.updateStatus(id, order, status);
     }
 }
