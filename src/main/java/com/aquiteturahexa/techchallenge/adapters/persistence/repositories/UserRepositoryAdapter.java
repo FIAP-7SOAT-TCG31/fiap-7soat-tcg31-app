@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.aquiteturahexa.techchallenge.adapters.persistence.mapper.UserMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +26,6 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     public User save(User user) {
         UserEntity entity = UserMapper.toEntity(user);
         return UserMapper.toDomain(userRepository.save(entity));
-
     }
 
     @Override
@@ -34,7 +34,7 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
 
         return list
                 .stream()
-                .map(userEntity -> modelMapper.map(userEntity, User.class))
+                .map(UserMapper::toDomain)
                 .collect(Collectors.toList());
     }
 
@@ -42,9 +42,8 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     public User findByid(Long id) {
         Optional<UserEntity> obj = userRepository.findById(id);
 
-        return obj.map(userEntity -> modelMapper.map(userEntity, User.class))
+        return obj.map(UserMapper::toDomain)
                 .orElse(null);
-        // return obj.get().toUser();
 
     }
 

@@ -1,7 +1,5 @@
 package com.aquiteturahexa.techchallenge.adapters.controllers.dto;
 
-import java.math.BigDecimal;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.AllArgsConstructor;
@@ -14,12 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class ItemDto {
+public class RequestCreateItemDto {
 
-    private Long id;
-    private String name;
-    private String type;
-    private BigDecimal price;
-    private Float quantity;
+    private ItemDto item;
 
 }
