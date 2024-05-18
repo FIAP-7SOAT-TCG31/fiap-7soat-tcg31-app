@@ -10,6 +10,6 @@ import java.util.List;
 public interface SearchOrderPortIn {
     List<Order> search(ZonedDateTime start,
                        ZonedDateTime end,
-                       Status status,
+                       List<Status> status,
                        User requester);
 }

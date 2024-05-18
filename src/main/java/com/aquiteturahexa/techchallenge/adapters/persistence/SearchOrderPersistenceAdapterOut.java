@@ -11,6 +11,7 @@ import com.aquiteturahexa.techchallenge.core.ports.out.SearchOrderPortOut;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -26,12 +27,12 @@ public class SearchOrderPersistenceAdapterOut implements SearchOrderPortOut {
     @Override
     public List<Order> search(ZonedDateTime start,
                               ZonedDateTime end,
-                              Status status,
+                              List<Status> statusList,
                               User requester) {
 
         var orders = orderRepository.findAll(Specification
                 .where(OrderSpecification.hasRequestedAtBetween(start, end))
-                .and(OrderSpecification.hasStatus(isNull(status) ? null : status.name()))
+                .and(OrderSpecification.hasStatus(CollectionUtils.isEmpty(statusList) ? List.of() : statusList.stream().map(Enum::name).toList()))
                 .and(OrderSpecification.hasRequester(UserMapper.toEntity(requester))));
 
         return orders

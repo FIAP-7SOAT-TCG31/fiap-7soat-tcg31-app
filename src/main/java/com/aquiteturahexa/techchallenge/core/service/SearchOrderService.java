@@ -18,7 +18,7 @@ public class SearchOrderService implements SearchOrderPortIn {
     }
 
     @Override
-    public List<Order> search(ZonedDateTime start, ZonedDateTime end, Status status, User requester) {
+    public List<Order> search(ZonedDateTime start, ZonedDateTime end, List<Status> status, User requester) {
         return searchOrderPortOut.search(start, end, status, requester);
     }
 }
