@@ -17,19 +17,17 @@ import java.util.Map;
 public class AutenticateController {
 
     private final GetUserPortIn getUserPortIn;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @PostMapping(path = "/auth")
     public ResponseEntity<?> create(@RequestBody RequestTokenDto body) {
 
         var user = getUserPortIn.getUser(body.getUsername(), body.getPassword());
 
-        if (user.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Authentication failed"));
-        }
+        return user.map(value -> ResponseEntity
+                .ok(Map.of("token", jwtTokenProvider.generateToken(value)))).orElseGet(() -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Authentication failed")));
 
-    return ResponseEntity
-            .ok(
-                    Map.of("token", "generateToken(user.get())")
-            );
     }
+
+
 }
