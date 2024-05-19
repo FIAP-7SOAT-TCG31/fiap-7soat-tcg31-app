@@ -19,6 +19,6 @@ public class GetUserByUserNamePersistenceAdapter implements GetUserPortOut {
     public Optional<User> get(String username) {
 
         var userEntity = userRepository.findByUsername(username);
-        return Optional.ofNullable(UserMapper.toDomain(userEntity));
+        return userEntity.map(UserMapper::toDomain);
     }
 }

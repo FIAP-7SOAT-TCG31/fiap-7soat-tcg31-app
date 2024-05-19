@@ -13,25 +13,24 @@ public class UserMapper {
                 ? null
                 : UserEntity
                 .builder()
-                .withId(user.getId())
                 .withUsername(user.getUsername())
                 .withEmail(user.getEmail().getEmail())
                 .withName(user.getName())
                 .withPassword(user.getPassword())
-                .withRole(user.getRole())
+                .withRole(user.getRoles())
                 .build();
     }
 
     public static User toDomain(UserEntity user) {
         return isNull(user)
                 ? null
-                : new User(
-                user.getId(),
-                user.getName(),
-                new Email(user.getEmail()),
-                user.getUsername(),
-                user.getPassword(),
-                user.getRole()
-        );
+                : new User
+                (
+                        user.getName(),
+                        new Email(user.getEmail()),
+                        user.getUsername(),
+                        user.getPassword(),
+                        user.getRole()
+                );
     }
 }

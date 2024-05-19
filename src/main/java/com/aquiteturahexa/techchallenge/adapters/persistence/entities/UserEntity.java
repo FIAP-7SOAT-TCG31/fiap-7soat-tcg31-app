@@ -1,6 +1,8 @@
 package com.aquiteturahexa.techchallenge.adapters.persistence.entities;
 
+import com.aquiteturahexa.techchallenge.adapters.persistence.utils.StringListConverter;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,6 +12,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -31,5 +35,7 @@ public class UserEntity {
 
     private String name;
     private String password;
-    private String role;
+
+    @Convert(converter = StringListConverter.class)
+    private List<String> role;
 }

@@ -6,5 +6,7 @@ import java.util.Optional;
 
 public interface GetUserPortIn {
 
+    Optional<User> getUser(String username);
+
     Optional<User> getUser(String username, String password);
 }

@@ -15,9 +15,14 @@ public class GetUserService implements GetUserPortIn {
     }
 
     @Override
+    public Optional<User> getUser(String username) {
+        return getUserPortOut.get(username);
+    }
+
+    @Override
     public Optional<User> getUser(String username, String password) {
 
-        var user = getUserPortOut.get(username);
+        var user = getUser(username);
 
         if (user.isPresent() && user.get().getPassword().equals(password)) {
             return user;
