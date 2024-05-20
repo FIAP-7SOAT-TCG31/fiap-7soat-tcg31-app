@@ -1,6 +1,7 @@
 package com.aquiteturahexa.techchallenge.core.service;
 
 import com.aquiteturahexa.techchallenge.core.model.User;
+import com.aquiteturahexa.techchallenge.core.ports.in.EncodePasswordPortOut;
 import com.aquiteturahexa.techchallenge.core.ports.in.GetUserPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.out.GetUserPortOut;
 
@@ -9,9 +10,11 @@ import java.util.Optional;
 public class GetUserService implements GetUserPortIn {
 
     private final GetUserPortOut getUserPortOut;
+    private final EncodePasswordPortOut encodePasswordPortOut;
 
-    public GetUserService(GetUserPortOut getUserPortOut) {
+    public GetUserService(GetUserPortOut getUserPortOut, EncodePasswordPortOut encodePasswordPortOut) {
         this.getUserPortOut = getUserPortOut;
+        this.encodePasswordPortOut = encodePasswordPortOut;
     }
 
     @Override
@@ -24,7 +27,7 @@ public class GetUserService implements GetUserPortIn {
 
         var user = getUser(username);
 
-        if (user.isPresent() && user.get().getPassword().equals(password)) {
+        if (user.isPresent() && encodePasswordPortOut.matches(password, user.get().getPassword())) {
             return user;
         }
 

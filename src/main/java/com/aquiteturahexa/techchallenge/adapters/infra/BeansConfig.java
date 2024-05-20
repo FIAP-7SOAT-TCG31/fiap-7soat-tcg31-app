@@ -1,9 +1,14 @@
 package com.aquiteturahexa.techchallenge.adapters.infra;
 
+import com.aquiteturahexa.techchallenge.adapters.controllers.provider.UserDetailsServiceImpl;
+import com.aquiteturahexa.techchallenge.core.ports.in.CreateUserPortIn;
+import com.aquiteturahexa.techchallenge.core.ports.in.EncodePasswordPortOut;
 import com.aquiteturahexa.techchallenge.core.ports.in.GetClientByDocumentPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.GetUserPortIn;
+import com.aquiteturahexa.techchallenge.core.ports.out.CreateUserPorOut;
 import com.aquiteturahexa.techchallenge.core.ports.out.GetClientByDocumentPortOut;
 import com.aquiteturahexa.techchallenge.core.ports.out.GetUserPortOut;
+import com.aquiteturahexa.techchallenge.core.service.CreateUserService;
 import com.aquiteturahexa.techchallenge.core.service.GetClientByDocumentService;
 import com.aquiteturahexa.techchallenge.core.service.GetUserService;
 import org.modelmapper.ModelMapper;
@@ -40,6 +45,7 @@ import com.aquiteturahexa.techchallenge.core.service.SearchOrderService;
 import com.aquiteturahexa.techchallenge.core.service.UpdateItemService;
 import com.aquiteturahexa.techchallenge.core.service.UpdateOrderService;
 import com.aquiteturahexa.techchallenge.core.service.ClientService;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 @Configuration
 public class BeansConfig {
@@ -104,7 +110,17 @@ public class BeansConfig {
     }
 
     @Bean
-    public GetUserPortIn beanGetUserPortIn(GetUserPortOut getUserPortOut) {
-        return new GetUserService(getUserPortOut);
+    public GetUserPortIn beanGetUserPortIn(GetUserPortOut getUserPortOut, EncodePasswordPortOut encodePasswordPortOut) {
+        return new GetUserService(getUserPortOut, encodePasswordPortOut);
+    }
+
+    @Bean
+    public CreateUserPortIn beanCreateUserPortIn(CreateUserPorOut createUserPorOut, EncodePasswordPortOut encodePasswordPortOut) {
+        return new CreateUserService(createUserPorOut, encodePasswordPortOut);
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService(GetUserPortIn getUserPortIn) {
+        return new UserDetailsServiceImpl(getUserPortIn);
     }
 }

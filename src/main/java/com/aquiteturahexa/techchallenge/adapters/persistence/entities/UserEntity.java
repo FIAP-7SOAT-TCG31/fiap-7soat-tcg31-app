@@ -4,8 +4,6 @@ import com.aquiteturahexa.techchallenge.adapters.persistence.utils.StringListCon
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -23,10 +21,8 @@ import java.util.List;
 @Builder(setterPrefix = "with")
 public class UserEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
+    @Id
     @Column(unique = true)
     private String username;
 
