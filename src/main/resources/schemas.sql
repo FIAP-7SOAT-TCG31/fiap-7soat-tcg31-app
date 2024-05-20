@@ -1,0 +1,37 @@
+
+CREATE TABLE tb_users (
+    id SERIAL PRIMARY KEY,
+    cpf VARCHAR(255) UNIQUE,
+    name VARCHAR(255),
+    email VARCHAR(255)
+);
+
+
+CREATE TABLE tb_items (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    type VARCHAR(255),
+    price DECIMAL(19, 4),
+    quantity FLOAT
+);
+
+
+CREATE TABLE tb_orders (
+    id SERIAL PRIMARY KEY,
+    requester_id BIGINT,
+    requestedAt TIMESTAMP,
+    amount DECIMAL(19, 4),
+    status VARCHAR(255),
+    FOREIGN KEY (requester_id) REFERENCES tb_users(id)
+);
+
+
+CREATE TABLE tb_order_items (
+    id SERIAL PRIMARY KEY,
+    order_id BIGINT,
+    item_id BIGINT,
+    quantity FLOAT,
+    FOREIGN KEY (order_id) REFERENCES tb_orders(id),
+    FOREIGN KEY (item_id) REFERENCES tb_items(id)
+);
+
