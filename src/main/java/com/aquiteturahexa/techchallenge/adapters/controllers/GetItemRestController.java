@@ -2,6 +2,7 @@ package com.aquiteturahexa.techchallenge.adapters.controllers;
 
 import java.util.Map;
 
+import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.ItemMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +26,7 @@ public class GetItemRestController {
 
                 return item.isEmpty()
                                 ? ResponseEntity.notFound().build()
-                                : ResponseEntity.ok(item);
+                                : ResponseEntity.ok(ItemMapper.toDto(item.get()));
 
         }
 

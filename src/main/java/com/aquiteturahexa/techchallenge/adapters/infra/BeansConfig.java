@@ -1,15 +1,21 @@
 package com.aquiteturahexa.techchallenge.adapters.infra;
 
 import com.aquiteturahexa.techchallenge.adapters.controllers.provider.UserDetailsServiceImpl;
+import com.aquiteturahexa.techchallenge.core.ports.in.CreateClientPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.CreateUserPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.EncodePasswordPortOut;
 import com.aquiteturahexa.techchallenge.core.ports.in.GetClientByDocumentPortIn;
+import com.aquiteturahexa.techchallenge.core.ports.in.GetClientByIdPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.GetUserPortIn;
+import com.aquiteturahexa.techchallenge.core.ports.out.CreateClientPortOut;
 import com.aquiteturahexa.techchallenge.core.ports.out.CreateUserPorOut;
 import com.aquiteturahexa.techchallenge.core.ports.out.GetClientByDocumentPortOut;
+import com.aquiteturahexa.techchallenge.core.ports.out.GetClientByIdPortOut;
 import com.aquiteturahexa.techchallenge.core.ports.out.GetUserPortOut;
+import com.aquiteturahexa.techchallenge.core.service.CreateClientService;
 import com.aquiteturahexa.techchallenge.core.service.CreateUserService;
 import com.aquiteturahexa.techchallenge.core.service.GetClientByDocumentService;
+import com.aquiteturahexa.techchallenge.core.service.GetClientByIdService;
 import com.aquiteturahexa.techchallenge.core.service.GetUserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
@@ -57,6 +63,16 @@ public class BeansConfig {
     @Bean
     public ClientServicePort clientServicePort(ClientRepositoryPort clientRepositoryPort) {
         return new ClientService(clientRepositoryPort);
+    }
+
+    @Bean
+    public CreateClientPortIn beanCreateClientPortIn(CreateClientPortOut createClientPortOut) {
+        return new CreateClientService(createClientPortOut);
+    }
+
+    @Bean
+    public GetClientByIdPortIn beanGetClientByIdPortIn(GetClientByIdPortOut getClientByIdPortOut) {
+        return new GetClientByIdService(getClientByIdPortOut);
     }
 
     @Bean
@@ -118,6 +134,8 @@ public class BeansConfig {
     public CreateUserPortIn beanCreateUserPortIn(CreateUserPorOut createUserPorOut, EncodePasswordPortOut encodePasswordPortOut) {
         return new CreateUserService(createUserPorOut, encodePasswordPortOut);
     }
+
+
 
     @Bean
     public UserDetailsService userDetailsService(GetUserPortIn getUserPortIn) {

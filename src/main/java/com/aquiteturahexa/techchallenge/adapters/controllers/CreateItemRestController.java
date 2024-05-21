@@ -35,7 +35,7 @@ public class CreateItemRestController {
 
                 return ResponseEntity
                                 .created(location)
-                                .body(item);
+                                .body(ItemMapper.toDto(item));
         }
 
 }

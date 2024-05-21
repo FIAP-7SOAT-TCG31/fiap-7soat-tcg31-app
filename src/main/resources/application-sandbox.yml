@@ -9,7 +9,6 @@ spring:
   jpa:
     show-sql: true
     database-platform: org.hibernate.dialect.H2Dialect
-    hibernate.ddl-auto: create-drop
     properties:
       hibernate:
         globally_quoted_identifiers: true
@@ -17,7 +16,7 @@ spring:
   h2:
     console:
       enabled: true
-      path: /h2-console
+      path: /h2
       settings.trace: false
       settings.web-allow-others: false
 
