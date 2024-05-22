@@ -18,7 +18,8 @@ CREATE TABLE tb_items (
     name VARCHAR(255),
     type VARCHAR(255),
     price DECIMAL(19, 4),
-    quantity FLOAT
+    quantity FLOAT,
+    description VARCHAR(255),
 );
 
 
@@ -42,3 +43,4 @@ CREATE TABLE tb_order_items (
     FOREIGN KEY (item_id) REFERENCES tb_items(id)
 );
 
+INSERT INTO tb_users (email,name,password,role,username) VALUES ('admin@admin.com','Administrator','$2a$10$WLrGTAB4pctxD/KMr26quuf/4dtZgvqX241EMy1QOXuAG9a9uu052','ADMIN','admin');

@@ -42,7 +42,7 @@ public class PaymentAdapter {
         try {
             PreferenceItemRequest itemRequest = PreferenceItemRequest.builder()
                     .id("" + order.getId())
-                    .title("Pedido")
+                    .title("Pedido ")
                     .quantity(1)
                     .unitPrice(order.getAmount())
                     .currencyId("BRL")
