@@ -2,17 +2,17 @@ package com.aquiteturahexa.techchallenge.core.model;
 
 public class Client {
     private Long id;
-    private Long CPF;
+    private Cpf cpf;
     private String name;
-    private String email;
+    private Email email;
 
     public Client() {
 
     }
 
-    public Client(Long id, Long CPF, String name, String email) {
+    public Client(Long id, Cpf cpf, String name, Email email) {
         this.id = id;
-        this.CPF = CPF;
+        this.cpf = cpf;
         this.name = name;
         this.email = email;
 
@@ -34,19 +34,19 @@ public class Client {
         this.name = name;
     }
 
-    public String getEmail() {
+    public Email getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(Email email) {
         this.email = email;
     }
 
-    public Long getCPF() {
-        return CPF;
+    public Cpf getCpf() {
+        return cpf;
     }
 
-    public void setCPF(Long CPF) {
-        this.CPF = CPF;
+    public void setCpf(Cpf cpf) {
+        this.cpf = cpf;
     }
 }

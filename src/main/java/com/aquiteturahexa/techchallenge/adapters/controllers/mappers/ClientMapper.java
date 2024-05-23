@@ -2,6 +2,8 @@ package com.aquiteturahexa.techchallenge.adapters.controllers.mappers;
 
 import com.aquiteturahexa.techchallenge.adapters.controllers.dto.ClientDto;
 import com.aquiteturahexa.techchallenge.core.model.Client;
+import com.aquiteturahexa.techchallenge.core.model.Cpf;
+import com.aquiteturahexa.techchallenge.core.model.Email;
 
 import static java.util.Objects.isNull;
 
@@ -11,9 +13,9 @@ public class ClientMapper {
         return isNull(client)
                 ? null
                 : new Client(client.getId(),
-                isNull(client.getCpf()) ? null : Long.valueOf(client.getCpf()),
-                client.getName(),
-                client.getEmail());
+                client.getCpf() == null ? null : new Cpf(client.getCpf()),
+                client.getName() == null ? null : client.getName(),
+                client.getEmail() == null ? null : new Email(client.getEmail()));
     }
 }
 
