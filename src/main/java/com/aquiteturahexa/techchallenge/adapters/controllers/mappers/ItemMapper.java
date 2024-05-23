@@ -13,13 +13,7 @@ public class ItemMapper {
                 ? List.of()
                 : items
                 .stream()
-                .map(item ->
-                        new Item(
-                                item.getId(),
-                                item.getName(),
-                                ItemType.valueOf(item.getType()),
-                                item.getPrice(),
-                                item.getQuantity()))
+                .map(ItemMapper::toDomain)
                 .toList();
     }
 
@@ -30,5 +24,25 @@ public class ItemMapper {
                 ItemType.valueOf(item.getType()),
                 item.getPrice(),
                 item.getQuantity());
+    }
+
+    public static List<ItemDto> toDto(List<Item> items) {
+        return items == null || items.isEmpty()
+                ? List.of()
+                : items
+                .stream()
+                .map(ItemMapper::toDto)
+                .toList();
+    }
+
+    public static ItemDto toDto(Item item) {
+        return ItemDto
+                .builder()
+                .withId(item.getId())
+                .withName(item.getName())
+                .withPrice(item.getPrice())
+                .withType(item.getType().name())
+                .withQuantity(item.getQuantity())
+                .build();
     }
 }
