@@ -11,14 +11,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-
 @Component
 @RequiredArgsConstructor
 public class GeneratePaymentWebAdapter implements GeneratePaymentPortOut {
 
-    private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd").withZone(ZoneId.systemDefault());
+    private static final String QR_CODE = "QR_CODE";
 
     @Value("${mercadopago.token}")
     private String accessToken;
@@ -47,12 +44,17 @@ public class GeneratePaymentWebAdapter implements GeneratePaymentPortOut {
 
             com.mercadopago.resources.payment.Payment createPayment = paymentClient.create(paymentCreateRequest);
 
-            payment.addPaymentDetails("QR_CODE", createPayment.getPointOfInteraction().getTransactionData().getQrCode());
+            payment.addPaymentDetails(QR_CODE, createPayment.getPointOfInteraction().getTransactionData().getQrCode());
 
         } catch (Exception e) {
             throw new PaymentNotGeneratedException(e, "Error generating payment");
         }
 
         return payment;
+    }
+
+    @Override
+    public boolean isType(Payment payment) {
+        return QR_CODE.equalsIgnoreCase(payment.getType());
     }
 }

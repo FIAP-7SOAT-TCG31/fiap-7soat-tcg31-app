@@ -60,6 +60,8 @@ import com.aquiteturahexa.techchallenge.core.service.UpdateOrderService;
 import com.aquiteturahexa.techchallenge.core.service.ClientService;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import java.util.List;
+
 @Configuration
 public class BeansConfig {
     @Bean
@@ -148,7 +150,7 @@ public class BeansConfig {
     }
 
     @Bean
-    public GeneratePaymentPortIn beanGeneratePaymentPortIn(GeneratePaymentPortOut generatePaymentPortOut, UpdateOrderPortOut updateOrderPortOut) {
+    public GeneratePaymentPortIn beanGeneratePaymentPortIn(List<GeneratePaymentPortOut> generatePaymentPortOut, UpdateOrderPortOut updateOrderPortOut) {
         return new GeneratePaymentService(generatePaymentPortOut, updateOrderPortOut);
     }
 

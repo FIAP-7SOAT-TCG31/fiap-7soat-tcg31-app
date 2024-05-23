@@ -5,5 +5,5 @@ import com.aquiteturahexa.techchallenge.core.model.Payment;
 
 public interface GeneratePaymentPortIn {
 
-    Payment generate(Order order);
+    Payment generate(Order order, String paymentType);
 }
