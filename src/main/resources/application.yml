@@ -23,3 +23,6 @@ springdoc:
 
 server:
   port: ${port:8080}
+
+mercadopago:
+  token: ${MERCADOPAGO_TOKEN:TEST-3131811887520031-051012-ec8e6c0e1f6acdbecda3aded94904d6d-177424796}

@@ -16,7 +16,7 @@ public class OrderMapper {
 
         return ResponseFollowupDto
                 .builder()
-                .withOrderId(String.format("%05d", order.getId()))
+                .withOrderId(String.format("%06d", order.getId()))
                 .withAmount(order.getAmount())
                 .withName(isNull(order.getRequester()) ? null : order.getRequester().getName())
                 .withStatus(order.getStatus().name())

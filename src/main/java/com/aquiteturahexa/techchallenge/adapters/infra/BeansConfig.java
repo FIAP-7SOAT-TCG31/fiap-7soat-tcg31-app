@@ -1,19 +1,26 @@
 package com.aquiteturahexa.techchallenge.adapters.infra;
 
 import com.aquiteturahexa.techchallenge.adapters.controllers.provider.UserDetailsServiceImpl;
+import com.aquiteturahexa.techchallenge.core.ports.in.AdvanceStatusPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.CreateClientPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.CreateUserPortIn;
+import com.aquiteturahexa.techchallenge.core.ports.in.EffecitvePaymentPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.EncodePasswordPortOut;
+import com.aquiteturahexa.techchallenge.core.ports.in.GeneratePaymentPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.GetClientByDocumentPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.GetClientByIdPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.GetUserPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.out.CreateClientPortOut;
 import com.aquiteturahexa.techchallenge.core.ports.out.CreateUserPorOut;
+import com.aquiteturahexa.techchallenge.core.ports.out.GeneratePaymentPortOut;
 import com.aquiteturahexa.techchallenge.core.ports.out.GetClientByDocumentPortOut;
 import com.aquiteturahexa.techchallenge.core.ports.out.GetClientByIdPortOut;
 import com.aquiteturahexa.techchallenge.core.ports.out.GetUserPortOut;
+import com.aquiteturahexa.techchallenge.core.service.AdvanceStatusService;
 import com.aquiteturahexa.techchallenge.core.service.CreateClientService;
 import com.aquiteturahexa.techchallenge.core.service.CreateUserService;
+import com.aquiteturahexa.techchallenge.core.service.EffecitvePaymentService;
+import com.aquiteturahexa.techchallenge.core.service.GeneratePaymentService;
 import com.aquiteturahexa.techchallenge.core.service.GetClientByDocumentService;
 import com.aquiteturahexa.techchallenge.core.service.GetClientByIdService;
 import com.aquiteturahexa.techchallenge.core.service.GetUserService;
@@ -135,10 +142,23 @@ public class BeansConfig {
         return new CreateUserService(createUserPorOut, encodePasswordPortOut);
     }
 
-
-
     @Bean
     public UserDetailsService userDetailsService(GetUserPortIn getUserPortIn) {
         return new UserDetailsServiceImpl(getUserPortIn);
+    }
+
+    @Bean
+    public GeneratePaymentPortIn beanGeneratePaymentPortIn(GeneratePaymentPortOut generatePaymentPortOut, UpdateOrderPortOut updateOrderPortOut) {
+        return new GeneratePaymentService(generatePaymentPortOut, updateOrderPortOut);
+    }
+
+    @Bean
+    public EffecitvePaymentPortIn beanEffecitvePaymentPortIn(UpdateOrderPortOut updateOrderPortOut) {
+        return new EffecitvePaymentService(updateOrderPortOut);
+    }
+
+    @Bean
+    public AdvanceStatusPortIn beanAdvanceStatusPortIn(UpdateOrderPortOut updateOrderPortOut) {
+        return new AdvanceStatusService(updateOrderPortOut);
     }
 }
