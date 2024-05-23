@@ -17,13 +17,13 @@ public class OrderMapper {
                 .withRequestedAt(order.getRequestedAt().atZone(ZoneId.systemDefault()))
                 .withStatus(order.getStatus().name())
                 .withAmount(order.getAmount())
-                .withRequester(UserMapper.toEntity(order.getRequester()))
+                .withRequester(ClientMapper.toEntity(order.getRequester()))
                 .withUpdatedAt(isNull(order.getUpdatedAt()) ? null : order.getUpdatedAt().atZone(ZoneId.systemDefault()))
                 .withItens(ItemMapper.toEntity(order.getCombo()))
                 .build();
     }
 
     public static Order toDomain(OrderEntity order) {
-        return new Order(order.getId(), UserMapper.toDomain(order.getRequester()), ItemMapper.toDomain(order.getItens()), order.getRequestedAt().toInstant(), isNull(order.getUpdatedAt()) ? null : order.getUpdatedAt().toInstant(), order.getAmount(), Status.valueOf(order.getStatus()));
+        return new Order(order.getId(), ClientMapper.toDomain(order.getRequester()), ItemMapper.toDomain(order.getItens()), order.getRequestedAt().toInstant(), isNull(order.getUpdatedAt()) ? null : order.getUpdatedAt().toInstant(), order.getAmount(), Status.valueOf(order.getStatus()));
     }
 }

@@ -14,5 +14,5 @@ import lombok.NoArgsConstructor;
 public class RequestCreateOrderDto {
 
     private ComboDto combo;
-    private UserDto requester;
+    private ClientDto requester;
 }

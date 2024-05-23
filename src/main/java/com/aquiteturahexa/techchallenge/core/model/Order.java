@@ -6,7 +6,7 @@ import java.time.Instant;
 public class Order {
 
     private Long id;
-    private User requester;
+    private Client requester;
     private Combo combo;
     private Instant requestedAt;
     private Instant updatedAt;
@@ -14,7 +14,7 @@ public class Order {
     private Status status;
 
     public Order(Long id,
-                 User requester,
+                 Client requester,
                  Combo combo,
                  Instant requestedAt,
                  Instant updatedAt,
@@ -37,11 +37,11 @@ public class Order {
         this.id = id;
     }
 
-    public User getRequester() {
+    public Client getRequester() {
         return requester;
     }
 
-    public void setRequester(User requester) {
+    public void setRequester(Client requester) {
         this.requester = requester;
     }
 

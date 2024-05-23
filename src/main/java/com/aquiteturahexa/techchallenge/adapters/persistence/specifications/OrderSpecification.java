@@ -1,7 +1,7 @@
 package com.aquiteturahexa.techchallenge.adapters.persistence.specifications;
 
 import com.aquiteturahexa.techchallenge.adapters.persistence.entities.OrderEntity;
-import com.aquiteturahexa.techchallenge.adapters.persistence.entities.UserEntity;
+import com.aquiteturahexa.techchallenge.adapters.persistence.entities.ClientEntity;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.time.ZonedDateTime;
@@ -27,7 +27,7 @@ public class OrderSpecification {
         };
     }
 
-    public static Specification<OrderEntity> hasRequester(UserEntity requester) {
+    public static Specification<OrderEntity> hasRequester(ClientEntity requester) {
         return (root, query, criteriaBuilder) -> {
             if (requester == null) {
                 return criteriaBuilder.conjunction();

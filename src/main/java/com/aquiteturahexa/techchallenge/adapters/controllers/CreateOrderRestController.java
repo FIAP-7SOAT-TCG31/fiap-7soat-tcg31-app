@@ -2,7 +2,7 @@ package com.aquiteturahexa.techchallenge.adapters.controllers;
 
 import com.aquiteturahexa.techchallenge.adapters.controllers.dto.RequestCreateOrderDto;
 import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.ComboMapper;
-import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.UserMapper;
+import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.ClientMapper;
 import com.aquiteturahexa.techchallenge.core.ports.in.CreateOrderPortIn;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -28,9 +28,9 @@ public class CreateOrderRestController {
                                     @RequestBody RequestCreateOrderDto body) {
 
         var combo = ComboMapper.toDomain(body.getCombo());
-        var user = UserMapper.toDomain(body.getRequester());
+        var client = ClientMapper.toDomain(body.getRequester());
 
-        var order = createOrderPortIn.create(combo, user);
+        var order = createOrderPortIn.create(combo, client);
 
         final var location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")

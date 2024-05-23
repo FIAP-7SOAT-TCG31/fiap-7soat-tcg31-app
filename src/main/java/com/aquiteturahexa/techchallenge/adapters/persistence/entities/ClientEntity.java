@@ -15,9 +15,9 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "tb_users")
+@Table(name = "tb_clients")
 @Builder(setterPrefix = "with")
-public class UserEntity {
+public class ClientEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

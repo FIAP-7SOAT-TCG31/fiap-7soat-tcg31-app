@@ -1,16 +1,16 @@
 package com.aquiteturahexa.techchallenge.adapters.persistence.mapper;
 
-import com.aquiteturahexa.techchallenge.adapters.persistence.entities.UserEntity;
-import com.aquiteturahexa.techchallenge.core.model.User;
+import com.aquiteturahexa.techchallenge.adapters.persistence.entities.ClientEntity;
+import com.aquiteturahexa.techchallenge.core.model.Client;
 
 import static java.util.Objects.isNull;
 
-public class UserMapper {
+public class ClientMapper {
 
-    public static UserEntity toEntity(User requester) {
+    public static ClientEntity toEntity(Client requester) {
         return isNull(requester)
                 ? null
-                : UserEntity
+                : ClientEntity
                         .builder()
                         .withId(requester.getId())
                         .withCpf(String.valueOf(requester.getCPF()))
@@ -19,10 +19,10 @@ public class UserMapper {
                         .build();
     }
 
-    public static User toDomain(UserEntity requester) {
+    public static Client toDomain(ClientEntity requester) {
         return isNull(requester)
                 ? null
-                : new User(requester.getId(), Long.valueOf(requester.getCpf()), requester.getName(),
+                : new Client(requester.getId(), Long.valueOf(requester.getCpf()), requester.getName(),
                         requester.getEmail());
     }
 }

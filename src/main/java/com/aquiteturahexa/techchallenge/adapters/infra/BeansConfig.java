@@ -1,8 +1,8 @@
 package com.aquiteturahexa.techchallenge.adapters.infra;
 
-import com.aquiteturahexa.techchallenge.core.ports.in.GetUserByDocumentPortIn;
-import com.aquiteturahexa.techchallenge.core.ports.out.GetUserByDocumentPortOut;
-import com.aquiteturahexa.techchallenge.core.service.GetUserByDocumentService;
+import com.aquiteturahexa.techchallenge.core.ports.in.GetClientByDocumentPortIn;
+import com.aquiteturahexa.techchallenge.core.ports.out.GetClientByDocumentPortOut;
+import com.aquiteturahexa.techchallenge.core.service.GetClientByDocumentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,7 @@ import com.aquiteturahexa.techchallenge.core.ports.in.OrderServicePort;
 import com.aquiteturahexa.techchallenge.core.ports.in.SearchOrderPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.UpdateItemPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.UpdateOrderPortIn;
-import com.aquiteturahexa.techchallenge.core.ports.in.UserServicePort;
+import com.aquiteturahexa.techchallenge.core.ports.in.ClientServicePort;
 import com.aquiteturahexa.techchallenge.core.ports.out.CreateItemPortOut;
 import com.aquiteturahexa.techchallenge.core.ports.out.GetItemPortOut;
 import com.aquiteturahexa.techchallenge.core.ports.out.GetOrderByIdPortOut;
@@ -26,7 +26,7 @@ import com.aquiteturahexa.techchallenge.core.ports.out.SaveOrderPortOut;
 import com.aquiteturahexa.techchallenge.core.ports.out.SearchOrderPortOut;
 import com.aquiteturahexa.techchallenge.core.ports.out.UpdateItemPortOut;
 import com.aquiteturahexa.techchallenge.core.ports.out.UpdateOrderPortOut;
-import com.aquiteturahexa.techchallenge.core.ports.out.UserRepositoryPort;
+import com.aquiteturahexa.techchallenge.core.ports.out.ClientRepositoryPort;
 import com.aquiteturahexa.techchallenge.core.service.CreateItemService;
 import com.aquiteturahexa.techchallenge.core.service.CreateOrderService;
 import com.aquiteturahexa.techchallenge.core.service.GetItemService;
@@ -36,7 +36,7 @@ import com.aquiteturahexa.techchallenge.core.service.OrderService;
 import com.aquiteturahexa.techchallenge.core.service.SearchOrderService;
 import com.aquiteturahexa.techchallenge.core.service.UpdateItemService;
 import com.aquiteturahexa.techchallenge.core.service.UpdateOrderService;
-import com.aquiteturahexa.techchallenge.core.service.UserService;
+import com.aquiteturahexa.techchallenge.core.service.ClientService;
 
 @Configuration
 public class BeansConfig {
@@ -46,13 +46,13 @@ public class BeansConfig {
     }
 
     @Bean
-    public UserServicePort userServicePort(UserRepositoryPort userRepositoryPort) {
-        return new UserService(userRepositoryPort);
+    public ClientServicePort clientServicePort(ClientRepositoryPort clientRepositoryPort) {
+        return new ClientService(clientRepositoryPort);
     }
 
     @Bean
-    public GetUserByDocumentPortIn beanGetUserByDocumentPortIn(GetUserByDocumentPortOut getUserByDocumentPortOut) {
-        return new GetUserByDocumentService(getUserByDocumentPortOut);
+    public GetClientByDocumentPortIn beanGetClientByDocumentPortIn(GetClientByDocumentPortOut getClientByDocumentPortOut) {
+        return new GetClientByDocumentService(getClientByDocumentPortOut);
     }
 
     @Bean

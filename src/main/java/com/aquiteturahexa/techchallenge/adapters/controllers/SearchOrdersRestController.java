@@ -1,10 +1,10 @@
 package com.aquiteturahexa.techchallenge.adapters.controllers;
 
 
+import com.aquiteturahexa.techchallenge.core.model.Client;
 import com.aquiteturahexa.techchallenge.core.model.Status;
-import com.aquiteturahexa.techchallenge.core.model.User;
 import com.aquiteturahexa.techchallenge.core.ports.in.SearchOrderPortIn;
-import com.aquiteturahexa.techchallenge.core.ports.in.UserServicePort;
+import com.aquiteturahexa.techchallenge.core.ports.in.ClientServicePort;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.ResponseEntity;
@@ -28,25 +28,25 @@ public class SearchOrdersRestController {
 
     private static final ZoneId ZONE_ID = ZoneId.of("America/Sao_Paulo");
     private final SearchOrderPortIn searchOrderPortIn;
-    private final UserServicePort userServicePort;
+    private final ClientServicePort clientServicePort;
 
     @GetMapping(path = "/api/v1/orders")
     public ResponseEntity<?> get(@RequestHeader Map<String, String> headers,
                                  @RequestParam(value = "status", required = false) List<String> status,
-                                 @RequestParam(value = "user_id", required = false) Long userId,
+                                 @RequestParam(value = "client_id", required = false) Long clientId,
                                  @RequestParam(value = "from", required = false) String fromDate,
                                  @RequestParam(value = "to", required = false) String toDate) {
 
 
         List<Status> statusEnums = CollectionUtils.isEmpty(status) ? List.of() : status.stream().map(Status::valueOf).toList();
-        User user = userId == null ? null : userServicePort.findById(userId);
+        Client client = clientId == null ? null : clientServicePort.findById(clientId);
         LocalDate from = StringUtils.isBlank(fromDate) ? null : LocalDate.parse(fromDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         LocalDate to = StringUtils.isBlank(toDate) ? null : LocalDate.parse(toDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
         var orders = searchOrderPortIn.search(isNull(from) ? null : from.atStartOfDay().atZone(ZONE_ID),
                 isNull(to) ? null : to.atStartOfDay().atZone(ZONE_ID),
                 statusEnums,
-                user);
+                client);
 
         return orders.isEmpty()
                 ? ResponseEntity.notFound().build()
