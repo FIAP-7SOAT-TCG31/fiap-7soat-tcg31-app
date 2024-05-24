@@ -3,8 +3,8 @@ package com.aquiteturahexa.techchallenge.adapters.controllers;
 
 import com.aquiteturahexa.techchallenge.core.model.Client;
 import com.aquiteturahexa.techchallenge.core.model.Status;
-import com.aquiteturahexa.techchallenge.core.ports.in.SearchOrderPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.ClientServicePort;
+import com.aquiteturahexa.techchallenge.core.ports.in.SearchOrderPortIn;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

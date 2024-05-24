@@ -26,7 +26,7 @@ public class CreateTokenRestController {
     private final JwtService jwtService;
 
     @PostMapping(path = "/api/v1/auth")
-    @Operation(summary = "Advance the status of an order")
+    @Operation(summary = "Generate access token")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully token generated"),
             @ApiResponse(responseCode = "401", description = "Unauthorized access")

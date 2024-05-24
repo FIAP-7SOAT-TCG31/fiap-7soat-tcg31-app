@@ -1,9 +1,10 @@
 package com.aquiteturahexa.techchallenge.adapters.controllers;
 
 import com.aquiteturahexa.techchallenge.adapters.controllers.dto.RequestCreateOrderDto;
-import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.ComboMapper;
 import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.ClientMapper;
+import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.ComboMapper;
 import com.aquiteturahexa.techchallenge.core.ports.in.CreateOrderPortIn;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,6 +29,7 @@ public class CreateOrderRestController {
     private final ModelMapper modelMapper;
 
     @PostMapping(path = "/api/v1/orders")
+    @Operation(summary = "Create order data")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Receive order data and save it in the database")
     })

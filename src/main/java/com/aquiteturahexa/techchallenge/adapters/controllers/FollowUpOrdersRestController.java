@@ -6,6 +6,7 @@ import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.OrderMapper
 import com.aquiteturahexa.techchallenge.core.model.Status;
 import com.aquiteturahexa.techchallenge.core.ports.in.ClientServicePort;
 import com.aquiteturahexa.techchallenge.core.ports.in.SearchOrderPortIn;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -32,7 +33,9 @@ public class FollowUpOrdersRestController {
     private final SearchOrderPortIn searchOrderPortIn;
     private final ClientServicePort clientServicePort;
 
-    @GetMapping(path = "/api/v1/followup")    @ApiResponses(value = {
+    @GetMapping(path = "/api/v1/followup")
+    @Operation(summary = "Follow Up Orders")
+    @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Return orders")
     })
     public ResponseEntity<?> get(@RequestHeader Map<String, String> headers) {

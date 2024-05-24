@@ -1,12 +1,8 @@
 package com.aquiteturahexa.techchallenge.adapters.controllers;
 
 import com.aquiteturahexa.techchallenge.adapters.controllers.dto.ClientDto;
-import com.aquiteturahexa.techchallenge.adapters.controllers.dto.RequestCreateClientDto;
-import com.aquiteturahexa.techchallenge.adapters.controllers.dto.RequestCreateUserDto;
 import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.ClientMapper;
-import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.UserMapper;
 import com.aquiteturahexa.techchallenge.core.ports.in.CreateClientPortIn;
-import com.aquiteturahexa.techchallenge.core.ports.in.CreateUserPortIn;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

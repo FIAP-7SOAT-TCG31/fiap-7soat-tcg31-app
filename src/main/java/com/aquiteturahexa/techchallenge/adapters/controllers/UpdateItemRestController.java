@@ -1,12 +1,13 @@
 package com.aquiteturahexa.techchallenge.adapters.controllers;
 
-import static java.util.Objects.isNull;
-
-import java.util.Map;
-
+import com.aquiteturahexa.techchallenge.adapters.controllers.dto.RequestCreateItemDto;
+import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.ItemMapper;
+import com.aquiteturahexa.techchallenge.core.ports.in.UpdateItemPortIn;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -14,11 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.aquiteturahexa.techchallenge.adapters.controllers.dto.RequestCreateItemDto;
-import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.ItemMapper;
-import com.aquiteturahexa.techchallenge.core.ports.in.UpdateItemPortIn;
+import java.util.Map;
 
-import lombok.RequiredArgsConstructor;
+import static java.util.Objects.isNull;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,6 +27,7 @@ public class UpdateItemRestController {
     private final UpdateItemPortIn updateItemPortIn;
 
     @PutMapping(path = "/api/v1/items/{id}")
+    @Operation(summary = "Update Item")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Receive updated item data and save it in the database"),
             @ApiResponse(responseCode = "404", description = "Item not found")

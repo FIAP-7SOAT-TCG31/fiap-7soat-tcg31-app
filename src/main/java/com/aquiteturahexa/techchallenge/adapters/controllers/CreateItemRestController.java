@@ -3,6 +3,7 @@ package com.aquiteturahexa.techchallenge.adapters.controllers;
 import com.aquiteturahexa.techchallenge.adapters.controllers.dto.RequestCreateItemDto;
 import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.ItemMapper;
 import com.aquiteturahexa.techchallenge.core.ports.in.CreateItemPortIn;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -24,6 +25,7 @@ public class CreateItemRestController {
     private final CreateItemPortIn createItemPortIn;
 
     @PostMapping(path = "/api/v1/items")
+    @Operation(summary = "Create item data")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Receive item data and save it in the database")
     })
