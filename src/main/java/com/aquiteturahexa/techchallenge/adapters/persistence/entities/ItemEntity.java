@@ -1,7 +1,11 @@
 package com.aquiteturahexa.techchallenge.adapters.persistence.entities;
 
 import java.math.BigDecimal;
+import java.util.List;
 
+import com.aquiteturahexa.techchallenge.adapters.persistence.utils.StringListConverter;
+
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,4 +31,8 @@ public class ItemEntity {
     private String type;
     private BigDecimal price;
     private Float quantity;
+    private String description;
+
+    @Convert(converter = StringListConverter.class)
+    private List<String> images;
 }
