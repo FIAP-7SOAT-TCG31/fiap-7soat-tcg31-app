@@ -2,6 +2,10 @@ package com.aquiteturahexa.techchallenge.adapters.controllers;
 
 import java.util.Map;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,13 +21,18 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "Create Client Controller", description = "Controller for receiving client data and save it in the database")
 public class CreateClientRestController {
 
         private final CreateClientPortIn createClientPortIn;
 
-        @PostMapping(path = "/api/v1/clients")
-        public ResponseEntity<?> create(@RequestHeader Map<String, String> headers,
-                        @RequestBody ClientDto body) {
+    @PostMapping(path = "/api/v1/clients")
+    @Operation(summary = "Create client")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Receive client data and save it in the database")
+    })
+    public ResponseEntity<?> create(@RequestHeader Map<String, String> headers,
+                                    @RequestBody ClientDto body) {
 
                 var client = createClientPortIn.create(ClientMapper.toDomain(body));
                 final var location = ServletUriComponentsBuilder.fromCurrentRequest()

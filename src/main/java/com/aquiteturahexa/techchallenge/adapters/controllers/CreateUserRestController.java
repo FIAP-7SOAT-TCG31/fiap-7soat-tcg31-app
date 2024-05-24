@@ -3,6 +3,10 @@ package com.aquiteturahexa.techchallenge.adapters.controllers;
 import com.aquiteturahexa.techchallenge.adapters.controllers.dto.RequestCreateUserDto;
 import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.UserMapper;
 import com.aquiteturahexa.techchallenge.core.ports.in.CreateUserPortIn;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,11 +19,16 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "Create User Controller", description = "Controller for receiving user data and save it in the database")
 public class CreateUserRestController {
 
         private final CreateUserPortIn createUserPortIn;
 
         @PostMapping(path = "/api/v1/users")
+        @Operation(summary = "Create item data")
+        @ApiResponses(value = {
+                @ApiResponse(responseCode = "201", description = "Receive user data and save it in the database")
+        })
         public ResponseEntity<?> create(@RequestHeader Map<String, String> headers,
                         @RequestBody RequestCreateUserDto body) {
 
