@@ -31,14 +31,17 @@ public class SecurityConfig {
     UserDetailsService userDetailsService;
 
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/api/v1/auth").permitAll()
                 .requestMatchers("/actuator/**").permitAll()
+                .requestMatchers("/swagger-ui.html").permitAll()
                 .requestMatchers("/swagger-ui/**").permitAll()
+                .requestMatchers("/swagger-resources/**").permitAll()
+                .requestMatchers("/v2/api-docs").permitAll()
+                .requestMatchers("/webjars/**").permitAll()
                 .requestMatchers("/h2/**").permitAll().and().headers().frameOptions().sameOrigin()
                 .and()
                 .authorizeHttpRequests().requestMatchers("/api/v1/**")
@@ -49,7 +52,6 @@ public class SecurityConfig {
                 .and()
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class).build();
-
     }
 
     @Bean
