@@ -33,7 +33,7 @@ public class OrderEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "requester")
+    @JoinColumn(name = "requester_id")
     private ClientEntity requester;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
