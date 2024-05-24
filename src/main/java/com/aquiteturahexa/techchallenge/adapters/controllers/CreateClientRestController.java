@@ -1,13 +1,7 @@
 package com.aquiteturahexa.techchallenge.adapters.controllers;
 
-import com.aquiteturahexa.techchallenge.adapters.controllers.dto.ClientDto;
-import com.aquiteturahexa.techchallenge.adapters.controllers.dto.RequestCreateClientDto;
-import com.aquiteturahexa.techchallenge.adapters.controllers.dto.RequestCreateUserDto;
-import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.ClientMapper;
-import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.UserMapper;
-import com.aquiteturahexa.techchallenge.core.ports.in.CreateClientPortIn;
-import com.aquiteturahexa.techchallenge.core.ports.in.CreateUserPortIn;
-import lombok.RequiredArgsConstructor;
+import java.util.Map;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +9,11 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.util.Map;
+import com.aquiteturahexa.techchallenge.adapters.controllers.dto.ClientDto;
+import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.ClientMapper;
+import com.aquiteturahexa.techchallenge.core.ports.in.CreateClientPortIn;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,9 +25,7 @@ public class CreateClientRestController {
         public ResponseEntity<?> create(@RequestHeader Map<String, String> headers,
                         @RequestBody ClientDto body) {
 
-                var client = ClientMapper.toDomain(body);
-                createClientPortIn.create(client);
-
+                var client = createClientPortIn.create(ClientMapper.toDomain(body));
                 final var location = ServletUriComponentsBuilder.fromCurrentRequest()
                                 .path("/{id}")
                                 .buildAndExpand(client.getId())
