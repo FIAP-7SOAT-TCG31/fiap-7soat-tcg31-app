@@ -19,7 +19,8 @@ CREATE TABLE tb_items (
     type VARCHAR(255),
     price DECIMAL(19, 4),
     quantity FLOAT,
-    description VARCHAR(255)
+    description VARCHAR(255),
+    images VARCHAR(1000)
 );
 
 
