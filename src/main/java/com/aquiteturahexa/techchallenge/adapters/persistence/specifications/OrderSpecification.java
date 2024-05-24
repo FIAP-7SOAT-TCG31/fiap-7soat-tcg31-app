@@ -33,7 +33,7 @@ public class OrderSpecification {
             if (requester == null) {
                 return criteriaBuilder.conjunction();
             }
-            return criteriaBuilder.equal(root.get("requester_id"), requester);
+            return criteriaBuilder.equal(root.get("requester"), requester);
         };
     }
 }
