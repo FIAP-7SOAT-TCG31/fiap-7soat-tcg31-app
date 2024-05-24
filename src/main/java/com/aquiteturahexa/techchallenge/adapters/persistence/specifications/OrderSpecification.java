@@ -1,11 +1,12 @@
 package com.aquiteturahexa.techchallenge.adapters.persistence.specifications;
 
-import com.aquiteturahexa.techchallenge.adapters.persistence.entities.OrderEntity;
-import com.aquiteturahexa.techchallenge.adapters.persistence.entities.ClientEntity;
-import org.springframework.data.jpa.domain.Specification;
-
 import java.time.ZonedDateTime;
 import java.util.List;
+
+import org.springframework.data.jpa.domain.Specification;
+
+import com.aquiteturahexa.techchallenge.adapters.persistence.entities.ClientEntity;
+import com.aquiteturahexa.techchallenge.adapters.persistence.entities.OrderEntity;
 
 public class OrderSpecification {
 
@@ -32,7 +33,7 @@ public class OrderSpecification {
             if (requester == null) {
                 return criteriaBuilder.conjunction();
             }
-            return criteriaBuilder.equal(root.get("requester"), requester);
+            return criteriaBuilder.equal(root.get("requester_id"), requester);
         };
     }
 }
