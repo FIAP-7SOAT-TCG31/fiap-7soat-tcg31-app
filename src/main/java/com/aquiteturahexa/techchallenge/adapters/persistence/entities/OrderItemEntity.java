@@ -34,4 +34,6 @@ public class OrderItemEntity {
 
     private Float quantity;
 
+    private boolean done;
+
 }

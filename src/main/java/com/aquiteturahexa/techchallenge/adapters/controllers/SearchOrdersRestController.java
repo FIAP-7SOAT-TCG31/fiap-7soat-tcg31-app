@@ -5,6 +5,10 @@ import com.aquiteturahexa.techchallenge.core.model.Client;
 import com.aquiteturahexa.techchallenge.core.model.Status;
 import com.aquiteturahexa.techchallenge.core.ports.in.SearchOrderPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.ClientServicePort;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +28,7 @@ import static java.util.Objects.isNull;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "Search Order Controller", description = "Controller for return order data")
 public class SearchOrdersRestController {
 
     private static final ZoneId ZONE_ID = ZoneId.of("America/Sao_Paulo");
@@ -31,6 +36,10 @@ public class SearchOrdersRestController {
     private final ClientServicePort clientServicePort;
 
     @GetMapping(path = "/api/v1/orders")
+    @Operation(summary = "Return order data")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully returned order data")
+    })
     public ResponseEntity<?> get(@RequestHeader Map<String, String> headers,
                                  @RequestParam(value = "status", required = false) List<String> status,
                                  @RequestParam(value = "client_id", required = false) Long clientId,
@@ -49,7 +58,7 @@ public class SearchOrdersRestController {
                 client);
 
         return orders.isEmpty()
-                ? ResponseEntity.notFound().build()
+                ? ResponseEntity.ok(List.of())
                 : ResponseEntity.ok(orders);
     }
 

@@ -1,8 +1,13 @@
 package com.aquiteturahexa.techchallenge.adapters.controllers;
 
+import java.util.List;
 import java.util.Map;
 
 import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.ItemMapper;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -17,27 +22,32 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "Search Item Controller", description = "Controller for return item data")
 public class ListItemsRestController {
 
-        private final ListItemsPortIn listItemsPortIn;
+    private final ListItemsPortIn listItemsPortIn;
 
-        @GetMapping(path = "/api/v1/items")
-        public ResponseEntity<?> getById(
-                        @RequestHeader Map<String, String> headers,
-                        @RequestParam(value = "itemType", required = false) String itemType
+    @GetMapping(path = "/api/v1/items")
+    @Operation(summary = "Return item data")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully returned items data"),
+    })
+    public ResponseEntity<?> getById(
+            @RequestHeader Map<String, String> headers,
+            @RequestParam(value = "itemType", required = false) String itemType
 
-        ) {
-                var filterByType = StringUtils.isNotEmpty(itemType);
-                var itemTypeEnum = filterByType ? ItemType.valueOf(itemType) : null;
+    ) {
+        var filterByType = StringUtils.isNotEmpty(itemType);
+        var itemTypeEnum = filterByType ? ItemType.valueOf(itemType) : null;
 
-                var items = filterByType
-                                ? listItemsPortIn.getAllByType(itemTypeEnum)
-                                : listItemsPortIn.getAll();
+        var items = filterByType
+                ? listItemsPortIn.getAllByType(itemTypeEnum)
+                : listItemsPortIn.getAll();
 
-                return items.isEmpty()
-                                ? ResponseEntity.notFound().build()
-                                : ResponseEntity.ok(ItemMapper.toDto(items));
+        return items.isEmpty()
+                ? ResponseEntity.ok(List.of())
+                : ResponseEntity.ok(ItemMapper.toDto(items));
 
-        }
+    }
 
 }

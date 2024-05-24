@@ -7,6 +7,10 @@ import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.ClientMappe
 import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.UserMapper;
 import com.aquiteturahexa.techchallenge.core.ports.in.CreateClientPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.CreateUserPortIn;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,11 +23,16 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "Create Client Controller", description = "Controller for receiving client data and save it in the database")
 public class CreateClientRestController {
 
         private final CreateClientPortIn createClientPortIn;
 
         @PostMapping(path = "/api/v1/clients")
+        @Operation(summary = "Confirm order and start payment flux")
+        @ApiResponses(value = {
+                @ApiResponse(responseCode = "201", description = "Receive client data and save it in the database")
+        })
         public ResponseEntity<?> create(@RequestHeader Map<String, String> headers,
                         @RequestBody ClientDto body) {
 
