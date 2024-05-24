@@ -22,7 +22,9 @@ public class ItemMapper {
                                                                 item.getItem().getName(),
                                                                 ItemType.valueOf(item.getItem().getType()),
                                                                 item.getItem().getPrice(),
-                                                                item.getQuantity()))
+                                                                item.getQuantity(),
+                                                                item.getItem().getDescription(),
+                                                                item.getItem().getImages()))
                                                 .collect(Collectors.toCollection(ArrayList::new));
 
                 return new Combo(itemList);
@@ -55,7 +57,9 @@ public class ItemMapper {
                                 item.getName(),
                                 ItemType.valueOf(item.getType()),
                                 item.getPrice(),
-                                item.getQuantity());
+                                item.getQuantity(),
+                                item.getDescription(),
+                                item.getImages());
         }
 
         public static ItemEntity toEntity(Item item) {
@@ -66,6 +70,8 @@ public class ItemMapper {
                                 .withPrice(item.getPrice())
                                 .withType(item.getType().name())
                                 .withQuantity(item.getQuantity())
+                                .withDescription(item.getDescription())
+                                .withImages(item.getImages())
                                 .build();
         }
 }

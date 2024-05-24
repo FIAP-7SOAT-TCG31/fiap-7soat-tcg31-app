@@ -1,10 +1,11 @@
 package com.aquiteturahexa.techchallenge.adapters.controllers.mappers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.aquiteturahexa.techchallenge.adapters.controllers.dto.ItemDto;
 import com.aquiteturahexa.techchallenge.core.model.Item;
 import com.aquiteturahexa.techchallenge.core.model.ItemType;
-
-import java.util.List;
 
 public class ItemMapper {
 
@@ -12,9 +13,9 @@ public class ItemMapper {
         return items == null || items.isEmpty()
                 ? List.of()
                 : items
-                .stream()
-                .map(ItemMapper::toDomain)
-                .toList();
+                        .stream()
+                        .map(ItemMapper::toDomain)
+                        .toList();
     }
 
     public static Item toDomain(ItemDto item) {
@@ -23,16 +24,18 @@ public class ItemMapper {
                 item.getName(),
                 ItemType.valueOf(item.getType()),
                 item.getPrice(),
-                item.getQuantity());
+                item.getQuantity(),
+                item.getDescription(),
+                new ArrayList<>(item.getImages()));
     }
 
     public static List<ItemDto> toDto(List<Item> items) {
         return items == null || items.isEmpty()
                 ? List.of()
                 : items
-                .stream()
-                .map(ItemMapper::toDto)
-                .toList();
+                        .stream()
+                        .map(ItemMapper::toDto)
+                        .toList();
     }
 
     public static ItemDto toDto(Item item) {
@@ -43,6 +46,8 @@ public class ItemMapper {
                 .withPrice(item.getPrice())
                 .withType(item.getType().name())
                 .withQuantity(item.getQuantity())
+                .withDescription(item.getDescription())
+                .withImages(item.getImages())
                 .build();
     }
 }

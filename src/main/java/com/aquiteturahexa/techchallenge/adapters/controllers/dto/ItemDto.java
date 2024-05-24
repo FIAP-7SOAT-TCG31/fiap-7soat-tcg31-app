@@ -1,6 +1,7 @@
 package com.aquiteturahexa.techchallenge.adapters.controllers.dto;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -21,5 +22,7 @@ public class ItemDto {
     private String type;
     private BigDecimal price;
     private Float quantity;
+    private String description;
+    private List<String> images;
 
 }

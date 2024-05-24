@@ -1,6 +1,8 @@
 package com.aquiteturahexa.techchallenge.core.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Item {
 
@@ -9,16 +11,21 @@ public class Item {
     private ItemType type;
     private BigDecimal price;
     private Float quantity;
+    private String description;
+    private List<String> images;
 
     public Item() {
     }
 
-    public Item(Long id, String name, ItemType type, BigDecimal price, Float quantity) {
+    public Item(Long id, String name, ItemType type, BigDecimal price, Float quantity, String description,
+            List<String> images) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.price = price;
         this.quantity = quantity;
+        this.description = description;
+        this.images = images;
     }
 
     public Long getId() {
@@ -55,5 +62,21 @@ public class Item {
 
     public void setQuantity(Float quantity) {
         this.quantity = quantity;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<String> getImages() {
+        return new ArrayList<>(images);
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
     }
 }
