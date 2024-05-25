@@ -1,10 +1,15 @@
 package com.aquiteturahexa.techchallenge.adapters.controllers;
 
+import com.aquiteturahexa.techchallenge.adapters.controllers.dto.ItemDto;
+import com.aquiteturahexa.techchallenge.adapters.controllers.dto.OrderDto;
 import com.aquiteturahexa.techchallenge.adapters.controllers.dto.RequestCreateOrderDto;
 import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.ClientMapper;
 import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.ComboMapper;
+import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.OrderMapper;
 import com.aquiteturahexa.techchallenge.core.ports.in.CreateOrderPortIn;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -31,7 +36,10 @@ public class CreateOrderRestController {
     @PostMapping(path = "/api/v1/orders")
     @Operation(summary = "Create order data")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Receive order data and save it in the database")
+            @ApiResponse(responseCode = "201",
+                    description = "Receive order data and save it in the database",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = OrderDto.class)))
     })
     public ResponseEntity<?> create(@RequestHeader Map<String, String> headers,
                                     @RequestBody RequestCreateOrderDto body) {
@@ -48,7 +56,7 @@ public class CreateOrderRestController {
 
         return ResponseEntity
                 .created(location)
-                .body(order);
+                .body(OrderMapper.toDto(order));
     }
 
 }

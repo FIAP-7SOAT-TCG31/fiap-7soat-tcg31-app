@@ -1,9 +1,13 @@
 package com.aquiteturahexa.techchallenge.adapters.controllers;
 
+import com.aquiteturahexa.techchallenge.adapters.controllers.dto.AccessTokenDto;
+import com.aquiteturahexa.techchallenge.adapters.controllers.dto.OrderDto;
 import com.aquiteturahexa.techchallenge.adapters.controllers.dto.RequestTokenDto;
 import com.aquiteturahexa.techchallenge.adapters.controllers.provider.JwtService;
 import com.aquiteturahexa.techchallenge.core.ports.in.GetUserPortIn;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,7 +32,10 @@ public class CreateTokenRestController {
     @PostMapping(path = "/api/v1/auth")
     @Operation(summary = "Generate access token")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully token generated"),
+            @ApiResponse(responseCode = "200",
+                    description = "Successfully token generated",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = AccessTokenDto.class))),
             @ApiResponse(responseCode = "401", description = "Unauthorized access")
     })
     public ResponseEntity<?> create(@RequestHeader Map<String, String> headers,
@@ -38,9 +45,11 @@ public class CreateTokenRestController {
 
         return user
                 .map(value -> ResponseEntity
-                        .ok(
-                                Map.of("token", jwtService.generateToken(value.getUsername()))))
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Authentication failed")));
+                        .ok(AccessTokenDto
+                                .builder()
+                                .withToken(jwtService.generateToken(value.getUsername()))
+                                .build()))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
 
 
     }

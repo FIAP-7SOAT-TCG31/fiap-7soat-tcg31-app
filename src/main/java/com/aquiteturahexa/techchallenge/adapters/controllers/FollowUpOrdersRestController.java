@@ -1,12 +1,15 @@
 package com.aquiteturahexa.techchallenge.adapters.controllers;
 
 
+import com.aquiteturahexa.techchallenge.adapters.controllers.dto.ItemDto;
 import com.aquiteturahexa.techchallenge.adapters.controllers.dto.ResponseFollowupDto;
 import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.OrderMapper;
 import com.aquiteturahexa.techchallenge.core.model.Status;
-import com.aquiteturahexa.techchallenge.core.ports.in.ClientServicePort;
 import com.aquiteturahexa.techchallenge.core.ports.in.SearchOrderPortIn;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -31,12 +34,16 @@ public class FollowUpOrdersRestController {
 
     private static final ZoneId ZONE_ID = ZoneId.of("America/Sao_Paulo");
     private final SearchOrderPortIn searchOrderPortIn;
-    private final ClientServicePort clientServicePort;
 
     @GetMapping(path = "/api/v1/followup")
     @Operation(summary = "Follow Up Orders")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Return orders")
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Return orders",
+                    content = @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = ResponseFollowupDto.class)))),
     })
     public ResponseEntity<?> get(@RequestHeader Map<String, String> headers) {
 
@@ -55,7 +62,7 @@ public class FollowUpOrdersRestController {
                 : ResponseEntity.ok(
                 orders
                         .stream()
-                        .map(OrderMapper::toDto)
+                        .map(OrderMapper::toFollowUpDto)
                         .collect(Collectors.groupingBy(ResponseFollowupDto::getStatus)));
 
 

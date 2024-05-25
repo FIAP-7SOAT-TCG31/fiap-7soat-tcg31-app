@@ -1,9 +1,14 @@
 package com.aquiteturahexa.techchallenge.adapters.controllers;
 
 import com.aquiteturahexa.techchallenge.adapters.controllers.dto.PaymentDto;
+import com.aquiteturahexa.techchallenge.adapters.controllers.dto.ResponseFollowupDto;
+import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.PaymentMapper;
+import com.aquiteturahexa.techchallenge.core.model.Payment;
 import com.aquiteturahexa.techchallenge.core.ports.in.GeneratePaymentPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.GetOrderPortIn;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,7 +33,11 @@ public class ConfirmOrderRestController {
     @PostMapping(path = "/api/v1/orders/{id}/payment")
     @Operation(summary = "Confirm order and start payment flux")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Successfully confirmed order"),
+            @ApiResponse(responseCode = "201",
+                    description = "Successfully confirmed order",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = PaymentDto.class))
+            ),
             @ApiResponse(responseCode = "404", description = "Order not found")
     })
     public ResponseEntity<?> generatePayment(@RequestHeader Map<String, String> headers,
@@ -44,7 +53,8 @@ public class ConfirmOrderRestController {
         var payment = generatePaymentPortIn.generate(order.get(), body.getType());
 
         return ResponseEntity.created(null)
-                .body(Map.of(body.getType(), payment.getPaymentDetails().get("QR_CODE")));
+                .body(PaymentMapper.toDto(payment));
     }
+
 
 }

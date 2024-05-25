@@ -26,7 +26,7 @@ public class ItemMapper {
                 item.getPrice(),
                 item.getQuantity(),
                 item.getDescription(),
-                new ArrayList<>(item.getImages()));
+                item.getImages() == null || item.getImages().isEmpty() ? List.of() : new ArrayList<>(item.getImages()));
     }
 
     public static List<ItemDto> toDto(List<Item> items) {
@@ -47,7 +47,7 @@ public class ItemMapper {
                 .withType(item.getType().name())
                 .withQuantity(item.getQuantity())
                 .withDescription(item.getDescription())
-                .withImages(item.getImages())
+                .withImages(item.getImages() == null || item.getImages().isEmpty() ? List.of() : item.getImages())
                 .build();
     }
 }

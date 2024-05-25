@@ -1,9 +1,12 @@
 package com.aquiteturahexa.techchallenge.adapters.controllers;
 
+import com.aquiteturahexa.techchallenge.adapters.controllers.dto.ItemDto;
 import com.aquiteturahexa.techchallenge.adapters.controllers.dto.RequestCreateItemDto;
 import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.ItemMapper;
 import com.aquiteturahexa.techchallenge.core.ports.in.UpdateItemPortIn;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -29,7 +32,11 @@ public class UpdateItemRestController {
     @PutMapping(path = "/api/v1/items/{id}")
     @Operation(summary = "Update Item")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Receive updated item data and save it in the database"),
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Receive updated item data and save it in the database",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ItemDto.class))),
             @ApiResponse(responseCode = "404", description = "Item not found")
     })
     public ResponseEntity<?> updateItem(

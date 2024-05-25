@@ -1,8 +1,12 @@
 package com.aquiteturahexa.techchallenge.adapters.controllers;
 
+import com.aquiteturahexa.techchallenge.adapters.controllers.dto.ClientDto;
+import com.aquiteturahexa.techchallenge.adapters.controllers.dto.ResponseFollowupDto;
 import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.ClientMapper;
 import com.aquiteturahexa.techchallenge.core.ports.in.GetClientByDocumentPortIn;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,7 +29,11 @@ public class GetClientByDocumentRestController {
     @GetMapping(path = "/api/v1/clients")
     @Operation(summary = "Return client data by his document number")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully returned client data"),
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Successfully returned client data",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ClientDto.class))),
             @ApiResponse(responseCode = "404", description = "Client not found")
     })
     public ResponseEntity<?> get(@RequestHeader Map<String, String> headers,

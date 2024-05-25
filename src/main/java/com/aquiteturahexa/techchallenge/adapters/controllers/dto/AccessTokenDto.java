@@ -6,15 +6,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.Map;
-
 @Getter
 @Builder(toBuilder = true, setterPrefix = "with")
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class PaymentDto {
+public class AccessTokenDto {
 
-    private String type;
-    private Map<String, Object> paymentDetails;
+    private String token;
 }
