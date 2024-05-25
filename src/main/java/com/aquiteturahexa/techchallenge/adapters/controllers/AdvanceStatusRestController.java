@@ -1,10 +1,13 @@
 package com.aquiteturahexa.techchallenge.adapters.controllers;
 
+import com.aquiteturahexa.techchallenge.adapters.controllers.dto.ResponseFollowupDto;
 import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.OrderMapper;
 import com.aquiteturahexa.techchallenge.core.ports.in.AdvanceStatusPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.GetOrderPortIn;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,7 +31,11 @@ public class AdvanceStatusRestController {
     @PatchMapping(path = "/api/v1/orders/{id}/status")
     @Operation(summary = "Advance the status of an order")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully advanced the order status"),
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Successfully advanced the order status",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ResponseFollowupDto.class))),
             @ApiResponse(responseCode = "404", description = "Order not found")
     })
     public ResponseEntity<?> create(@RequestHeader Map<String, String> headers,
@@ -42,6 +49,6 @@ public class AdvanceStatusRestController {
         var updatedOrder = advanceStatusPortIn.advance(order.get());
 
         return ResponseEntity.ok()
-                .body(OrderMapper.toDto(updatedOrder));
+                .body(OrderMapper.toFollowUpDto(updatedOrder));
     }
 }

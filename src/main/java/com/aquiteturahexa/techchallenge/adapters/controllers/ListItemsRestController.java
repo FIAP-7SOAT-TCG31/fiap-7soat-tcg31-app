@@ -1,10 +1,14 @@
 package com.aquiteturahexa.techchallenge.adapters.controllers;
 
+import com.aquiteturahexa.techchallenge.adapters.controllers.dto.ItemDto;
 import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.ItemMapper;
 import com.aquiteturahexa.techchallenge.core.model.ItemType;
 import com.aquiteturahexa.techchallenge.core.ports.in.ListItemsPortIn;
 import io.micrometer.common.util.StringUtils;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,7 +32,12 @@ public class ListItemsRestController {
     @GetMapping(path = "/api/v1/items")
     @Operation(summary = "Return item data")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully returned items data"),
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Successfully returned items data",
+                    content = @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = ItemDto.class)))),
     })
     public ResponseEntity<?> getById(
             @RequestHeader Map<String, String> headers,

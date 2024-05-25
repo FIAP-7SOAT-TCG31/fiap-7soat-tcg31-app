@@ -1,9 +1,13 @@
 package com.aquiteturahexa.techchallenge.adapters.controllers;
 
+import com.aquiteturahexa.techchallenge.adapters.controllers.dto.ClientDto;
+import com.aquiteturahexa.techchallenge.adapters.controllers.dto.ItemDto;
 import com.aquiteturahexa.techchallenge.adapters.controllers.dto.RequestCreateItemDto;
 import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.ItemMapper;
 import com.aquiteturahexa.techchallenge.core.ports.in.CreateItemPortIn;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -27,7 +31,10 @@ public class CreateItemRestController {
     @PostMapping(path = "/api/v1/items")
     @Operation(summary = "Create item data")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Receive item data and save it in the database")
+            @ApiResponse(responseCode = "201",
+                    description = "Receive item data and save it in the database",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ItemDto.class)))
     })
     public ResponseEntity<?> create(@RequestHeader Map<String, String> headers,
                                     @RequestBody RequestCreateItemDto body) {

@@ -12,4 +12,13 @@ public class ComboMapper {
                 ? null
                 : new Combo(ItemMapper.toDomain(combo.getItems()));
     }
+
+    public static ComboDto toDto(Combo combo) {
+        return isNull(combo)
+                ? null
+                : ComboDto
+                .builder()
+                .withItems(ItemMapper.toDto(combo.getItems()))
+                .build();
+    }
 }

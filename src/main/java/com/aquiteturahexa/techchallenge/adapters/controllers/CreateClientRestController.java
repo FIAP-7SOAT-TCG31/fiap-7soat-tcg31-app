@@ -2,7 +2,10 @@ package com.aquiteturahexa.techchallenge.adapters.controllers;
 
 import java.util.Map;
 
+import com.aquiteturahexa.techchallenge.adapters.controllers.dto.PaymentDto;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -29,7 +32,10 @@ public class CreateClientRestController {
     @PostMapping(path = "/api/v1/clients")
     @Operation(summary = "Create client")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Receive client data and save it in the database")
+            @ApiResponse(responseCode = "201",
+                    description = "Receive client data and save it in the database",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ClientDto.class)))
     })
     public ResponseEntity<?> create(@RequestHeader Map<String, String> headers,
                                     @RequestBody ClientDto body) {

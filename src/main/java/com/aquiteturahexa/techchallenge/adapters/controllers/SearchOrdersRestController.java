@@ -1,11 +1,16 @@
 package com.aquiteturahexa.techchallenge.adapters.controllers;
 
 
+import com.aquiteturahexa.techchallenge.adapters.controllers.dto.ResponseFollowupDto;
+import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.OrderMapper;
 import com.aquiteturahexa.techchallenge.core.model.Client;
 import com.aquiteturahexa.techchallenge.core.model.Status;
 import com.aquiteturahexa.techchallenge.core.ports.in.ClientServicePort;
 import com.aquiteturahexa.techchallenge.core.ports.in.SearchOrderPortIn;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -38,7 +43,10 @@ public class SearchOrdersRestController {
     @GetMapping(path = "/api/v1/orders")
     @Operation(summary = "Return order data")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully returned order data")
+            @ApiResponse(responseCode = "200", description = "Successfully returned order data",
+                    content = @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = ResponseFollowupDto.class)))),
     })
     public ResponseEntity<?> get(@RequestHeader Map<String, String> headers,
                                  @RequestParam(value = "status", required = false) List<String> status,
@@ -59,7 +67,7 @@ public class SearchOrdersRestController {
 
         return orders.isEmpty()
                 ? ResponseEntity.ok(List.of())
-                : ResponseEntity.ok(orders);
+                : ResponseEntity.ok(OrderMapper.toDto(orders));
     }
 
 }

@@ -1,8 +1,13 @@
 package com.aquiteturahexa.techchallenge.adapters.controllers;
 
 
+import com.aquiteturahexa.techchallenge.adapters.controllers.dto.ItemDto;
+import com.aquiteturahexa.techchallenge.adapters.controllers.dto.OrderDto;
+import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.OrderMapper;
 import com.aquiteturahexa.techchallenge.core.ports.in.GetOrderPortIn;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,7 +30,11 @@ public class GetOrderByIdRestController {
     @GetMapping(path = "/api/v1/orders/{id}")
     @Operation(summary = "Return order data by his id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully returned order data"),
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Successfully returned order data",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = OrderDto.class))),
             @ApiResponse(responseCode = "404", description = "Order not found")
     })
     public ResponseEntity<?> get(@RequestHeader Map<String, String> headers,
@@ -35,7 +44,7 @@ public class GetOrderByIdRestController {
 
         return order.isEmpty()
                 ? ResponseEntity.notFound().build()
-                : ResponseEntity.ok(order);
+                : ResponseEntity.ok(OrderMapper.toDto(order.get()));
     }
 
 }

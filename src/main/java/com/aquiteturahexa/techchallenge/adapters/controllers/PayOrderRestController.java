@@ -40,7 +40,7 @@ public class PayOrderRestController {
         var updatedOrder = effecitvePaymentPortIn.pay(order.get());
 
         return ResponseEntity.ok()
-                .body(OrderMapper.toDto(updatedOrder));
+                .body(OrderMapper.toFollowUpDto(updatedOrder));
     }
 
 }

@@ -1,10 +1,15 @@
 package com.aquiteturahexa.techchallenge.adapters.controllers;
 
+import com.aquiteturahexa.techchallenge.adapters.controllers.dto.ItemDto;
+import com.aquiteturahexa.techchallenge.adapters.controllers.dto.OrderDto;
 import com.aquiteturahexa.techchallenge.adapters.controllers.dto.RequestUpdateOrderDto;
 import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.ComboMapper;
+import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.OrderMapper;
 import com.aquiteturahexa.techchallenge.core.ports.in.GetOrderPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.UpdateOrderPortIn;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -30,7 +35,10 @@ public class UpdateOrderRestController {
     @PatchMapping(path = "/api/v1/orders/{id}")
     @Operation(summary = "Update Order")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Receive updated order data and save it in the database"),
+            @ApiResponse(responseCode = "200",
+                    description = "Receive updated order data and save it in the database",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = OrderDto.class))),
             @ApiResponse(responseCode = "404", description = "Order not found")
     })
     public ResponseEntity<?> update(@RequestHeader Map<String, String> headers,
@@ -50,7 +58,7 @@ public class UpdateOrderRestController {
         var orderUpdated = updateOrderPortIn.update(order.get(), combo);
 
         return ResponseEntity
-                .ok(orderUpdated);
+                .ok(OrderMapper.toDto(orderUpdated));
     }
 
 }
