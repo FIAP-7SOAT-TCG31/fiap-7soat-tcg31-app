@@ -1,4 +1,14 @@
-## Tech Challenge FIAP Project 
+## Tech Challenge FIAP Project
+
+Projeto desenvolvido durante a `Fase I`, do curso de `Arquitetura de Software` da FIAP, como requisito para avaliação.
+
+### Integrantes do Grupo 7SOAT-31:
+
+- Julio Augusto Silva
+- Lucas Henrique de Oliveira Silva
+- Getúlio Magela Silva (RM355427)
+- Lucas Rego Lima
+- Lilian Rosario de Jesus
 
 ### Hexagonal architecture project
 
@@ -10,8 +20,8 @@ Sem um sistema de controle de pedidos, pode haver confusão entre os atendentes 
 
 Em resumo, um sistema de controle de pedidos é essencial para garantir que a lanchonete possa atender os clientes de maneira eficiente, gerenciando seus pedidos e estoques de forma adequada. Sem ele, expandir a lanchonete pode acabar não dando certo, resultando em clientes insatisfeitos e impactando os negócios de forma negativa.
 
-
 ## Proposta
+
 Para solucionar o problema, a lanchonete irá investir em um sistema de autoatendimento de fast food, que é composto por uma série de dispositivos e interfaces que permitem aos clientes selecionar e fazer pedidos sem precisar interagir com um atendente.
 
 Com o objetivo de aprimorar a experiência do cliente e assegurar uma gestão eficiente dos pedidos, desenvolvemos um sistema de controle de pedidos. Sua arquitetura centraliza-se em um aplicativo de autoatendimento intuitivo, capacitando os clientes a personalizarem seus pedidos de forma ágil e simples, selecionando entre uma variedade de lanches, acompanhamentos, bebidas e sobremesas.
@@ -21,11 +31,13 @@ Inicialmente, o sistema integrará apenas com a opção de pagamento via QR Code
 ---
 
 # Documentação
+
 Documentação DDD pelo [Miro](https://miro.com/app/board/uXjVKYNMy0E=/)
 
 ---
 
 ## Application architecture
+
 <br>
 <p align="center">
     <img src="https://github.com/augustojulio-code/postechrepo/blob/master/solution_architecture.PNG" width="700px" height="500px"/>    
@@ -33,4 +45,5 @@ Documentação DDD pelo [Miro](https://miro.com/app/board/uXjVKYNMy0E=/)
 <br>
 
 ## Project Status
-* Development
+
+- Development
