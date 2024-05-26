@@ -40,6 +40,7 @@ CREATE TABLE tb_order_items (
     order_id BIGINT,
     item_id BIGINT,
     quantity FLOAT,
+    done BOOLEAN,
     FOREIGN KEY (order_id) REFERENCES tb_orders(id),
     FOREIGN KEY (item_id) REFERENCES tb_items(id)
 );
