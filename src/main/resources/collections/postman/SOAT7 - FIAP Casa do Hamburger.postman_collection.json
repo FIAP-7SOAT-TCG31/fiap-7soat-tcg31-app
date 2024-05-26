@@ -1,0 +1,1265 @@
+{
+	"info": {
+		"_postman_id": "6c07b8a1-6854-41f5-bb3a-9ea0bcc3158c",
+		"name": "SOAT7 - FIAP Casa do Hamburger",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10261834"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Authenticate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const result = pm.response.json();\r",
+									"pm.collectionVariables.set(\"token\", result.token);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "# Processo de Autenticação\n\nGeração de Token de Acesso para integração com a API"
+		},
+		{
+			"name": "Prepopulate with Data",
+			"item": [
+				{
+					"name": "Create Items",
+					"item": [
+						{
+							"name": "Create Snack X-Burger",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"item\": {\r\n        \"name\": \"X-Burger\",\r\n        \"type\": \"SNACK\",\r\n        \"price\": 32.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"Hamburger and Cheese\",\r\n        \"images\": [\r\n            \"https://imageurl.com/x-burger-1.png\",\r\n            \"https://imageurl.com/x-burger-2.png\"\r\n        ]\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/items",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"items"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Snack X-Egg",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"item\": {\r\n        \"name\": \"X-Egg\",\r\n        \"type\": \"SNACK\",\r\n        \"price\": 42.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"Hamburger with Cheese and Friend Eggs\",\r\n        \"images\": [\r\n            \"https://imageurl.com/x-egg-burger-1.png\",\r\n            \"https://imageurl.com/x-egg-burger-2.png\"\r\n        ]\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/items",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"items"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Snack Simple Hotdog",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Hotdog\",\r\n        \"type\": \"SNACK\",\r\n        \"price\": 12.99,\r\n        \"quantity\": 100,\r\n        \"description\": \"1 Saussage Hotdog, Smashed Potato and Shoestring Potatoes\",\r\n        \"images\": [\r\n            \"https://imageurl.com/simple-hotdog-1.png\"\r\n        ]\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/items",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"items"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Snack Double Hotdog",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Double Hotdog\",\r\n        \"type\": \"SNACK\",\r\n        \"price\": 18.99,\r\n        \"quantity\": 100,\r\n        \"description\": \"2 Saussages Hotdog, Smashed Potato and Shoestring Potatoes\",\r\n        \"images\": [\r\n            \"https://imageurl.com/double-hotdog-1.png\"\r\n        ]\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/items",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"items"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Beverage Coke",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Coke\",\r\n        \"type\": \"BEVERAGE\",\r\n        \"price\": 7.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"Coca-Cola Beverage\",\r\n        \"images\": [\r\n            \"https://imageurl.com/coke.png\"\r\n        ]\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/items",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"items"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Beverage Guarana",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Guarana\",\r\n        \"type\": \"BEVERAGE\",\r\n        \"price\": 12.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"Brazilian Guarana Beverage\",\r\n        \"images\": [\r\n            \"https://imageurl.com/guarana.png\"\r\n        ]\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/items",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"items"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Beverage Orange Juice",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Orange Juice\",\r\n        \"type\": \"BEVERAGE\",\r\n        \"price\": 8.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"Orange Juice Beverage\",\r\n        \"images\": [\r\n            \"https://imageurl.com/orange-juice.png\"\r\n        ]\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/items",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"items"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Accompaniment Fries",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Fries\",\r\n        \"type\": \"ACCOMPANIMENT\",\r\n        \"price\": 12.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"French Fries\",\r\n        \"images\": [\r\n            \"https://imageurl.com/fries.png\"\r\n        ]\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/items",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"items"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Accompaniment Nuggets",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Nuggets\",\r\n        \"type\": \"ACCOMPANIMENT\",\r\n        \"price\": 12.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"French Nuggets\",\r\n        \"images\": [\r\n            \"https://imageurl.com/nuggets.png\"\r\n        ]\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/items",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"items"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Dessert Ice Cream",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Ice Cream\",\r\n        \"type\": \"DESSERT\",\r\n        \"price\": 18.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"Vanilla Ice Cream\",\r\n        \"images\": [\r\n            \"https://imageurl.com/vanilla-ice-cream.png\"\r\n        ]\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/items",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"items"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Dessert Brownie",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Brownie\",\r\n        \"type\": \"DESSERT\",\r\n        \"price\": 8.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"Chocolate Brownie\",\r\n        \"images\": [\r\n            \"https://imageurl.com/chocolate-brownie.png\"\r\n        ]\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/items",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"items"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"description": "1. Authenticate\n    \n2. Run the `Create Items`folder to prepopulate the database with some data."
+		},
+		{
+			"name": "Items",
+			"item": [
+				{
+					"name": "Create Item",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Double Dog\",\r\n        \"type\": \"SNACK\",\r\n        \"price\": 18.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"Double Sausages Hot Dog\",\r\n        \"images\": [\r\n            \"https://imageurl.com/double-dog-1.png\",\r\n            \"https://imageurl.com/double-dog-2.png\"\r\n        ]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/items",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Item",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"item\": {\r\n    \"name\": \"X-Burger\",\r\n    \"type\": \"SNACK\",\r\n    \"price\": 35.9900,\r\n    \"quantity\": 30.0,\r\n    \"description\": \"Hamburger and Cheese\",\r\n    \"images\": [\r\n        \"https://imageurl.com/x-burger-1.png\",\r\n        \"https://imageurl.com/x-burger-2.png\"\r\n    ]\r\n\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/items/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"items",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Item By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/items/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"items",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/items",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"items"
+							],
+							"query": [
+								{
+									"key": "itemType",
+									"value": "DESSERT",
+									"disabled": true
+								},
+								{
+									"key": "itemType",
+									"value": "ACCOMPANIMENT",
+									"disabled": true
+								},
+								{
+									"key": "itemType",
+									"value": "BEVERAGE",
+									"disabled": true
+								},
+								{
+									"key": "itemType",
+									"value": "SNACK",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "Cadastrar Cliente",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const { generateCPF } = pm.require('brutils');\r",
+									"pm.collectionVariables.set(\"randomCPF\", generateCPF());"
+								],
+								"type": "text/javascript",
+								"packages": {
+									"brutils": {
+										"id": "018facae-de30-7d88-afa0-9a2f665704d2"
+									}
+								}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.collectionVariables.set(\"clientId\", response.id)\r",
+									"pm.collectionVariables.set(\"cpf\", response.cpf)\r",
+									"pm.collectionVariables.set(\"clientName\", response.name)\r",
+									"pm.collectionVariables.set(\"email\", response.email)\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cpf\": \"{{randomCPF}}\",\r\n    \"name\": \"{{$randomFullName}}\",\r\n    \"email\": \"{{$randomEmail}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/clients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Client By Id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.collectionVariables.set(\"clientId\", response.id)\r",
+									"pm.collectionVariables.set(\"cpf\", response.cpf)\r",
+									"pm.collectionVariables.set(\"clientName\", response.name)\r",
+									"pm.collectionVariables.set(\"email\", response.email)\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/clients/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"clients",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{clientId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Client By CPF",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.collectionVariables.set(\"clientId\", response.id)\r",
+									"pm.collectionVariables.set(\"cpf\", response.cpf)\r",
+									"pm.collectionVariables.set(\"clientName\", response.name)\r",
+									"pm.collectionVariables.set(\"email\", response.email)\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/clients?cpf={{cpf}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"clients"
+							],
+							"query": [
+								{
+									"key": "cpf",
+									"value": "{{cpf}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Create Anonymous",
+					"item": [
+						{
+							"name": "Create Empty Order",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.collectionVariables.set(\"orderId\", response.id)\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"combo\": {\r\n\t\t\"items\": [\r\n\t\t]\r\n\t}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/orders",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"orders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Order With Items",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.collectionVariables.set(\"orderId\", response.id)\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"combo\": {\r\n\t\t\"items\": [\r\n\t\t\t{\r\n\t\t\t\t\"id\": 1,\r\n\t\t\t\t\"name\": \"Hamburger\",\r\n\t\t\t\t\"type\": \"SNACK\",\r\n\t\t\t\t\"price\": 7.99,\r\n\t\t\t\t\"quantity\": 1\r\n\t\t\t}\r\n\t\t]\r\n\t}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/orders",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"orders"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Create Identified",
+					"item": [
+						{
+							"name": "Create Empty Order",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.collectionVariables.set(\"orderId\", response.id)\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"combo\": {\r\n        \"items\": []\r\n    },\r\n    \"requester\": {\r\n        \"id\": {{clientId}},\r\n        \"cpf\": \"{{cpf}}\",\r\n        \"name\": \"{{clientName}}\",\r\n        \"email\": \"{{email}}\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/orders",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"orders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Order With Items",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.collectionVariables.set(\"orderId\", response.id)\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"combo\": {\r\n        \"items\": [\r\n            {\r\n                \"id\": 1,\r\n                \"name\": \"Hamburger\",\r\n                \"type\": \"SNACK\",\r\n                \"price\": 7.99,\r\n                \"quantity\": 1\r\n            }\r\n        ]\r\n    },\r\n    \"requester\": {\r\n        \"id\": {{clientId}},\r\n        \"cpf\": \"{{cpf}}\",\r\n        \"name\": \"{{clientName}}\",\r\n        \"email\": \"{{email}}\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/orders",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"orders"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/orders/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{orderId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Order",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"combo\": {\r\n        \"items\": [\r\n            {\r\n                \"id\": 1,\r\n                \"name\": \"Hamburger\",\r\n                \"type\": \"SNACK\",\r\n                \"price\": 7.99,\r\n                \"quantity\": 1\r\n            },\r\n            {\r\n                \"id\": 2,\r\n                \"name\": \"Refrigerante\",\r\n                \"type\": \"BEVERAGE\",\r\n                \"price\": 4.99,\r\n                \"quantity\": 1\r\n            }\r\n        ]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/orders/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{orderId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Confirm Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"QR_CODE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/orders/:id/payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								":id",
+								"payment"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{orderId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pay Order",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/orders/:id/payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								":id",
+								"payment"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{orderId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Advance Order Status",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/orders/:id/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								":id",
+								"status"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{orderId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/orders?client_id=1&from=2024-05-04&to=2024-05-31&status=CREATED",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "1"
+								},
+								{
+									"key": "from",
+									"value": "2024-05-04"
+								},
+								{
+									"key": "to",
+									"value": "2024-05-31"
+								},
+								{
+									"key": "status",
+									"value": "CREATED"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Followup",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/followup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"followup"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "FINISHED",
+									"disabled": true
+								},
+								{
+									"key": "user_id",
+									"value": "3",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "CREATED",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "CPF",
+			"value": ""
+		},
+		{
+			"key": "randomCPF",
+			"value": ""
+		},
+		{
+			"key": "$$randomCPF",
+			"value": ""
+		},
+		{
+			"key": "cpf",
+			"value": ""
+		},
+		{
+			"key": "name",
+			"value": ""
+		},
+		{
+			"key": "email",
+			"value": ""
+		},
+		{
+			"key": "userId",
+			"value": ""
+		},
+		{
+			"key": "clientName",
+			"value": ""
+		},
+		{
+			"key": "clientId",
+			"value": ""
+		},
+		{
+			"key": "orderId",
+			"value": ""
+		}
+	]
+}
