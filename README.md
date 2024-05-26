@@ -1,4 +1,4 @@
-## Tech Challenge FIAP Project
+# Tech Challenge FIAP Project
 
 Projeto desenvolvido durante a `Fase I`, do curso de `Arquitetura de Software` da FIAP, como requisito para avaliação.
 
@@ -9,8 +9,6 @@ Projeto desenvolvido durante a `Fase I`, do curso de `Arquitetura de Software` d
 - Getúlio Magela Silva (RM355427)
 - Lucas Rego Lima
 - Lilian Rosario de Jesus
-
-### Hexagonal architecture project
 
 ## Problema
 
@@ -35,6 +33,8 @@ Inicialmente, o sistema integrará apenas com a opção de pagamento via QR Code
 Documentação DDD pelo [Miro](https://miro.com/app/board/uXjVKYNMy0E=/)
 
 ---
+
+# Hexagonal architecture project
 
 ## Application architecture
 
