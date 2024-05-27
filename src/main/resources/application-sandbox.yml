@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: orders
+  datasource:
+    url: jdbc:h2:mem:ordersdb
+    driverClassName: org.h2.Driver
+    username: admin
+    password: admin
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+        globally_quoted_identifiers_skip_column_definitions: true
+  h2:
+    console:
+      enabled: true
+      path: /h2
+      settings.trace: false
+      settings.web-allow-others: false
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+server:
+  port: ${port:8080}
+
+mercadopago:
+  enabled: false
+  token: ${MERCADOPAGO_TOKEN:TEST-4053224988277850-050812-370259fb760f438a6d41960b582d4bb8-177424796}

@@ -1,52 +1,48 @@
 package com.aquiteturahexa.techchallenge.core.model;
 
+import java.util.List;
+
 public class User {
-    private Long id;
-    private Long CPF;
+
     private String name;
-    private String email;
+    private Email email;
+    private String username;
+    private String password;
+    private List<String> roles;
 
     public User() {
-
     }
 
-    public User(Long id, Long CPF, String name, String email) {
-        this.id = id;
-        this.CPF = CPF;
+    public User(String name, Email email, String username, String password, List<String> roles) {
         this.name = name;
         this.email = email;
-
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
+    public Email getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getUsername() {
+        return username;
     }
 
-    public Long getCPF() {
-        return CPF;
+    public String getPassword() {
+        return password;
     }
 
-    public void setCPF(Long CPF) {
-        this.CPF = CPF;
+    public void setPassword(String password) {
+         this.password = password;
+    }
+
+    public List<String> getRoles() {
+        return roles;
     }
 }

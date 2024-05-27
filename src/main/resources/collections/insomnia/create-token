@@ -1,0 +1,9 @@
+curl --request POST \
+  --url http://localhost:8080/api/v1/auth \
+  --header 'Content-Type: application/json' \
+  --header 'User-Agent: Insomnia/2023.5.7' \
+  --cookie JSESSIONID=8BBC14989D34D8C0C076D0CC79EE534C \
+  --data '{
+	"username":"admin",
+	"password":"123456"
+}'

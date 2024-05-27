@@ -1,21 +1,31 @@
 package com.aquiteturahexa.techchallenge.core.model;
 
+import java.math.BigDecimal;
+import java.time.Instant;
+
 public class Order {
 
     private Long id;
-    private Long reqUser;
-    private Long combos;
-    private Float totalPrice;
-    private Integer status;
+    private Client requester;
+    private Combo combo;
+    private Instant requestedAt;
+    private Instant updatedAt;
+    private BigDecimal amount;
+    private Status status;
 
-    public Order() {
-    }
-
-    public Order(Long id, Long reqUser, Long combos, Float totalPrice, Integer status) {
+    public Order(Long id,
+                 Client requester,
+                 Combo combo,
+                 Instant requestedAt,
+                 Instant updatedAt,
+                 BigDecimal amount,
+                 Status status) {
         this.id = id;
-        this.reqUser = reqUser;
-        this.combos = combos;
-        this.totalPrice = totalPrice;
+        this.requester = requester;
+        this.combo = combo;
+        this.requestedAt = requestedAt;
+        this.updatedAt = updatedAt;
+        this.amount = amount;
         this.status = status;
     }
 
@@ -27,36 +37,51 @@ public class Order {
         this.id = id;
     }
 
-    public Long getReqUser() {
-        return reqUser;
+    public Client getRequester() {
+        return requester;
     }
 
-    public void setReqUser(Long reqUser) {
-        this.reqUser = reqUser;
+    public void setRequester(Client requester) {
+        this.requester = requester;
     }
 
-    public Long getCombos() {
-        return combos;
+    public Combo getCombo() {
+        return combo;
     }
 
-    public void setCombos(Long combos) {
-        this.combos = combos;
+    public void setCombo(Combo combo) {
+        this.combo = combo;
     }
 
-    public Float getTotalPrice() {
-        return totalPrice;
+    public Instant getRequestedAt() {
+        return requestedAt;
     }
 
-    public void setTotalPrice(Float totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setRequestedAt(Instant requestedAt) {
+        this.requestedAt = requestedAt;
     }
 
-    public Integer getStatus() {
+    public Instant getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Instant updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
-
 }
