@@ -4,8 +4,8 @@ import com.aquiteturahexa.techchallenge.adapters.controllers.dto.ResponseFollowu
 import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.OrderMapper;
 import com.aquiteturahexa.techchallenge.core.ports.in.EffecitvePaymentPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.GetOrderPortIn;
+import com.aquiteturahexa.techchallenge.core.ports.in.ReceiveOrderPortIn;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -27,6 +27,7 @@ public class PayOrderRestController {
 
     private final GetOrderPortIn getOrderPortIn;
     private final EffecitvePaymentPortIn effecitvePaymentPortIn;
+    private final ReceiveOrderPortIn receiveOrderPortIn;
 
     @PatchMapping(path = "/api/v1/orders/{id}/payment")
     @Operation(summary = "Receive order payment")
@@ -48,6 +49,8 @@ public class PayOrderRestController {
         }
 
         var updatedOrder = effecitvePaymentPortIn.pay(order.get());
+        updatedOrder = receiveOrderPortIn.receive(updatedOrder);
+
 
         return ResponseEntity.ok()
                 .body(OrderMapper.toFollowUpDto(updatedOrder));
