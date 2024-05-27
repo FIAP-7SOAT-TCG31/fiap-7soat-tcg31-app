@@ -1,7 +1,6 @@
 package com.aquiteturahexa.techchallenge.adapters.controllers;
 
 
-import com.aquiteturahexa.techchallenge.adapters.controllers.dto.ItemDto;
 import com.aquiteturahexa.techchallenge.adapters.controllers.dto.ResponseFollowupDto;
 import com.aquiteturahexa.techchallenge.adapters.controllers.mappers.OrderMapper;
 import com.aquiteturahexa.techchallenge.core.model.Status;
@@ -47,13 +46,11 @@ public class FollowUpOrdersRestController {
     })
     public ResponseEntity<?> get(@RequestHeader Map<String, String> headers) {
 
-        LocalDateTime from = LocalDateTime.now().minusHours(1);
-        LocalDateTime to = LocalDateTime.now().plusMinutes(5);
         List<Status> statusList = new ArrayList<>(Arrays.asList(Status.values()));
-        statusList.removeAll(List.of(Status.CREATED, Status.AWAITING_PAYMENT, Status.PAID, Status.FINISHED));
+        statusList.removeAll(List.of(Status.CREATED, Status.AWAITING_PAYMENT, Status.PAID, Status.FINISHED, Status.CANCELLED));
 
-        var orders = searchOrderPortIn.search(from.atZone(ZONE_ID),
-                to.atZone(ZONE_ID),
+        var orders = searchOrderPortIn.search(null,
+                null,
                 statusList,
                 null);
 
