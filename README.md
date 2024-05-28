@@ -4,11 +4,11 @@ Projeto desenvolvido durante a `Fase I`, do curso de `Arquitetura de Software` d
 
 ### Integrantes do Grupo 7SOAT-31:
 
-- Julio Augusto Silva
-- Lucas Henrique de Oliveira Silva
+- Julio Augusto Silva (RM355432)
+- Lucas Henrique de Oliveira Silva (RM354904)
 - Getúlio Magela Silva (RM355427)
-- Lucas Rego Lima
-- Lilian Rosario de Jesus
+- Lucas Rego Lima (RM356101)
+- Lilian Rosario de Jesus (RM355928)
 
 ## Problema
 
