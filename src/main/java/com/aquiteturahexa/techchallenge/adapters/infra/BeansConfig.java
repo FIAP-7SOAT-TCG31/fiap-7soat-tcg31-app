@@ -10,6 +10,7 @@ import com.aquiteturahexa.techchallenge.core.ports.in.GeneratePaymentPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.GetClientByDocumentPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.GetClientByIdPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.in.GetUserPortIn;
+import com.aquiteturahexa.techchallenge.core.ports.in.ReceiveOrderPortIn;
 import com.aquiteturahexa.techchallenge.core.ports.out.CreateClientPortOut;
 import com.aquiteturahexa.techchallenge.core.ports.out.CreateUserPorOut;
 import com.aquiteturahexa.techchallenge.core.ports.out.GeneratePaymentPortOut;
@@ -24,6 +25,7 @@ import com.aquiteturahexa.techchallenge.core.service.GeneratePaymentService;
 import com.aquiteturahexa.techchallenge.core.service.GetClientByDocumentService;
 import com.aquiteturahexa.techchallenge.core.service.GetClientByIdService;
 import com.aquiteturahexa.techchallenge.core.service.GetUserService;
+import com.aquiteturahexa.techchallenge.core.service.ReceiveOrderService;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -163,4 +165,11 @@ public class BeansConfig {
     public AdvanceStatusPortIn beanAdvanceStatusPortIn(UpdateOrderPortOut updateOrderPortOut) {
         return new AdvanceStatusService(updateOrderPortOut);
     }
+
+    @Bean
+    public ReceiveOrderPortIn beanReceiveOrderPortIn(UpdateOrderPortOut updateOrderPortOut) {
+        return new ReceiveOrderService(updateOrderPortOut);
+    }
+
+
 }

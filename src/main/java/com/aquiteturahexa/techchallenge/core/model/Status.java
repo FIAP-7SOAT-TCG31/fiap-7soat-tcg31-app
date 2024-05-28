@@ -43,6 +43,12 @@ public enum Status {
         public Status advance() {
             throw new RuntimeException("final status");
         }
+    },
+    CANCELLED {
+        @Override
+        public Status advance() {
+            throw new RuntimeException("final status");
+        }
     };
 
 
