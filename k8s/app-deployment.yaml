@@ -42,10 +42,10 @@ spec:
           resources:
             limits:
               cpu: "300m"
-              memory: "350Mi"
+              memory: "380Mi"
             requests:
-              cpu: "50m"
-              memory: "250Mi"
+              cpu: "200m"
+              memory: "280Mi"
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
