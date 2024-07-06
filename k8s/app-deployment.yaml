@@ -1,0 +1,80 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: fiap-burger-pgsecrets
+data:
+  # Em ambiente de produção esses secrets não estariam expostos
+  # Este secret está separado do banco por ser uma dependência direta da aplicação
+  # Podendo ser gerenciado independente do banco de dados.
+  SPRING_DATASOURCE_URL: "amRiYzpwb3N0Z3Jlc3FsOi8vcG9zdGdyZXMtY2x1c3RlcmlwLXNydjo1NDMyL3Bvc3RncmVz"
+  SPRING_DATASOURCE_USERNAME: "cG9zdGdyZXM="
+  SPRING_DATASOURCE_PASSWORD: "cHdkNHBvc3RncmVz"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fiap-burger-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fiap-burger-app
+  template:
+    metadata:
+      labels:
+        app: fiap-burger-app
+    spec:
+      containers:
+        - name: fiap-burger-app
+          image: gm50x/fiap-burger:v1-monolith
+          envFrom:
+            - secretRef:
+                name: "fiap-burger-pgsecrets"
+          env:
+            - name: TZ
+              value: "America/Sao_Paulo"
+            - name: SERVER_SERVLET_CONTEXT_PATH
+              value: "/fiap-burger"
+          ports:
+            - name: http
+              containerPort: 8080
+          resources:
+            limits:
+              cpu: "300m"
+              memory: "800Mi"
+            requests:
+              cpu: "50m"
+              memory: "350Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fiap-burger-app-clusterip-srv
+spec:
+  selector:
+    app: fiap-burger-app
+  type: ClusterIP
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fiap-burger-app-srv-ingress
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: "/fiap-burger"
+            pathType: Prefix
+            backend:
+              service:
+                name: fiap-burger-app-clusterip-srv
+                port:
+                  number: 8080
