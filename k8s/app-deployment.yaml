@@ -4,7 +4,7 @@ kind: Secret
 metadata:
   name: fiap-burger-pgsecrets
 data:
-  # Em ambiente de produção esses secrets não estariam expostos
+  # Em ambiente de produção/cloud esses secrets não estariam expostos
   # Este secret está separado do banco por ser uma dependência direta da aplicação
   # Podendo ser gerenciado independente do banco de dados.
   SPRING_DATASOURCE_URL: "amRiYzpwb3N0Z3Jlc3FsOi8vcG9zdGdyZXMtY2x1c3RlcmlwLXNydjo1NDMyL3Bvc3RncmVz"
