@@ -46,6 +46,19 @@ spec:
             requests:
               cpu: "200m"
               memory: "280Mi"
+          livenessProbe:
+            initialDelaySeconds: 30
+            failureThreshold: 3
+            periodSeconds: 15
+            httpGet:
+              # TODO: app should have health check endpoint
+              path: /fiap-burger/swagger-ui/index.html
+              port: 8080
+          readinessProbe:
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            tcpSocket:
+              port: 8080
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
