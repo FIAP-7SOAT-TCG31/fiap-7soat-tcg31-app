@@ -59,7 +59,7 @@ kubectl port-forward service/postgres-clusterip-srv 5432:5432
 
 2.3 Utilizando DBeaver ou qualquer outra ferramenta de acesso copie e execute os scripts localizados em `src/main/resources/init-scripts`.
 
-# Cleanup
+# Desfazimento
 
 ```bash
 # Remover o cluster k3d
@@ -68,7 +68,7 @@ k3d cluster delete fiap-sandbox
 sudo rm -rf k8s/.volumes/postgres/data -rf
 ```
 
-# Apply Sequence of Manifest:
+# Sequencia de aplicação dos manifestos de K8S:
 
 1. k8s/pg-pv.yaml
 2. k8s/pg-pvc.yaml
