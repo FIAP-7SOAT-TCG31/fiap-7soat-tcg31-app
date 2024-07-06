@@ -41,16 +41,23 @@ kubectl apply -f k8s/pg-deployment.yaml
 ## 5. Executar as migrations no Postgres
 
 1. É necessário expor o banco de dados para acesso local:
-   Vamos fazer esta exposição utilizando port-foward. Já como nosso cluster k3d está configurado para
-   acesso apenas por ingress.
+   Vamos fazer esta exposição utilizando port-foward, pois o cluster k8s criado com k3d está configurado para acesso por ingress na porta 7777. Para acessar um nodeport seria necessário realizar configurações adicionais.
 
 ```bash
 kubectl port-forward service/postgres-clusterip-srv 5432:5432
 ```
 
 2. Aplicar scripts de criação da estrutura da persistência.
-   <!-- TODO: Automatizar este processo -->
-   Utilizando DBeaver ou qualquer outra ferramenta de acesso copie e execute os scripts localizados em `src/main/resources/init-scripts`. É importante executar os scripts na ordem 01, 02... para manter a consistência da estrutuda da base. É importante conectar e criar o banco de dados correspondente: `fiapburger`.
+
+2.1 - Obter o secret de acesso a base com
+
+```bash
+ kubectl get secret pgsecrets --template={{.data.POSTGRES_PASSWORD}} | base64 -d
+```
+
+2.2 Conectar à base de dados utilizando alguma ferramenta de preferência, DBeaver, Azure Data Studio e etc.
+
+2.3 Utilizando DBeaver ou qualquer outra ferramenta de acesso copie e execute os scripts localizados em `src/main/resources/init-scripts`.
 
 # Cleanup
 
@@ -60,3 +67,10 @@ k3d cluster delete fiap-sandbox
 # remover  o volume criado para o postgres
 sudo rm -rf k8s/.volumes/postgres/data -rf
 ```
+
+# Apply Sequence of Manifest:
+
+1. k8s/pg-pv.yaml
+2. k8s/pg-pvc.yaml
+3. k8s/pg-secret.yaml
+4. k8s/pg-deployment.yaml
