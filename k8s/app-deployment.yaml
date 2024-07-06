@@ -25,6 +25,8 @@ spec:
       labels:
         app: fiap-burger-app
     spec:
+      terminationGracePeriodSeconds: 90
+      automountServiceAccountToken: false
       containers:
         - name: fiap-burger-app
           image: gm50x/fiap-burger:v1-monolith
