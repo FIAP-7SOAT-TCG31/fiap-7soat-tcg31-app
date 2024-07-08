@@ -59,6 +59,33 @@ kubectl port-forward service/postgres-clusterip-srv 5432:5432
 
 2.3 Utilizando DBeaver ou qualquer outra ferramenta de acesso copie e execute os scripts localizados em `src/main/resources/init-scripts`.
 
+## 6. Implantar a aplicação Java Spring:
+
+Neste passo alguns artefatos serão criados:
+
+- `Secret` contendo as credenciais de conexão com o banco de dados, em ambiente produtivo esses secrets não seriam expostos no gerenciamento de versão;
+- `Deployment` para gerenciar a aplicação;
+- `HorizontalPodAutoscaler` para realizar autoscaling da aplicação;
+- `Service` tipo `ClusterIP` para expor a aplicação dentro do cluster; e
+- `Ingress` para expor a aplicação na porta de entrada do cluster;
+
+```bash
+kubectl apply -f k8s/app-deployment.yaml
+```
+
+# 7. Agora é possível acessar a aplicação para testes
+
+Por exemplo no processo de autenticação:
+
+```bash
+curl --location 'http://localhost:7777/fiap-burger/api/v1/auth' \
+--header 'Content-Type: application/json' \
+--data '{
+    "username": "admin",
+    "password": "123456"
+}'
+```
+
 # Desfazimento
 
 ```bash
@@ -74,3 +101,4 @@ sudo rm -rf k8s/.volumes/postgres/data -rf
 2. k8s/pg-pvc.yaml
 3. k8s/pg-secret.yaml
 4. k8s/pg-deployment.yaml
+5. k8s/app-deployment.yaml
