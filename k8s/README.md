@@ -1,0 +1,76 @@
+# Ambiente de Desenvolvimento Local:
+
+## Pré-Requisitos:
+
+- Docker: https://www.docker.com/
+- K3D: https://k3d.io/v5.6.3/#installation
+
+## 1. Criação do Cluster K8S (Localmente)
+
+> Navegar pelo terminal até a raiz do projeto antes de executar os seguintes comandos. Neste exemplo estamos utilizando uma máquina Windows com WSL2
+
+```bash
+# Criar um cluster kubernetes com k3d
+k3d cluster create --api-port 6550 -p "7777:80@loadbalancer" fiap-sandbox --agents 2 --volume $(pwd)/k8s/.volumes:/var/lib/rancher/k3s/storage@all
+```
+
+## 2. Criação do `Persistent Volume` e `Persistent Volume Claim` para o Postgres
+
+```bash
+kubectl apply -f k8s/pg-pv.yaml
+kubectl apply -f k8s/pg-pvc.yaml
+```
+
+## 3. Criação do `Secret` do Postgres:
+
+```bash
+kubectl apply -f k8s/pg-secret.yaml
+```
+
+## 4. Criação do Banco de Dados:
+
+Neste passo serão criados dois artefatos conforme descritos abaixo:
+
+- `Deployment` do Postgres; e
+- `Service` do tipo `ClusterIP` para permitir que nossos serviços possam se conectar ao Postgres;
+
+```bash
+kubectl apply -f k8s/pg-deployment.yaml
+```
+
+## 5. Executar as migrations no Postgres
+
+1. É necessário expor o banco de dados para acesso local:
+   Vamos fazer esta exposição utilizando port-foward, pois o cluster k8s criado com k3d está configurado para acesso por ingress na porta 7777. Para acessar um nodeport seria necessário realizar configurações adicionais.
+
+```bash
+kubectl port-forward service/postgres-clusterip-srv 5432:5432
+```
+
+2. Aplicar scripts de criação da estrutura da persistência.
+
+2.1 - Obter o secret de acesso a base com
+
+```bash
+ kubectl get secret pgsecrets --template={{.data.POSTGRES_PASSWORD}} | base64 -d
+```
+
+2.2 Conectar à base de dados utilizando alguma ferramenta de preferência, DBeaver, Azure Data Studio e etc.
+
+2.3 Utilizando DBeaver ou qualquer outra ferramenta de acesso copie e execute os scripts localizados em `src/main/resources/init-scripts`.
+
+# Desfazimento
+
+```bash
+# Remover o cluster k3d
+k3d cluster delete fiap-sandbox
+# remover  o volume criado para o postgres
+sudo rm -rf k8s/.volumes/postgres/data -rf
+```
+
+# Sequencia de aplicação dos manifestos de K8S:
+
+1. k8s/pg-pv.yaml
+2. k8s/pg-pvc.yaml
+3. k8s/pg-secret.yaml
+4. k8s/pg-deployment.yaml
