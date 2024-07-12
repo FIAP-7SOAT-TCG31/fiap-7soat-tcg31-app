@@ -24,5 +24,6 @@ server:
   port: ${port:8080}
 
 mercadopago:
-  enabled: false
+  enabled: true
   token: ${MERCADOPAGO_TOKEN:TEST-4053224988277850-050812-370259fb760f438a6d41960b582d4bb8-177424796}
+  callback-url: ${MERCADOPAGO_CALLBACK_URL:http://localhost:8080/api/v1/orders/orderId/payment}
