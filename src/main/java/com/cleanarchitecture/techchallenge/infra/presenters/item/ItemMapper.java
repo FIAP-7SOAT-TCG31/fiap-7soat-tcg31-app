@@ -6,6 +6,7 @@ import java.util.List;
 import com.cleanarchitecture.techchallenge.api.rest.dtos.item.ItemDto;
 import com.cleanarchitecture.techchallenge.domain.entities.item.Item;
 import com.cleanarchitecture.techchallenge.domain.entities.item.ItemType;
+import com.cleanarchitecture.techchallenge.domain.factories.ItemFactory;
 
 public class ItemMapper {
 
@@ -21,14 +22,16 @@ public class ItemMapper {
     public static Item toDomain(ItemDto item) {
         return item == null
                 ? null
-                : new Item(
+                : ItemFactory.getInstance().createItemWithIdNameTypePriceQuantityDescriptionImagesNote(
                 item.getId(),
                 item.getName(),
                 ItemType.valueOf(item.getType()),
                 item.getPrice(),
                 item.getQuantity(),
                 item.getDescription(),
-                item.getImages() == null || item.getImages().isEmpty() ? List.of() : new ArrayList<>(item.getImages()));
+                item.getImages() == null || item.getImages().isEmpty() ? List.of() : new ArrayList<>(item.getImages()),
+                item.getNote()
+        );
     }
 
     public static List<ItemDto> toDto(List<Item> items) {
@@ -52,6 +55,7 @@ public class ItemMapper {
                 .withQuantity(item.getQuantity())
                 .withDescription(item.getDescription())
                 .withImages(item.getImages() == null || item.getImages().isEmpty() ? List.of() : item.getImages())
+                .withNote(item.getNote())
                 .build();
     }
 }

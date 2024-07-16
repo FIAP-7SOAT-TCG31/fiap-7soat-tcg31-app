@@ -17,7 +17,7 @@ public class UpdateItemPersistanceAdapterOut implements UpdateItemGateway {
     @Override
     public Item update(Item item) {
         var savedItem = itemJpaRepository.save(ItemEntity.toEntity(item));
-        return ItemEntity.toDomain(savedItem, null);
+        return ItemEntity.toDomain(savedItem);
     }
 
 }

@@ -45,6 +45,7 @@ public class UpdateOrderPersistenceAdapter implements UpdateOrderGateway {
                                                 .withType(item.getType().name())
                                                 .build())
                                         .withQuantity(item.getQuantity())
+                                        .withNote(item.getNote())
                                         .build())
                         .toList()
         );

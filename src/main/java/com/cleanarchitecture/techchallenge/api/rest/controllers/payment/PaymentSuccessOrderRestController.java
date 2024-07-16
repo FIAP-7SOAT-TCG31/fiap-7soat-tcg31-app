@@ -1,6 +1,7 @@
 package com.cleanarchitecture.techchallenge.api.rest.controllers.payment;
 
 import com.cleanarchitecture.techchallenge.api.rest.dtos.order.ResponseFollowupDto;
+import com.cleanarchitecture.techchallenge.domain.usecases.RefusedPaymentUseCase;
 import com.cleanarchitecture.techchallenge.infra.presenters.order.OrderMapper;
 import com.cleanarchitecture.techchallenge.domain.usecases.EffecitvePaymentUseCase;
 import com.cleanarchitecture.techchallenge.domain.usecases.GetOrderUseCase;
@@ -23,37 +24,44 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "Pay Order Controller", description = "Controller for receive order payment")
-public class PayOrderRestController {
+public class PaymentSuccessOrderRestController {
 
+    private static final String FAILED = "failed";
     private final GetOrderUseCase getOrderUseCase;
+    private final RefusedPaymentUseCase refusedPaymentUseCase;
     private final EffecitvePaymentUseCase effecitvePaymentUseCase;
     private final ReceiveOrderUseCase receiveOrderUseCase;
 
-    @PatchMapping(path = "/api/v1/orders/{id}/payment")
-    @Operation(summary = "Receive order payment")
+    @PatchMapping(path = "/api/v1/orders/{id}/payment/{status}")
+    @Operation(summary = "Receive order payment statuss")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Successfully paid order",
+                    description = "Order payment status updated",
                     content = @Content(
                             mediaType = "application/json",
                             schema = @Schema(implementation = ResponseFollowupDto.class))
             ),
+            @ApiResponse(responseCode = "204", description = "Order cancelled"),
             @ApiResponse(responseCode = "404", description = "Order not found")
     })
-    public ResponseEntity<?> create(@RequestHeader Map<String, String> headers, @PathVariable("id") String id) {
+    public ResponseEntity<?> create(@RequestHeader Map<String, String> headers, @PathVariable("id") String id, @PathVariable("status") String status) {
         var order = getOrderUseCase.get(id);
 
         if (order.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
 
-        var updatedOrder = effecitvePaymentUseCase.pay(order.get());
-        updatedOrder = receiveOrderUseCase.receive(updatedOrder);
+        if (FAILED.equalsIgnoreCase(status)) {
+            refusedPaymentUseCase.refused(order.get());
+            return ResponseEntity.noContent().build();
+        } else {
+            var updatedOrder = effecitvePaymentUseCase.pay(order.get());
+            updatedOrder = receiveOrderUseCase.receive(updatedOrder);
 
-
-        return ResponseEntity.ok()
-                .body(OrderMapper.toFollowUpDto(updatedOrder));
+            return ResponseEntity.ok()
+                    .body(OrderMapper.toFollowUpDto(updatedOrder));
+        }
     }
 
 }

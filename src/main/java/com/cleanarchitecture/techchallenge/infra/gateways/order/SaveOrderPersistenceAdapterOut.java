@@ -36,6 +36,7 @@ public class SaveOrderPersistenceAdapterOut implements SaveOrderGateway {
                                                 .withType(item.getType().name())
                                                 .build())
                                         .withQuantity(item.getQuantity())
+                                        .withNote(item.getNote())
                                         .build())
                         .toList()
         );

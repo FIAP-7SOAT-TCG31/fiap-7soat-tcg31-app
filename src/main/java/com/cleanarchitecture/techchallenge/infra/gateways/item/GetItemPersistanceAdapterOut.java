@@ -17,6 +17,6 @@ public class GetItemPersistanceAdapterOut implements GetItemGateway {
     @Override
     public Optional<Item> get(Long id) {
         var entity = itemJpaRepository.findById(id);
-        return entity.map(itemEntity -> ItemEntity.toDomain(itemEntity, null));
+        return entity.map(ItemEntity::toDomain);
     }
 }

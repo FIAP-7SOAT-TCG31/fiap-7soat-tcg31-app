@@ -46,16 +46,34 @@ CREATE TABLE tb_orders (
     updated_at TIMESTAMP,
     amount DECIMAL(19, 4),
     status VARCHAR(255),
-    FOREIGN KEY (requester_id) REFERENCES tb_clients(id)
+    payment_id VARCHAR(255),
+    FOREIGN KEY (requester_id) REFERENCES tb_clients(id),
+    FOREIGN KEY (payment_id) REFERENCES tb_payments(id)
 );
-
 
 CREATE TABLE tb_order_items (
     id SERIAL PRIMARY KEY,
     order_id BIGINT,
     item_id BIGINT,
     quantity FLOAT,
+    note VARCHAR(255),
     done BOOLEAN,
     FOREIGN KEY (order_id) REFERENCES tb_orders(id),
     FOREIGN KEY (item_id) REFERENCES tb_items(id)
 );
+
+CREATE TABLE tb_payments (
+    id VARCHAR(255) PRIMARY KEY,
+    was_paid boolean not null,
+    paid_at TIMESTAMP,
+    method VARCHAR(255)
+);
+
+CREATE TABLE tb_payment_details (
+    id SERIAL PRIMARY KEY,
+    payment_id varchar(255),
+    key VARCHAR(255),
+    value varchar(255),
+    FOREIGN KEY (payment_id) REFERENCES tb_payments(id)
+);
+

@@ -3,7 +3,6 @@ package com.cleanarchitecture.techchallenge.domain.factories;
 import com.cleanarchitecture.techchallenge.domain.entities.payment.Payment;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.UUID;
 
 public class PaymentFactory {

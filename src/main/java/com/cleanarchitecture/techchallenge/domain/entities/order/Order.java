@@ -71,6 +71,10 @@ public class Order {
         this.payment = payment;
     }
 
+    public void setRequester(Client requester) {
+        this.requester = requester;
+    }
+
     public void updateCombo(Combo combo) {
         this.combo = combo;
         this.amount = combo == null ? BigDecimal.ZERO : combo.calculate();

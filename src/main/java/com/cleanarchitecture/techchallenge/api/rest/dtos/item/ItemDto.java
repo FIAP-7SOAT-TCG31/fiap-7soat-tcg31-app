@@ -24,5 +24,6 @@ public class ItemDto {
     private Float quantity;
     private String description;
     private List<String> images;
+    private String note;
 
 }

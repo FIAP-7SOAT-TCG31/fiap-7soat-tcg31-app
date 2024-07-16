@@ -1,5 +1,6 @@
 package com.cleanarchitecture.techchallenge.api.rest.dtos.payment;
 
+import com.cleanarchitecture.techchallenge.api.rest.dtos.client.ClientDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,5 +17,6 @@ import java.util.Map;
 public class PaymentDto {
 
     private String type;
+    private ClientDto client;
     private Map<String, Object> paymentDetails;
 }

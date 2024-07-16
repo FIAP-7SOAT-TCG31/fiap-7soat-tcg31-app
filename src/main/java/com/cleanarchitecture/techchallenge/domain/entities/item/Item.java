@@ -6,19 +6,17 @@ import java.util.List;
 
 public class Item {
 
-    private Long id;
+    private final Long id;
     private String name;
     private ItemType type;
     private BigDecimal price;
-    private Float quantity;
-    private String description;
-    private List<String> images;
-
-    public Item() {
-    }
+    private final Float quantity;
+    private final String description;
+    private final List<String> images;
+    private final String note;
 
     public Item(Long id, String name, ItemType type, BigDecimal price, Float quantity, String description,
-            List<String> images) {
+                List<String> images, String note) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -26,6 +24,7 @@ public class Item {
         this.quantity = quantity;
         this.description = description;
         this.images = images;
+        this.note = note;
     }
 
     public Long getId() {
@@ -36,47 +35,33 @@ public class Item {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public ItemType getType() {
         return type;
-    }
-
-    public void setType(ItemType type) {
-        this.type = type;
     }
 
     public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
     public Float getQuantity() {
         return quantity;
-    }
-
-    public void setQuantity(Float quantity) {
-        this.quantity = quantity;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public List<String> getImages() {
-        return new ArrayList<>(images);
+        return images;
     }
 
-    public void setImages(List<String> images) {
-        this.images = images;
+    public String getNote() {
+        return note;
+    }
+
+    public void update(Item item) {
+        this.name = item.getName();
+        this.type = item.getType();
+        this.price = item.getPrice();
     }
 }

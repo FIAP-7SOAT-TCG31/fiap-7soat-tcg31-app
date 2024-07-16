@@ -22,7 +22,7 @@ public class ListItemsPersistanceAdapterOut implements ListItemsGateway {
         var entities = itemJpaRepository.findAll();
         return entities
                 .stream()
-                .map(itemEntity -> ItemEntity.toDomain(itemEntity, null))
+                .map(ItemEntity::toDomain)
                 .toList();
 
     }
@@ -32,7 +32,7 @@ public class ListItemsPersistanceAdapterOut implements ListItemsGateway {
         var entities = itemJpaRepository.findAll(Specification.where(ItemSpecification.hasItemType(itemType.toString())));
         return entities
                 .stream()
-                .map(itemEntity -> ItemEntity.toDomain(itemEntity, null))
+                .map(ItemEntity::toDomain)
                 .toList();
     }
 }

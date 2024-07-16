@@ -3,6 +3,7 @@ package com.cleanarchitecture.techchallenge.persistence.entities;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.cleanarchitecture.techchallenge.domain.factories.ItemFactory;
 import com.cleanarchitecture.techchallenge.persistence.utils.StringListConverter;
 
 import com.cleanarchitecture.techchallenge.domain.entities.item.Item;
@@ -38,15 +39,32 @@ public class ItemEntity {
     @Convert(converter = StringListConverter.class)
     private List<String> images;
 
-    public static Item toDomain(ItemEntity item, Float quantity) {
-        return new Item(
-                item.getId(),
-                item.getName(),
-                ItemType.valueOf(item.getType()),
-                item.getPrice(),
-                quantity,
-                item.getDescription(),
-                item.getImages());
+    public static Item toDomain(ItemEntity item) {
+        return ItemFactory
+                .getInstance()
+                .createItemWithIdNameTypePriceDescriptionImages(
+                        item.getId(),
+                        item.getName(),
+                        ItemType.valueOf(item.getType()),
+                        item.getPrice(),
+                        item.getDescription(),
+                        item.getImages()
+                );
+    }
+
+    public static Item toDomain(ItemEntity item, Float quantity, String note) {
+        return ItemFactory
+                .getInstance()
+                .createItemWithIdNameTypePriceQuantityDescriptionImagesNote(
+                        item.getId(),
+                        item.getName(),
+                        ItemType.valueOf(item.getType()),
+                        item.getPrice(),
+                        quantity,
+                        item.getDescription(),
+                        item.getImages(),
+                        note
+                );
     }
 
     public static ItemEntity toEntity(Item item) {

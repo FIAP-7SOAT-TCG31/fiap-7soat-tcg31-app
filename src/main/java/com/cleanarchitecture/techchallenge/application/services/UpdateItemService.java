@@ -25,10 +25,7 @@ public class UpdateItemService implements UpdateItemUseCase {
         }
 
         var existingItem = maybeExistingItem.get();
-        existingItem.setName(item.getName());
-        existingItem.setPrice(item.getPrice());
-        existingItem.setQuantity(item.getQuantity());
-        existingItem.setType(item.getType());
+        existingItem.update(item);
 
         return updateItemGateway.update(existingItem);
     }

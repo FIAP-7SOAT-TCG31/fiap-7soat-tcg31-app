@@ -39,7 +39,7 @@ public class OrderItemEntity {
     private ItemEntity item;
 
     private Float quantity;
-
+    private String note;
     private boolean done;
 
     public static Combo toDomain(List<OrderItemEntity> itens) {
@@ -47,7 +47,7 @@ public class OrderItemEntity {
                 ? new ArrayList<Item>()
                 : itens
                 .stream()
-                .map(item -> ItemEntity.toDomain(item.getItem(), item.getQuantity()))
+                .map(item -> ItemEntity.toDomain(item.getItem(), item.getQuantity(), item.getNote()))
                 .collect(Collectors.toCollection(ArrayList::new));
 
         return new Combo(itemList);
@@ -62,6 +62,7 @@ public class OrderItemEntity {
                         .builder()
                         .withItem(ItemEntity.toEntity(item))
                         .withQuantity(item.getQuantity())
+                        .withNote(item.getNote())
                         .build())
                 .collect(Collectors.toCollection(ArrayList::new));
     }

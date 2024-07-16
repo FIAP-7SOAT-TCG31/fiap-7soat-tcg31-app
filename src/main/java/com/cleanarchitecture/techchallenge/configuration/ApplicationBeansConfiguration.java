@@ -1,6 +1,7 @@
 package com.cleanarchitecture.techchallenge.configuration;
 
 import com.cleanarchitecture.techchallenge.api.rest.provider.UserDetailsServiceImpl;
+import com.cleanarchitecture.techchallenge.application.exceptions.PaymentNotValidException;
 import com.cleanarchitecture.techchallenge.application.services.AdvanceStatusService;
 import com.cleanarchitecture.techchallenge.application.services.CreateClientService;
 import com.cleanarchitecture.techchallenge.application.services.CreateItemService;
@@ -19,6 +20,12 @@ import com.cleanarchitecture.techchallenge.application.services.RefusedPaymentSe
 import com.cleanarchitecture.techchallenge.application.services.SearchOrderService;
 import com.cleanarchitecture.techchallenge.application.services.UpdateItemService;
 import com.cleanarchitecture.techchallenge.application.services.UpdateOrderService;
+import com.cleanarchitecture.techchallenge.application.validation.AssignClientHandler;
+import com.cleanarchitecture.techchallenge.application.validation.ClientInformedHandler;
+import com.cleanarchitecture.techchallenge.application.validation.OrderAmountHandler;
+import com.cleanarchitecture.techchallenge.application.validation.PaymentExistsHandler;
+import com.cleanarchitecture.techchallenge.application.validation.PaymentValidationHandler;
+import com.cleanarchitecture.techchallenge.domain.entities.order.Status;
 import com.cleanarchitecture.techchallenge.domain.usecases.AdvanceStatusUseCase;
 import com.cleanarchitecture.techchallenge.domain.usecases.CreateClientUseCase;
 import com.cleanarchitecture.techchallenge.domain.usecases.CreateItemUseCase;
@@ -57,6 +64,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Configuration
@@ -141,7 +149,17 @@ public class ApplicationBeansConfiguration {
 
     @Bean
     public GeneratePaymentUseCase beanGeneratePaymentPortIn(List<GeneratePaymentGateway> generatePaymentGateway, UpdateOrderGateway updateOrderGateway) {
-        return new GeneratePaymentService(generatePaymentGateway, updateOrderGateway);
+
+        PaymentValidationHandler paymentExistsHandler = new PaymentExistsHandler();
+        PaymentValidationHandler clientInformedHandler = new ClientInformedHandler();
+        PaymentValidationHandler orderAmountHandler = new OrderAmountHandler();
+        PaymentValidationHandler assignClientHandler = new AssignClientHandler();
+
+        paymentExistsHandler.setNext(clientInformedHandler);
+        clientInformedHandler.setNext(orderAmountHandler);
+        orderAmountHandler.setNext(assignClientHandler);
+
+        return new GeneratePaymentService(generatePaymentGateway, updateOrderGateway, paymentExistsHandler);
     }
 
     @Bean
@@ -156,7 +174,7 @@ public class ApplicationBeansConfiguration {
 
     @Bean
     public AdvanceStatusUseCase beanAdvanceStatusPortIn(UpdateOrderGateway updateOrderGateway) {
-        return new AdvanceStatusService(updateOrderGateway);
+        return new AdvanceStatusService(List.of(Status.CREATED, Status.AWAITING_PAYMENT, Status.FINISHED, Status.CANCELLED), updateOrderGateway);
     }
 
     @Bean

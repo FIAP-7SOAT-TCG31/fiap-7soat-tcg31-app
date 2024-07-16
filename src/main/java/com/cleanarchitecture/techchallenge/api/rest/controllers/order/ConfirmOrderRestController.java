@@ -1,6 +1,7 @@
 package com.cleanarchitecture.techchallenge.api.rest.controllers.order;
 
 import com.cleanarchitecture.techchallenge.api.rest.dtos.payment.PaymentDto;
+import com.cleanarchitecture.techchallenge.infra.presenters.client.ClientMapper;
 import com.cleanarchitecture.techchallenge.infra.presenters.payment.PaymentMapper;
 import com.cleanarchitecture.techchallenge.domain.usecases.GeneratePaymentUseCase;
 import com.cleanarchitecture.techchallenge.domain.usecases.GetOrderUseCase;
@@ -48,7 +49,7 @@ public class ConfirmOrderRestController {
             return ResponseEntity.notFound().build();
         }
 
-        var payment = generatePaymentUseCase.generate(order.get(), body.getType());
+        var payment = generatePaymentUseCase.generate(order.get(), ClientMapper.toDomain(body.getClient()), body.getType());
 
         return ResponseEntity.created(null)
                 .body(PaymentMapper.toDto(payment));

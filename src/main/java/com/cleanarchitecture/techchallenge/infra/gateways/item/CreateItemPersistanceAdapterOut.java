@@ -17,6 +17,6 @@ public class CreateItemPersistanceAdapterOut implements CreateItemGateway {
     @Override
     public Item create(Item itemToCreate) {
         var createdItem = itemJpaRepository.save(ItemEntity.toEntity(itemToCreate));
-        return ItemEntity.toDomain(createdItem, null);
+        return ItemEntity.toDomain(createdItem);
     }
 }
