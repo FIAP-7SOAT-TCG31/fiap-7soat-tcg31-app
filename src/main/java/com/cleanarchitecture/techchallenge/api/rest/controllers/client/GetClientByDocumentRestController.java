@@ -1,8 +1,7 @@
 package com.cleanarchitecture.techchallenge.api.rest.controllers.client;
 
 import com.cleanarchitecture.techchallenge.api.rest.dtos.client.ClientDto;
-import com.cleanarchitecture.techchallenge.infra.presenters.client.ClientMapper;
-import com.cleanarchitecture.techchallenge.domain.usecases.GetClientByDocumentUseCase;
+import com.cleanarchitecture.techchallenge.infra.controllers.client.GetClientByDocumentController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -23,7 +22,7 @@ import java.util.Map;
 @Tag(name = "Get Client By Document Controller", description = "Controller for return client data by his document number")
 public class GetClientByDocumentRestController {
 
-    private final GetClientByDocumentUseCase getClientByDocumentUseCase;
+    private final GetClientByDocumentController clientByDocumenController;
 
     @GetMapping(path = "/api/v1/clients")
     @Operation(summary = "Return client data by his document number")
@@ -36,13 +35,10 @@ public class GetClientByDocumentRestController {
             @ApiResponse(responseCode = "404", description = "Client not found")
     })
     public ResponseEntity<?> get(@RequestHeader Map<String, String> headers,
-            @RequestParam("cpf") String cpf) {
+                                 @RequestParam("cpf") String cpf) {
 
-        var client = getClientByDocumentUseCase.find(cpf);
-
-        return client.isEmpty()
-                ? ResponseEntity.notFound().build()
-                : ResponseEntity.ok(ClientMapper.toDto(client.get()));
+        var client = clientByDocumenController.get(cpf);
+        return client.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
 }

@@ -2,8 +2,9 @@ package com.cleanarchitecture.techchallenge.api.rest.controllers.order;
 
 import com.cleanarchitecture.techchallenge.api.rest.dtos.order.OrderDto;
 import com.cleanarchitecture.techchallenge.api.rest.dtos.order.RequestUpdateOrderDto;
-import com.cleanarchitecture.techchallenge.infra.presenters.item.ComboMapper;
-import com.cleanarchitecture.techchallenge.infra.presenters.order.OrderMapper;
+import com.cleanarchitecture.techchallenge.infra.controllers.order.UpdateOrderController;
+import com.cleanarchitecture.techchallenge.infra.presenters.item.ComboPresenter;
+import com.cleanarchitecture.techchallenge.infra.presenters.order.OrderPresenter;
 import com.cleanarchitecture.techchallenge.domain.usecases.GetOrderUseCase;
 import com.cleanarchitecture.techchallenge.domain.usecases.UpdateOrderUseCase;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,8 +29,7 @@ import java.util.Map;
 @Tag(name = "Update Order Controller", description = "Controller for update order and save in database")
 public class UpdateOrderRestController {
 
-    private final GetOrderUseCase getOrderUseCase;
-    private final UpdateOrderUseCase updateOrderUseCase;
+    private final UpdateOrderController updateOrderController;
 
     @PatchMapping(path = "/api/v1/orders/{id}")
     @Operation(summary = "Update Order")
@@ -44,20 +44,11 @@ public class UpdateOrderRestController {
                                     @PathVariable("id") String id,
                                     @RequestBody RequestUpdateOrderDto body) {
 
-        var combo = ComboMapper.toDomain(body.getCombo());
+        var orderUpdated = updateOrderController.update(id, body);
 
-        var order = getOrderUseCase.get(id);
-
-        if (order.isEmpty()) {
-            return ResponseEntity
-                    .notFound()
-                    .build();
-        }
-
-        var orderUpdated = updateOrderUseCase.update(order.get(), combo);
-
-        return ResponseEntity
-                .ok(OrderMapper.toDto(orderUpdated));
+        return orderUpdated == null
+                ? ResponseEntity.notFound().build()
+                : ResponseEntity.ok(orderUpdated);
     }
 
 }

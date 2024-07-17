@@ -1,7 +1,8 @@
 package com.cleanarchitecture.techchallenge.api.rest.controllers.item;
 
 import com.cleanarchitecture.techchallenge.api.rest.dtos.item.ItemDto;
-import com.cleanarchitecture.techchallenge.infra.presenters.item.ItemMapper;
+import com.cleanarchitecture.techchallenge.infra.controllers.item.GetItemController;
+import com.cleanarchitecture.techchallenge.infra.presenters.item.ItemPresenter;
 import com.cleanarchitecture.techchallenge.domain.usecases.GetItemUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -23,7 +24,7 @@ import java.util.Map;
 @Tag(name = "Get Item By Id Controller", description = "Controller for return item data by his id")
 public class GetItemRestController {
 
-    private final GetItemUseCase getItemUseCase;
+    private final GetItemController getItemController;
 
     @GetMapping(path = "/api/v1/items/{id}")
     @Operation(summary = "Return item data by his id")
@@ -36,11 +37,11 @@ public class GetItemRestController {
     })
     public ResponseEntity<?> getById(@RequestHeader Map<String, String> headers, @PathVariable("id") String id) {
 
-        var item = getItemUseCase.get(Long.parseLong(id));
+        var item = getItemController.getById(Long.parseLong(id));
 
         return item.isEmpty()
                 ? ResponseEntity.notFound().build()
-                : ResponseEntity.ok(ItemMapper.toDto(item.get()));
+                : ResponseEntity.ok(item.get());
 
     }
 

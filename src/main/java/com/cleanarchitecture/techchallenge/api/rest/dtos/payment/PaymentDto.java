@@ -18,5 +18,7 @@ public class PaymentDto {
 
     private String type;
     private ClientDto client;
+    private boolean paid;
+    private String paidAt;
     private Map<String, Object> paymentDetails;
 }

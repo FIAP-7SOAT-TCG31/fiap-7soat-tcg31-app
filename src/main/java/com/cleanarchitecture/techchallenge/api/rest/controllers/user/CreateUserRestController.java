@@ -2,8 +2,7 @@ package com.cleanarchitecture.techchallenge.api.rest.controllers.user;
 
 import com.cleanarchitecture.techchallenge.api.rest.dtos.user.RequestCreateUserDto;
 import com.cleanarchitecture.techchallenge.api.rest.dtos.user.UserDto;
-import com.cleanarchitecture.techchallenge.infra.presenters.user.UserMapper;
-import com.cleanarchitecture.techchallenge.domain.usecases.CreateUserUseCase;
+import com.cleanarchitecture.techchallenge.infra.controllers.user.CreateUserController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,7 +24,7 @@ import java.util.Map;
 @Tag(name = "Create User Controller", description = "Controller for receiving user data and save it in the database")
 public class CreateUserRestController {
 
-    private final CreateUserUseCase createUserUseCase;
+    private final CreateUserController createUserController;
 
     @PostMapping(path = "/api/v1/users")
     @Operation(summary = "Create item data")
@@ -39,8 +38,7 @@ public class CreateUserRestController {
     public ResponseEntity<?> create(@RequestHeader Map<String, String> headers,
                                     @RequestBody RequestCreateUserDto body) {
 
-        var user = UserMapper.toDomain(body.getUser());
-        createUserUseCase.create(user);
+        var user = createUserController.create(body);
 
         final var location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -49,7 +47,7 @@ public class CreateUserRestController {
 
         return ResponseEntity
                 .created(location)
-                .body(UserMapper.toDto(user));
+                .body(user);
     }
 
 }

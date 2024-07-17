@@ -1,7 +1,8 @@
 package com.cleanarchitecture.techchallenge.api.rest.controllers.item;
 
 import com.cleanarchitecture.techchallenge.api.rest.dtos.item.ItemDto;
-import com.cleanarchitecture.techchallenge.infra.presenters.item.ItemMapper;
+import com.cleanarchitecture.techchallenge.infra.controllers.item.ListItemsController;
+import com.cleanarchitecture.techchallenge.infra.presenters.item.ItemPresenter;
 import com.cleanarchitecture.techchallenge.domain.entities.item.ItemType;
 import com.cleanarchitecture.techchallenge.domain.usecases.ListItemsUseCase;
 import io.micrometer.common.util.StringUtils;
@@ -27,7 +28,7 @@ import java.util.Map;
 @Tag(name = "Search Item Controller", description = "Controller for return item data")
 public class ListItemsRestController {
 
-    private final ListItemsUseCase listItemsUseCase;
+    private final ListItemsController listItemsController;
 
     @GetMapping(path = "/api/v1/items")
     @Operation(summary = "Return item data")
@@ -39,22 +40,13 @@ public class ListItemsRestController {
                             mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = ItemDto.class)))),
     })
-    public ResponseEntity<?> getById(
+    public ResponseEntity<?> search(
             @RequestHeader Map<String, String> headers,
             @RequestParam(value = "itemType", required = false) String itemType
 
     ) {
-        var filterByType = StringUtils.isNotEmpty(itemType);
-        var itemTypeEnum = filterByType ? ItemType.valueOf(itemType) : null;
-
-        var items = filterByType
-                ? listItemsUseCase.getAllByType(itemTypeEnum)
-                : listItemsUseCase.getAll();
-
-        return items.isEmpty()
-                ? ResponseEntity.ok(List.of())
-                : ResponseEntity.ok(ItemMapper.toDto(items));
-
+        var items = listItemsController.search(itemType);
+        return ResponseEntity.ok(items);
     }
 
 }

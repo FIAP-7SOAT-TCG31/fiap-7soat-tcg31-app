@@ -1,6 +1,7 @@
 package com.cleanarchitecture.techchallenge.api.rest.controllers.client;
 
-import com.cleanarchitecture.techchallenge.infra.presenters.client.ClientMapper;
+import com.cleanarchitecture.techchallenge.infra.controllers.client.GetClientByIdController;
+import com.cleanarchitecture.techchallenge.infra.presenters.client.ClientPresenter;
 import com.cleanarchitecture.techchallenge.api.rest.dtos.client.ClientDto;
 import com.cleanarchitecture.techchallenge.domain.usecases.GetClientByIdUseCase;
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,7 +24,7 @@ import java.util.Map;
 @Tag(name = "Get Client By Id Controller", description = "Controller for return client data by his id")
 public class GetClientByIdRestController {
 
-    private final GetClientByIdUseCase getClientByIdUseCase;
+    private final GetClientByIdController getClientByIdController;
 
     @GetMapping(path = "/api/v1/clients/{id}")
     @Operation(summary = "Return client data by his id")
@@ -39,11 +40,9 @@ public class GetClientByIdRestController {
     public ResponseEntity<?> get(@RequestHeader Map<String, String> headers,
                                  @PathVariable("id") Long id) {
 
-        var client = getClientByIdUseCase.find(id);
+        var client = getClientByIdController.get(id);
 
-        return client.isEmpty()
-                ? ResponseEntity.notFound().build()
-                : ResponseEntity.ok(ClientMapper.toDto(client.get()));
+        return client.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
 }

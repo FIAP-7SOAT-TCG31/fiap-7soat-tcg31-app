@@ -1,7 +1,8 @@
 package com.cleanarchitecture.techchallenge.api.rest.controllers.order;
 
 import com.cleanarchitecture.techchallenge.api.rest.dtos.order.ResponseFollowupDto;
-import com.cleanarchitecture.techchallenge.infra.presenters.order.OrderMapper;
+import com.cleanarchitecture.techchallenge.infra.controllers.order.AdvanceStatusController;
+import com.cleanarchitecture.techchallenge.infra.presenters.order.OrderPresenter;
 import com.cleanarchitecture.techchallenge.domain.usecases.AdvanceStatusUseCase;
 import com.cleanarchitecture.techchallenge.domain.usecases.GetOrderUseCase;
 import io.swagger.v3.oas.annotations.Operation;
@@ -25,8 +26,7 @@ import java.util.Map;
 @Tag(name = "Order Status Controller", description = "Controller for managing order status")
 public class AdvanceStatusRestController {
 
-    private final GetOrderUseCase getOrderUseCase;
-    private final AdvanceStatusUseCase advanceStatusUseCase;
+    private final AdvanceStatusController advanceStatusController;
 
     @PatchMapping(path = "/api/v1/orders/{id}/status")
     @Operation(summary = "Advance the status of an order")
@@ -40,15 +40,12 @@ public class AdvanceStatusRestController {
     })
     public ResponseEntity<?> create(@RequestHeader Map<String, String> headers,
                                     @Parameter(description = "The ID of the order to advance status") @PathVariable("id") String id) {
-        var order = getOrderUseCase.get(id);
 
-        if (order.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
+        var followup = advanceStatusController.create(id);
 
-        var updatedOrder = advanceStatusUseCase.advance(order.get());
-
-        return ResponseEntity.ok()
-                .body(OrderMapper.toFollowUpDto(updatedOrder));
+        return followup == null
+                ? ResponseEntity.notFound().build()
+                : ResponseEntity.ok()
+                .body(followup);
     }
 }

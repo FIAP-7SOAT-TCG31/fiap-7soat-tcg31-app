@@ -1,7 +1,8 @@
-package com.cleanarchitecture.techchallenge.api.rest.controllers.item;
+package com.cleanarchitecture.techchallenge.api.rest.controllers.order;
 
-import com.cleanarchitecture.techchallenge.infra.presenters.item.ComboMapper;
-import com.cleanarchitecture.techchallenge.infra.presenters.order.OrderMapper;
+import com.cleanarchitecture.techchallenge.infra.controllers.order.UpdateItemReadyController;
+import com.cleanarchitecture.techchallenge.infra.presenters.item.ComboPresenter;
+import com.cleanarchitecture.techchallenge.infra.presenters.order.OrderPresenter;
 import com.cleanarchitecture.techchallenge.api.rest.dtos.order.OrderDto;
 import com.cleanarchitecture.techchallenge.api.rest.dtos.order.RequestUpdateOrderDto;
 import com.cleanarchitecture.techchallenge.domain.usecases.GetOrderUseCase;
@@ -28,8 +29,7 @@ import java.util.Map;
 @Tag(name = "Update Order Controller", description = "Controller for update order and save in database")
 public class UpdateItemReadyRestController {
 
-    private final GetOrderUseCase getOrderUseCase;
-    private final UpdateOrderUseCase updateOrderUseCase;
+    private final UpdateItemReadyController updateItemReadyController;
 
     @PatchMapping(path = "/api/v1/orders/{id}/combo")
     @Operation(summary = "Flag Order Item is Ready")
@@ -44,20 +44,15 @@ public class UpdateItemReadyRestController {
                                     @PathVariable("id") String id,
                                     @RequestBody RequestUpdateOrderDto body) {
 
-        var combo = ComboMapper.toDomain(body.getCombo());
+        var order = updateItemReadyController.update(id, body);
 
-        var order = getOrderUseCase.get(id);
+        return order == null
+                ? ResponseEntity
+                .notFound()
+                .build()
+                : ResponseEntity
+                .ok(order);
 
-        if (order.isEmpty()) {
-            return ResponseEntity
-                    .notFound()
-                    .build();
-        }
-
-        var orderUpdated = updateOrderUseCase.update(order.get(), combo);
-
-        return ResponseEntity
-                .ok(OrderMapper.toDto(orderUpdated));
     }
 
 }

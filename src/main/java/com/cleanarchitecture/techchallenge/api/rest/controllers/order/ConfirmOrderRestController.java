@@ -1,8 +1,8 @@
 package com.cleanarchitecture.techchallenge.api.rest.controllers.order;
 
 import com.cleanarchitecture.techchallenge.api.rest.dtos.payment.PaymentDto;
-import com.cleanarchitecture.techchallenge.infra.presenters.client.ClientMapper;
-import com.cleanarchitecture.techchallenge.infra.presenters.payment.PaymentMapper;
+import com.cleanarchitecture.techchallenge.infra.presenters.client.ClientPresenter;
+import com.cleanarchitecture.techchallenge.infra.presenters.payment.PaymentPresenter;
 import com.cleanarchitecture.techchallenge.domain.usecases.GeneratePaymentUseCase;
 import com.cleanarchitecture.techchallenge.domain.usecases.GetOrderUseCase;
 import io.swagger.v3.oas.annotations.Operation;
@@ -49,10 +49,10 @@ public class ConfirmOrderRestController {
             return ResponseEntity.notFound().build();
         }
 
-        var payment = generatePaymentUseCase.generate(order.get(), ClientMapper.toDomain(body.getClient()), body.getType());
+        var payment = generatePaymentUseCase.generate(order.get(), ClientPresenter.getInstance().toDomain(body.getClient()), body.getType());
 
         return ResponseEntity.created(null)
-                .body(PaymentMapper.toDto(payment));
+                .body(PaymentPresenter.getInstance().toDto(payment));
     }
 
 

@@ -6,14 +6,11 @@ import java.util.List;
 
 public class User {
 
-    private String name;
-    private Email email;
-    private String username;
+    private final String name;
+    private final Email email;
+    private final String username;
     private String password;
-    private List<String> roles;
-
-    public User() {
-    }
+    private final List<String> roles;
 
     public User(String name, Email email, String username, String password, List<String> roles) {
         this.name = name;
@@ -22,7 +19,6 @@ public class User {
         this.password = password;
         this.roles = roles;
     }
-
 
     public String getName() {
         return name;
@@ -41,7 +37,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-         this.password = password;
+        this.password = password;
     }
 
     public List<String> getRoles() {

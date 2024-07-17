@@ -2,8 +2,7 @@ package com.cleanarchitecture.techchallenge.api.rest.controllers.item;
 
 import com.cleanarchitecture.techchallenge.api.rest.dtos.item.ItemDto;
 import com.cleanarchitecture.techchallenge.api.rest.dtos.item.RequestCreateItemDto;
-import com.cleanarchitecture.techchallenge.infra.presenters.item.ItemMapper;
-import com.cleanarchitecture.techchallenge.domain.usecases.UpdateItemUseCase;
+import com.cleanarchitecture.techchallenge.infra.controllers.item.UpdateItemController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -20,14 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
-import static java.util.Objects.isNull;
-
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "Update Item Controller", description = "Controller for update item and save in database")
 public class UpdateItemRestController {
 
-    private final UpdateItemUseCase updateItemUseCase;
+    private final UpdateItemController updateItemController;
 
     @PutMapping(path = "/api/v1/items/{id}")
     @Operation(summary = "Update Item")
@@ -44,15 +41,11 @@ public class UpdateItemRestController {
             @PathVariable("id") String id,
             @RequestBody RequestCreateItemDto body) {
 
-        var updatedItem = updateItemUseCase.update(
-                Long.parseLong(id),
-                ItemMapper.toDomain(body.getItem()));
+        var updatedItem = updateItemController.updateItem(Long.parseLong(id), body);
 
-        if (isNull(updatedItem)) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(updatedItem);
+        return updatedItem == null
+                ? ResponseEntity.notFound().build()
+                : ResponseEntity.ok(updatedItem);
     }
 
 }

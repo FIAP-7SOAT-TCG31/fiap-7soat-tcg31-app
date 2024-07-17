@@ -8,18 +8,31 @@ import com.cleanarchitecture.techchallenge.domain.entities.item.Item;
 import com.cleanarchitecture.techchallenge.domain.entities.item.ItemType;
 import com.cleanarchitecture.techchallenge.domain.factories.ItemFactory;
 
-public class ItemMapper {
+public class ItemPresenter {
 
-    public static List<Item> toDomain(List<ItemDto> items) {
+    private static ItemPresenter itemPresenter;
+
+    private ItemPresenter() {
+    }
+
+    public static ItemPresenter getInstance() {
+        if (itemPresenter == null) {
+            itemPresenter = new ItemPresenter();
+        }
+
+        return itemPresenter;
+    }
+
+    public List<Item> toDomain(List<ItemDto> items) {
         return items == null || items.isEmpty()
                 ? List.of()
                 : items
                 .stream()
-                .map(ItemMapper::toDomain)
+                .map(this::toDomain)
                 .toList();
     }
 
-    public static Item toDomain(ItemDto item) {
+    public Item toDomain(ItemDto item) {
         return item == null
                 ? null
                 : ItemFactory.getInstance().createItemWithIdNameTypePriceQuantityDescriptionImagesNote(
@@ -29,21 +42,21 @@ public class ItemMapper {
                 item.getPrice(),
                 item.getQuantity(),
                 item.getDescription(),
-                item.getImages() == null || item.getImages().isEmpty() ? List.of() : new ArrayList<>(item.getImages()),
+                item.getImages() == null || item.getImages().isEmpty() ? null : new ArrayList<>(item.getImages()),
                 item.getNote()
         );
     }
 
-    public static List<ItemDto> toDto(List<Item> items) {
+    public List<ItemDto> toDto(List<Item> items) {
         return items == null || items.isEmpty()
                 ? List.of()
                 : items
                 .stream()
-                .map(ItemMapper::toDto)
+                .map(this::toDto)
                 .toList();
     }
 
-    public static ItemDto toDto(Item item) {
+    public ItemDto toDto(Item item) {
         return item == null
                 ? null
                 : ItemDto

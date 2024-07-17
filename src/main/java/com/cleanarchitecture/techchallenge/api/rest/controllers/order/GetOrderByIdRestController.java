@@ -2,7 +2,8 @@ package com.cleanarchitecture.techchallenge.api.rest.controllers.order;
 
 
 import com.cleanarchitecture.techchallenge.api.rest.dtos.order.OrderDto;
-import com.cleanarchitecture.techchallenge.infra.presenters.order.OrderMapper;
+import com.cleanarchitecture.techchallenge.infra.controllers.order.GetOrderByIdController;
+import com.cleanarchitecture.techchallenge.infra.presenters.order.OrderPresenter;
 import com.cleanarchitecture.techchallenge.domain.usecases.GetOrderUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -24,7 +25,7 @@ import java.util.Map;
 @Tag(name = "Get Order By Id Controller", description = "Controller for return order data by his id")
 public class GetOrderByIdRestController {
 
-    private final GetOrderUseCase getOrderUseCase;
+    private final GetOrderByIdController getOrderByIdController;
 
     @GetMapping(path = "/api/v1/orders/{id}")
     @Operation(summary = "Return order data by his id")
@@ -39,11 +40,11 @@ public class GetOrderByIdRestController {
     public ResponseEntity<?> get(@RequestHeader Map<String, String> headers,
                                  @PathVariable("id") String id) {
 
-        var order = getOrderUseCase.get(id);
+        var order = getOrderByIdController.get(id);
 
         return order.isEmpty()
                 ? ResponseEntity.notFound().build()
-                : ResponseEntity.ok(OrderMapper.toDto(order.get()));
+                : ResponseEntity.ok(order);
     }
 
 }

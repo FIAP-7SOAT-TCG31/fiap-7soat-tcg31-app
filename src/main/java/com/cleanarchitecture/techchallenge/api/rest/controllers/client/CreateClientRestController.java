@@ -1,6 +1,7 @@
 package com.cleanarchitecture.techchallenge.api.rest.controllers.client;
 
-import com.cleanarchitecture.techchallenge.infra.presenters.client.ClientMapper;
+import com.cleanarchitecture.techchallenge.infra.controllers.client.CreateClientController;
+import com.cleanarchitecture.techchallenge.infra.presenters.client.ClientPresenter;
 import com.cleanarchitecture.techchallenge.api.rest.dtos.client.ClientDto;
 import com.cleanarchitecture.techchallenge.domain.usecases.CreateClientUseCase;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,7 +25,7 @@ import java.util.Map;
 @Tag(name = "Create Client Controller", description = "Controller for receiving client data and save it in the database")
 public class CreateClientRestController {
 
-    private final CreateClientUseCase createClientUseCase;
+    private final CreateClientController createClientController;
 
     @PostMapping(path = "/api/v1/clients")
     @Operation(summary = "Create client")
@@ -37,15 +38,14 @@ public class CreateClientRestController {
     public ResponseEntity<?> create(@RequestHeader Map<String, String> headers,
                                     @RequestBody ClientDto body) {
 
-        var client = createClientUseCase.create(ClientMapper.toDomain(body));
-        final var location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(client.getId())
-                .toUri();
+        var client = createClientController.create(body);
 
         return ResponseEntity
-                .created(location)
-                .body(ClientMapper.toDto(client));
+                .created(ServletUriComponentsBuilder.fromCurrentRequest()
+                        .path("/{id}")
+                        .buildAndExpand(client.getId())
+                        .toUri())
+                .body(client);
     }
 
 }

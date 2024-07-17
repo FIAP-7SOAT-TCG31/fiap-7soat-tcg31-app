@@ -4,6 +4,7 @@ import com.cleanarchitecture.techchallenge.api.rest.dtos.credential.AccessTokenD
 import com.cleanarchitecture.techchallenge.api.rest.dtos.credential.RequestTokenDto;
 import com.cleanarchitecture.techchallenge.api.rest.provider.JwtService;
 import com.cleanarchitecture.techchallenge.domain.usecases.GetUserUseCase;
+import com.cleanarchitecture.techchallenge.infra.controllers.credential.CreateTokenController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,8 +26,7 @@ import java.util.Map;
 @Tag(name = "Generate Token Controller", description = "Controller for create access token for use in other routes")
 public class CreateTokenRestController {
 
-    private final GetUserUseCase getUserUseCase;
-    private final JwtService jwtService;
+    private final CreateTokenController createTokenController;
 
     @PostMapping(path = "/api/v1/auth")
     @Operation(summary = "Generate access token")
@@ -40,17 +40,11 @@ public class CreateTokenRestController {
     public ResponseEntity<?> create(@RequestHeader Map<String, String> headers,
                                     @RequestBody RequestTokenDto body) {
 
-        var user = getUserUseCase.getUser(body.getUsername(), body.getPassword());
+        var accessToken = createTokenController.create(body);
 
-        return user
-                .map(value -> ResponseEntity
-                        .ok(AccessTokenDto
-                                .builder()
-                                .withToken(jwtService.generateToken(value.getUsername()))
-                                .build()))
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
-
-
+        return accessToken == null
+                ? ResponseEntity.status(HttpStatus.UNAUTHORIZED).build()
+                : ResponseEntity.ok(accessToken);
     }
 
 }

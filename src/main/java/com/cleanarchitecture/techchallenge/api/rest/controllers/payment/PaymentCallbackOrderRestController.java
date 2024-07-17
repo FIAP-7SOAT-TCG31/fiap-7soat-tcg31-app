@@ -2,7 +2,8 @@ package com.cleanarchitecture.techchallenge.api.rest.controllers.payment;
 
 import com.cleanarchitecture.techchallenge.api.rest.dtos.order.ResponseFollowupDto;
 import com.cleanarchitecture.techchallenge.domain.usecases.RefusedPaymentUseCase;
-import com.cleanarchitecture.techchallenge.infra.presenters.order.OrderMapper;
+import com.cleanarchitecture.techchallenge.infra.controllers.payment.PaymentCallbackOrderController;
+import com.cleanarchitecture.techchallenge.infra.presenters.order.OrderPresenter;
 import com.cleanarchitecture.techchallenge.domain.usecases.EffecitvePaymentUseCase;
 import com.cleanarchitecture.techchallenge.domain.usecases.GetOrderUseCase;
 import com.cleanarchitecture.techchallenge.domain.usecases.ReceiveOrderUseCase;
@@ -24,16 +25,12 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "Pay Order Controller", description = "Controller for receive order payment")
-public class PaymentSuccessOrderRestController {
+public class PaymentCallbackOrderRestController {
 
-    private static final String FAILED = "failed";
-    private final GetOrderUseCase getOrderUseCase;
-    private final RefusedPaymentUseCase refusedPaymentUseCase;
-    private final EffecitvePaymentUseCase effecitvePaymentUseCase;
-    private final ReceiveOrderUseCase receiveOrderUseCase;
+    private final PaymentCallbackOrderController paymentCallbackOrderController;
 
     @PatchMapping(path = "/api/v1/orders/{id}/payment/{status}")
-    @Operation(summary = "Receive order payment statuss")
+    @Operation(summary = "Receive order payment status and update it in the database")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
@@ -46,22 +43,15 @@ public class PaymentSuccessOrderRestController {
             @ApiResponse(responseCode = "404", description = "Order not found")
     })
     public ResponseEntity<?> create(@RequestHeader Map<String, String> headers, @PathVariable("id") String id, @PathVariable("status") String status) {
-        var order = getOrderUseCase.get(id);
+        var order = paymentCallbackOrderController.create(id, status);
 
-        if (order.isEmpty()) {
+        if (order == null) {
             return ResponseEntity.notFound().build();
         }
 
-        if (FAILED.equalsIgnoreCase(status)) {
-            refusedPaymentUseCase.refused(order.get());
-            return ResponseEntity.noContent().build();
-        } else {
-            var updatedOrder = effecitvePaymentUseCase.pay(order.get());
-            updatedOrder = receiveOrderUseCase.receive(updatedOrder);
-
-            return ResponseEntity.ok()
-                    .body(OrderMapper.toFollowUpDto(updatedOrder));
-        }
+        return order.getStatus().equalsIgnoreCase("CANCELLED")
+                ? ResponseEntity.noContent().build()
+                : ResponseEntity.ok(order);
     }
 
 }

@@ -2,8 +2,7 @@ package com.cleanarchitecture.techchallenge.api.rest.controllers.item;
 
 import com.cleanarchitecture.techchallenge.api.rest.dtos.item.ItemDto;
 import com.cleanarchitecture.techchallenge.api.rest.dtos.item.RequestCreateItemDto;
-import com.cleanarchitecture.techchallenge.infra.presenters.item.ItemMapper;
-import com.cleanarchitecture.techchallenge.domain.usecases.CreateItemUseCase;
+import com.cleanarchitecture.techchallenge.infra.controllers.item.CreateItemController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,7 +24,7 @@ import java.util.Map;
 @Tag(name = "Create Item Controller", description = "Controller for receiving item data and save it in the database")
 public class CreateItemRestController {
 
-    private final CreateItemUseCase createItemUseCase;
+    private final CreateItemController createItemController;
 
     @PostMapping(path = "/api/v1/items")
     @Operation(summary = "Create item data")
@@ -38,8 +37,7 @@ public class CreateItemRestController {
     public ResponseEntity<?> create(@RequestHeader Map<String, String> headers,
                                     @RequestBody RequestCreateItemDto body) {
 
-        var itemToCreate = ItemMapper.toDomain(body.getItem());
-        var item = createItemUseCase.create(itemToCreate);
+        var item = createItemController.create(body);
 
         final var location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -48,7 +46,7 @@ public class CreateItemRestController {
 
         return ResponseEntity
                 .created(location)
-                .body(ItemMapper.toDto(item));
+                .body(item);
     }
 
 }
