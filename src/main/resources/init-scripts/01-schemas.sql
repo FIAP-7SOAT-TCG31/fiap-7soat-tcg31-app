@@ -13,21 +13,6 @@ CREATE TABLE tb_users (
     role VARCHAR(255)
 );
 
-INSERT INTO tb_users (
-        email,
-        name,
-        password,
-        role,
-        username
-) VALUES (
-    'admin@admin.com',
-    'Administrator',
-    '$2a$10$WLrGTAB4pctxD/KMr26quuf/4dtZgvqX241EMy1QOXuAG9a9uu052'
-    ,'ADMIN',
-    'admin'
-);
-
-
 CREATE TABLE tb_items (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
@@ -36,6 +21,21 @@ CREATE TABLE tb_items (
     quantity FLOAT,
     description VARCHAR(255),
     images VARCHAR(1000)
+);
+
+CREATE TABLE tb_payments (
+    id VARCHAR(255) PRIMARY KEY,
+    was_paid boolean not null,
+    paid_at TIMESTAMP,
+    method VARCHAR(255)
+);
+
+CREATE TABLE tb_payment_details (
+    id SERIAL PRIMARY KEY,
+    payment_id varchar(255),
+    key VARCHAR(255),
+    value varchar(255),
+    FOREIGN KEY (payment_id) REFERENCES tb_payments(id)
 );
 
 
@@ -62,18 +62,4 @@ CREATE TABLE tb_order_items (
     FOREIGN KEY (item_id) REFERENCES tb_items(id)
 );
 
-CREATE TABLE tb_payments (
-    id VARCHAR(255) PRIMARY KEY,
-    was_paid boolean not null,
-    paid_at TIMESTAMP,
-    method VARCHAR(255)
-);
-
-CREATE TABLE tb_payment_details (
-    id SERIAL PRIMARY KEY,
-    payment_id varchar(255),
-    key VARCHAR(255),
-    value varchar(255),
-    FOREIGN KEY (payment_id) REFERENCES tb_payments(id)
-);
 
