@@ -5,6 +5,9 @@
 - Docker: https://www.docker.com/
 - K3D: https://k3d.io/v5.6.3/#installation
 
+## Arquitetura K8S
+![Arquitetura K8S](../docs/resources/v2/archtecture.k8s.png)
+
 ## 1. Criação do Cluster K8S (Localmente)
 
 > Navegar pelo terminal até a raiz do projeto antes de executar os seguintes comandos. Neste exemplo estamos utilizando uma máquina Windows com WSL2
