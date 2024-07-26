@@ -38,6 +38,8 @@ spec:
               value: "America/Sao_Paulo"
             - name: SERVER_SERVLET_CONTEXT_PATH
               value: "/fiap-burger"
+            - name: MERCADOPAGO_ENABLED
+              value: "false"
           ports:
             - name: http
               containerPort: 8080
@@ -53,7 +55,6 @@ spec:
             failureThreshold: 3
             periodSeconds: 15
             httpGet:
-              # TODO: app should have health check endpoint
               path: /fiap-burger/swagger-ui/index.html
               port: 8080
           readinessProbe:
