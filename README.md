@@ -12,25 +12,25 @@ Este projeto foi desenvolvido durante a `Fase II`, do curso de `Arquitetura de S
 
 ## Gravação
 
-[YouTube]()
+[YouTube]() :: TODO ::
 
 ### Tópicos
 
 - Implantação da Aplicação com K8S
+- Postman
+- Swagger
 - Revisão de Requisitos Funcionais
   - Realização de Um Pedido de Ponta a Ponta
 - Revisão de Requisitos Não Funcionais
   - HPA
   - Armazenamento de Dados com Volumes
 - Revisão da Arquitetura Limpa
-- Postman
-- Swagger
 
 ## Arquitetura K8S
 
 ![Arquitetura K8S](./docs/resources/v2/archtecture.k8s.png)
 
-## Event Storming
+## Event Storming :[Ver no Miro 👁️](https://miro.com/app/board/uXjVKYNMy0E=/):
 
 ![Event Storming](./docs/resources/v1/EventStormingEventFlow.png)
 ![Domain Aggregates](./docs/resources/v1/EventStormingAggregates.png)
@@ -39,17 +39,17 @@ Este projeto foi desenvolvido durante a `Fase II`, do curso de `Arquitetura de S
 
 O projeto está preparado para implantação utilizando um cluster kubernetes.
 
-1. [Configurar Package Lib no Postman](./docs/resources/v2/postman/LIB_INSTRUCTIONS.md)
+1. [Configurar Package Lib no Postman](./docs/postman/README.md)
 2. [Criar Cluster Kubernetes com K3D e Implantar a Aplicação](./k8s/README.md)
 
 ## OpenAPI - Swagger
 
-O arquivo está disponibilizado em `docs/resources/v2/openapi.yaml` e pode ser importado no [editor da OpenAPI](https://editor.swagger.io).
-O Swagger também está disponível na aplicação, acessando o [caminho](http://localhost:7777/fiap-burger/swagger-ui/index.html) após a implantação da aplicação.
+O arquivo está disponibilizado em `./docs/swagger/openapi.yaml` e pode ser importado no [editor da OpenAPI](https://editor.swagger.io).
+O Swagger também está disponível na aplicação. Após a implantação com sucesso da aplicação acessar a [URL](http://localhost:7777/fiap-burger/swagger-ui/index.html).
 
 ## Postman
 
-A collection do Postman assim como os environments envolvidos estão disponíveis no caminho `./src/main/resources/collections/postman`
+A collection do Postman assim como os environments e instruções para configuração estão disponíveis no caminho `./docs/postman`
 
 ## Problema
 
