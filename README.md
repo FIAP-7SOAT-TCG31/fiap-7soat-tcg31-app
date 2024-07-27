@@ -1,14 +1,44 @@
 # Tech Challenge FIAP Project
 
-Projeto desenvolvido durante a `Fase I`, do curso de `Arquitetura de Software` da FIAP, como requisito para avaliação.
+Este projeto foi desenvolvido durante a `Fase II`, do curso de `Arquitetura de Software` da FIAP, como requisito para avaliação.
 
-### Integrantes do Grupo 7SOAT-31:
+## Integrantes do Grupo 7SOAT-31:
 
 - Julio Augusto Silva (RM355432)
 - Lucas Henrique de Oliveira Silva (RM354904)
 - Getúlio Magela Silva (RM355427)
 - Lucas Rego Lima (RM356101)
 - Lilian Rosario de Jesus (RM355928)
+
+## Gravações
+- Implantação do Projeto no K8S Local: TODO::YOUTUBE-LINK -> Demonstrar a criação dos artefatos do k8s
+- Requisitos Funcionais: TODO::YOUTUBE-LINK -> Demonstar a execução das regras de negócios
+- Requisitos Não Funcionais: TODO::YOUTUBE-LINK -> Demonstarar a HPA e Persistencia do Banco
+
+## Arquitetura K8S
+
+![Arquitetura K8S](./docs/resources/v2/archtecture.k8s.png)
+
+## Event Storming
+
+![Event Storming](./docs/resources/v1/EventStormingEventFlow.png)
+![Domain Aggregates](./docs/resources/v1/EventStormingAggregates.png)
+
+## Instruções para Implantação do Projeto com K8S + K3D
+
+O projeto está preparado para implantação utilizando um cluster kubernetes.
+
+1. [Configurar Package Lib no Postman](./docs/resources/v2/postman/LIB_INSTRUCTIONS.md)
+2. [Criar Cluster Kubernetes com K3D e Implantar a Aplicação](./k8s/README.md)
+
+## OpenAPI - Swagger
+
+O arquivo está disponibilizado em `docs/resources/v2/openapi.yaml` e pode ser importado no [editor da OpenAPI](https://editor.swagger.io).
+O Swagger também está disponível na aplicação, acessando o [caminho](http://localhost:7777/fiap-burger/swagger-ui/index.html) após a implantação da aplicação.
+
+## Postman
+
+A collection do Postman assim como os environments envolvidos estão disponíveis no caminho `./src/main/resources/collections/postman`
 
 ## Problema
 
@@ -25,25 +55,3 @@ Para solucionar o problema, a lanchonete irá investir em um sistema de autoaten
 Com o objetivo de aprimorar a experiência do cliente e assegurar uma gestão eficiente dos pedidos, desenvolvemos um sistema de controle de pedidos. Sua arquitetura centraliza-se em um aplicativo de autoatendimento intuitivo, capacitando os clientes a personalizarem seus pedidos de forma ágil e simples, selecionando entre uma variedade de lanches, acompanhamentos, bebidas e sobremesas.
 
 Inicialmente, o sistema integrará apenas com a opção de pagamento via QR Code do Mercado Pago.
-
----
-
-# Documentação
-
-Documentação DDD pelo [Miro](https://miro.com/app/board/uXjVKYNMy0E=/)
-
----
-
-# Hexagonal architecture project
-
-## Application architecture
-
-<br>
-<p align="center">
-    <img src="https://github.com/augustojulio-code/postechrepo/blob/master/solution_architecture.PNG" width="700px" height="500px"/>    
-</p>
-<br>
-
-## Project Status
-
-- Development
