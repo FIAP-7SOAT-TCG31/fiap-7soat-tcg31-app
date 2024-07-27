@@ -10,22 +10,6 @@ Este projeto foi desenvolvido durante a `Fase II`, do curso de `Arquitetura de S
 - Lucas Rego Lima (RM356101)
 - Lilian Rosario de Jesus (RM355928)
 
-## Gravação
-
-[YouTube]() :: TODO ::
-
-### Tópicos
-
-- Implantação da Aplicação com K8S
-- Postman
-- Swagger
-- Revisão de Requisitos Funcionais
-  - Realização de Um Pedido de Ponta a Ponta
-- Revisão de Requisitos Não Funcionais
-  - HPA
-  - Armazenamento de Dados com Volumes
-- Revisão da Arquitetura Limpa
-
 ## Arquitetura K8S
 
 ![Arquitetura K8S](./docs/resources/v2/archtecture.k8s.png)
@@ -39,17 +23,17 @@ Este projeto foi desenvolvido durante a `Fase II`, do curso de `Arquitetura de S
 
 O projeto está preparado para implantação utilizando um cluster kubernetes.
 
-1. [Configurar Package Lib no Postman](./docs/postman/README.md)
-2. [Criar Cluster Kubernetes com K3D e Implantar a Aplicação](./k8s/README.md)
+- [Criar Cluster Kubernetes com K3D e Implantar a Aplicação](./k8s/README.md)
 
 ## OpenAPI - Swagger
 
-O arquivo está disponibilizado em `./docs/swagger/openapi.yaml` e pode ser importado no [editor da OpenAPI](https://editor.swagger.io).
-O Swagger também está disponível na aplicação. Após a implantação com sucesso da aplicação acessar a [URL](http://localhost:7777/fiap-burger/swagger-ui/index.html).
+- O arquivo está disponibilizado em `./docs/swagger/openapi.yaml` e pode ser importado no [editor da OpenAPI](https://editor.swagger.io).
+- O Swagger também está disponível na aplicação. Após a implantação com sucesso da aplicação acessar a [URL](http://localhost:7777/fiap-burger/swagger-ui/index.html).
 
 ## Postman
 
-A collection do Postman assim como os environments e instruções para configuração estão disponíveis no caminho `./docs/postman`
+- Collection e Environments disponibilizados direto no código fonte `./docs/postman`
+- [Collection e Environments Via Postman](https://www.postman.com/gm50x/workspace/7soat31/collection/10261834-c3a1434e-4636-4150-b6ac-531acf1182da?action=share&creator=10261834&active-environment=10261834-11ead16b-1dc1-415d-a87f-d0d55e12415c)
 
 ## Problema
 
