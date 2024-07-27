@@ -5,9 +5,6 @@
 - Docker: https://www.docker.com/
 - K3D: https://k3d.io/v5.6.3/#installation
 
-## Arquitetura K8S
-![Arquitetura K8S](../docs/resources/v2/archtecture.k8s.png)
-
 ## 1. Criação do Cluster K8S (Localmente)
 
 > Navegar pelo terminal até a raiz do projeto antes de executar os seguintes comandos. Neste exemplo estamos utilizando uma máquina Windows com WSL2
@@ -89,7 +86,7 @@ curl --location 'http://localhost:7777/fiap-burger/api/v1/auth' \
 }'
 ```
 
-# Desfazimento
+# Desfazimento e Limpeza do Ambiente
 
 ```bash
 # Remover o cluster k3d
@@ -105,3 +102,5 @@ sudo rm -rf k8s/.volumes/postgres/data -rf
 3. k8s/pg-secret.yaml
 4. k8s/pg-deployment.yaml
 5. k8s/app-deployment.yaml
+
+[Voltar ao Início](../README.md)
