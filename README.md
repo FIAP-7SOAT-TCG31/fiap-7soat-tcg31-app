@@ -10,10 +10,21 @@ Este projeto foi desenvolvido durante a `Fase II`, do curso de `Arquitetura de S
 - Lucas Rego Lima (RM356101)
 - Lilian Rosario de Jesus (RM355928)
 
-## Gravações
-- Implantação do Projeto no K8S Local: TODO::YOUTUBE-LINK -> Demonstrar a criação dos artefatos do k8s
-- Requisitos Funcionais: TODO::YOUTUBE-LINK -> Demonstar a execução das regras de negócios
-- Requisitos Não Funcionais: TODO::YOUTUBE-LINK -> Demonstarar a HPA e Persistencia do Banco
+## Gravação
+
+[YouTube]()
+
+### Tópicos
+
+- Implantação da Aplicação com K8S
+- Revisão de Requisitos Funcionais
+  - Realização de Um Pedido de Ponta a Ponta
+- Revisão de Requisitos Não Funcionais
+  - HPA
+  - Armazenamento de Dados com Volumes
+- Revisão da Arquitetura Limpa
+- Postman
+- Swagger
 
 ## Arquitetura K8S
 

@@ -15,4 +15,4 @@ Esta collection está configurara com uma library interna no postman. Antes de e
 7. Clicar em `Create`
    - ![Criar Library](postman-lib-2.png)
 
-[Voltar ao Início](../../../../README.md)
+[Voltar ao Início](../../README.md)
