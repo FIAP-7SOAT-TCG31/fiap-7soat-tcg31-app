@@ -16,10 +16,13 @@ k3d cluster create --api-port 6550 -p "7777:80@loadbalancer" fiap-sandbox --agen
 
 ## 2. Criação do `Persistent Volume`
 
-## 3. e `Persistent Volume Claim` para o Postgres
-
 ```bash
 kubectl apply -f k8s/pg-pv.yaml
+```
+
+## 3. `Persistent Volume Claim` para o Postgres
+
+```bash
 kubectl apply -f k8s/pg-pvc.yaml
 ```
 
