@@ -16,6 +16,10 @@ k3d cluster create --api-port 6550 -p "7777:80@loadbalancer" fiap-sandbox --agen
 
 ## 2. Criação do `Persistent Volume`
 
+> IMPORTANTE:
+>
+> Este PV está configurado para funcionar com o K3D. Caso queria executar num outro cluster pode ser necessário a chave `spec.hostPath.path` (linha 19) para um caminho dentro do host.
+
 ```bash
 kubectl apply -f k8s/pg-pv.yaml
 ```
