@@ -10,6 +10,12 @@ Este projeto foi desenvolvido durante a `Fase II`, do curso de `Arquitetura de S
 - Lucas Rego Lima (RM356101)
 - Lilian Rosario de Jesus (RM355928)
 
+## Demostração em Vídeo:
+
+- [Assistir a Fase 1 no YouTube](https://www.youtube.com/watch?v=I0tNdblTFDc)
+- [Assistir a Parte 1 da Fase 2 no YouTube](https://www.youtube.com/watch?v=r81e0Y-HJx4)
+- [Assistir a Parte 2 da Fase 2 no YouTube](https://www.youtube.com/watch?v=cL7ryiqxlvk)
+
 ## Arquitetura K8S :[Ver no Miro 👁️](https://miro.com/app/board/uXjVKYNMy0E=/?moveToWidget=3458764595663077751&cot=10):
 
 ![Arquitetura K8S](./docs/resources/v2/archtecture.k8s.png)
