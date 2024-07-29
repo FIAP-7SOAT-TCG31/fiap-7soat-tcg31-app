@@ -14,20 +14,29 @@
 k3d cluster create --api-port 6550 -p "7777:80@loadbalancer" fiap-sandbox --agents 2 --volume $(pwd)/k8s/.volumes:/var/lib/rancher/k3s/storage@all
 ```
 
-## 2. Criação do `Persistent Volume` e `Persistent Volume Claim` para o Postgres
+## 2. Criação do `Persistent Volume`
+
+> IMPORTANTE:
+>
+> Este PV está configurado para funcionar com o K3D. Caso queria executar num outro cluster pode ser necessário a chave `spec.hostPath.path` (linha 19) para um caminho dentro do host.
 
 ```bash
 kubectl apply -f k8s/pg-pv.yaml
+```
+
+## 3. `Persistent Volume Claim` para o Postgres
+
+```bash
 kubectl apply -f k8s/pg-pvc.yaml
 ```
 
-## 3. Criação do `Secret` do Postgres:
+## 4. Criação do `Secret` do Postgres:
 
 ```bash
 kubectl apply -f k8s/pg-secret.yaml
 ```
 
-## 4. Criação do Banco de Dados:
+## 5. Criação do Banco de Dados:
 
 Neste passo serão criados dois artefatos conforme descritos abaixo:
 
@@ -38,28 +47,25 @@ Neste passo serão criados dois artefatos conforme descritos abaixo:
 kubectl apply -f k8s/pg-deployment.yaml
 ```
 
-## 5. Executar as migrations no Postgres
+## 6. Executar as migrations no Postgres
 
-1. É necessário expor o banco de dados para acesso local:
-   Vamos fazer esta exposição utilizando port-foward, pois o cluster k8s criado com k3d está configurado para acesso por ingress na porta 7777. Para acessar um nodeport seria necessário realizar configurações adicionais.
+1. É necessário expor o banco de dados para acesso local. Vamos fazer esta exposição utilizando port-foward, pois o cluster k8s criado com k3d está configurado para acesso por ingress na porta 7777. Para acessar um nodeport seria necessário realizar configurações adicionais.
 
 ```bash
 kubectl port-forward service/postgres-clusterip-srv 5432:5432
 ```
 
-2. Aplicar scripts de criação da estrutura da persistência.
-
-2.1 - Obter o secret de acesso a base com
+2. Obter senha de admim do banco de dados postgres
 
 ```bash
  kubectl get secret pgsecrets --template={{.data.POSTGRES_PASSWORD}} | base64 -d
 ```
 
-2.2 Conectar à base de dados utilizando alguma ferramenta de preferência, DBeaver, Azure Data Studio e etc.
+3. Conectar à base de dados utilizando alguma ferramenta de preferência, DBeaver, Azure Data Studio.
 
-2.3 Utilizando DBeaver ou qualquer outra ferramenta de acesso copie e execute os scripts localizados em `src/main/resources/init-scripts`.
+4. Utilizando DBeaver ou qualquer outra ferramenta de acesso copie e execute os scripts localizados em `./src/main/resources/init-scripts`.
 
-## 6. Implantar a aplicação Java Spring:
+## 7. Implantar a aplicação Java Spring:
 
 Neste passo alguns artefatos serão criados:
 
@@ -73,7 +79,7 @@ Neste passo alguns artefatos serão criados:
 kubectl apply -f k8s/app-deployment.yaml
 ```
 
-# 7. Agora é possível acessar a aplicação para testes
+# 8. Agora é possível acessar a aplicação para testes
 
 Por exemplo no processo de autenticação:
 
@@ -86,7 +92,7 @@ curl --location 'http://localhost:7777/fiap-burger/api/v1/auth' \
 }'
 ```
 
-# Desfazimento
+# Desfazimento e Limpeza do Ambiente
 
 ```bash
 # Remover o cluster k3d
@@ -102,3 +108,5 @@ sudo rm -rf k8s/.volumes/postgres/data -rf
 3. k8s/pg-secret.yaml
 4. k8s/pg-deployment.yaml
 5. k8s/app-deployment.yaml
+
+[Voltar ao Início](../README.md)

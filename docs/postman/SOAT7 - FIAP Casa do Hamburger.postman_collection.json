@@ -1,0 +1,2407 @@
+{
+	"info": {
+		"_postman_id": "c3a1434e-4636-4150-b6ac-531acf1182da",
+		"name": "SOAT7 - FIAP Casa do Hamburger",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10261834"
+	},
+	"item": [
+		{
+			"name": "Fase 1 - V1",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Authenticate",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const result = pm.response.json();\r",
+											"pm.collectionVariables.set(\"token\", result.token);\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/auth",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "# Processo de Autenticação\n\nGeração de Token de Acesso para integração com a API"
+				},
+				{
+					"name": "UTIL - Cadastrar Itens",
+					"item": [
+						{
+							"name": "Create Items",
+							"item": [
+								{
+									"name": "Create Snack X-Burger",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"item\": {\r\n        \"name\": \"X-Burger\",\r\n        \"type\": \"SNACK\",\r\n        \"price\": 32.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"Hamburger and Cheese\",\r\n        \"images\": [\r\n            \"https://imageurl.com/x-burger-1.png\",\r\n            \"https://imageurl.com/x-burger-2.png\"\r\n        ]\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/items",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"items"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Snack X-Egg",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"item\": {\r\n        \"name\": \"X-Egg\",\r\n        \"type\": \"SNACK\",\r\n        \"price\": 42.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"Hamburger with Cheese and Friend Eggs\",\r\n        \"images\": [\r\n            \"https://imageurl.com/x-egg-burger-1.png\",\r\n            \"https://imageurl.com/x-egg-burger-2.png\"\r\n        ]\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/items",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"items"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Snack Simple Hotdog",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Hotdog\",\r\n        \"type\": \"SNACK\",\r\n        \"price\": 12.99,\r\n        \"quantity\": 100,\r\n        \"description\": \"1 Saussage Hotdog, Smashed Potato and Shoestring Potatoes\",\r\n        \"images\": [\r\n            \"https://imageurl.com/simple-hotdog-1.png\"\r\n        ]\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/items",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"items"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Snack Double Hotdog",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Double Hotdog\",\r\n        \"type\": \"SNACK\",\r\n        \"price\": 18.99,\r\n        \"quantity\": 100,\r\n        \"description\": \"2 Saussages Hotdog, Smashed Potato and Shoestring Potatoes\",\r\n        \"images\": [\r\n            \"https://imageurl.com/double-hotdog-1.png\"\r\n        ]\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/items",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"items"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Beverage Coke",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Coke\",\r\n        \"type\": \"BEVERAGE\",\r\n        \"price\": 7.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"Coca-Cola Beverage\",\r\n        \"images\": [\r\n            \"https://imageurl.com/coke.png\"\r\n        ]\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/items",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"items"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Beverage Guarana",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Guarana\",\r\n        \"type\": \"BEVERAGE\",\r\n        \"price\": 12.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"Brazilian Guarana Beverage\",\r\n        \"images\": [\r\n            \"https://imageurl.com/guarana.png\"\r\n        ]\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/items",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"items"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Beverage Orange Juice",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Orange Juice\",\r\n        \"type\": \"BEVERAGE\",\r\n        \"price\": 8.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"Orange Juice Beverage\",\r\n        \"images\": [\r\n            \"https://imageurl.com/orange-juice.png\"\r\n        ]\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/items",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"items"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Accompaniment Fries",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Fries\",\r\n        \"type\": \"ACCOMPANIMENT\",\r\n        \"price\": 12.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"French Fries\",\r\n        \"images\": [\r\n            \"https://imageurl.com/fries.png\"\r\n        ]\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/items",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"items"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Accompaniment Nuggets",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Nuggets\",\r\n        \"type\": \"ACCOMPANIMENT\",\r\n        \"price\": 12.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"French Nuggets\",\r\n        \"images\": [\r\n            \"https://imageurl.com/nuggets.png\"\r\n        ]\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/items",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"items"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Dessert Ice Cream",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Ice Cream\",\r\n        \"type\": \"DESSERT\",\r\n        \"price\": 18.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"Vanilla Ice Cream\",\r\n        \"images\": [\r\n            \"https://imageurl.com/vanilla-ice-cream.png\"\r\n        ]\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/items",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"items"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Dessert Brownie",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Brownie\",\r\n        \"type\": \"DESSERT\",\r\n        \"price\": 8.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"Chocolate Brownie\",\r\n        \"images\": [\r\n            \"https://imageurl.com/chocolate-brownie.png\"\r\n        ]\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/items",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"items"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					],
+					"description": "1. Authenticate\n    \n2. Run the `Create Items`folder to prepopulate the database with some data."
+				},
+				{
+					"name": "Items",
+					"item": [
+						{
+							"name": "Create Item",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Chicken Burger\",\r\n        \"type\": \"SNACK\",\r\n        \"price\": 18.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"Simple Chicken Hamburger\",\r\n        \"images\": [\r\n            \"https://imageurl.com/chicken-burger-1.png\",\r\n            \"https://imageurl.com/chicken-burger-2.png\"\r\n        ]\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/items",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"items"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Item",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"item\": {\r\n    \"name\": \"X-Burger\",\r\n    \"type\": \"SNACK\",\r\n    \"price\": 32.9900,\r\n    \"quantity\": 30.0,\r\n    \"description\": \"Hamburger and Cheese\",\r\n    \"images\": [\r\n        \"https://imageurl.com/x-burger-1.png\",\r\n        \"https://imageurl.com/x-burger-2.png\"\r\n    ]\r\n\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/items/1",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"items",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Item By Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/items/:id",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"items",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List Items",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/items",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"items"
+									],
+									"query": [
+										{
+											"key": "itemType",
+											"value": "ACCOMPANIMENT",
+											"disabled": true
+										},
+										{
+											"key": "itemType",
+											"value": "DESSERT",
+											"disabled": true
+										},
+										{
+											"key": "itemType",
+											"value": "BEVERAGE",
+											"disabled": true
+										},
+										{
+											"key": "itemType",
+											"value": "SNACK",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Client",
+					"item": [
+						{
+							"name": "Cadastrar Cliente",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const { generateCPF } = pm.require('brutils');\r",
+											"pm.collectionVariables.set(\"randomCPF\", generateCPF());"
+										],
+										"type": "text/javascript",
+										"packages": {
+											"brutils": {
+												"id": "018facae-de30-7d88-afa0-9a2f665704d2"
+											}
+										}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.collectionVariables.set(\"clientId\", response.id)\r",
+											"pm.collectionVariables.set(\"cpf\", response.cpf)\r",
+											"pm.collectionVariables.set(\"clientName\", response.name)\r",
+											"pm.collectionVariables.set(\"email\", response.email)\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cpf\": \"{{randomCPF}}\",\r\n    \"name\": \"{{$randomFullName}}\",\r\n    \"email\": \"{{$randomEmail}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/clients",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"clients"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Client By Id",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.collectionVariables.set(\"clientId\", response.id)\r",
+											"pm.collectionVariables.set(\"cpf\", response.cpf)\r",
+											"pm.collectionVariables.set(\"clientName\", response.name)\r",
+											"pm.collectionVariables.set(\"email\", response.email)\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/clients/:id",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"clients",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{clientId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Client By CPF",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.collectionVariables.set(\"clientId\", response.id)\r",
+											"pm.collectionVariables.set(\"cpf\", response.cpf)\r",
+											"pm.collectionVariables.set(\"clientName\", response.name)\r",
+											"pm.collectionVariables.set(\"email\", response.email)\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/clients?cpf={{cpf}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"clients"
+									],
+									"query": [
+										{
+											"key": "cpf",
+											"value": "{{cpf}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "This collection uses a library inside postman pre-script.\n\nTo run it first add a library named 'brutils' with postman:  \n1\\. Go to `Cadastrar Cliente`\n\n2\\. Go to `scripts`\n\n3\\. On the right side, you will see libraries...\n\n<img src=\"https://content.pstmn.io/d681f250-fd1d-480a-8cd2-382ed20af3f9/aW1hZ2UucG5n\" width=\"986\" height=\"491\">\n\n4\\. Click on `open package library`\n\n5\\. Click on `add new package` and past the following code to a library named `brutils`:\n\n``` javascript\nfunction generateCPF() {\n    function randomize(n) {\n        var ranNum = Math.round(Math.random() * n);\n        return ranNum;\n    }\n    function mod(dividendo, divisor) {\n        return Math.round(dividendo - (Math.floor(dividendo / divisor) * divisor));\n    }\n    var n = 9;\n    var n1 = randomize(n);\n    var n2 = randomize(n);\n    var n3 = randomize(n);\n    var n4 = randomize(n);\n    var n5 = randomize(n);\n    var n6 = randomize(n);\n    var n7 = randomize(n);\n    var n8 = randomize(n);\n    var n9 = randomize(n);\n    var d1 = n9 * 2 + n8 * 3 + n7 * 4 + n6 * 5 + n5 * 6 + n4 * 7 + n3 * 8 + n2 * 9 + n1 * 10;\n    d1 = 11 - (mod(d1, 11));\n    if (d1 >= 10) d1 = 0;\n    var d2 = d1 * 2 + n9 * 3 + n8 * 4 + n7 * 5 + n6 * 6 + n5 * 7 + n4 * 8 + n3 * 9 + n2 * 10 + n1 * 11;\n    d2 = 11 - (mod(d2, 11));\n    if (d2 >= 10) d2 = 0;\n    return '' + n1 + n2 + n3 + '.' + n4 + n5 + n6 + '.' + n7 + n8 + n9 + '-' + d1 + d2;\n}\nmodule.exports = {\n    generateCPF\n}\n\n ```"
+				},
+				{
+					"name": "Orders",
+					"item": [
+						{
+							"name": "Create Anonymous",
+							"item": [
+								{
+									"name": "Create Empty Order",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const response = pm.response.json();\r",
+													"\r",
+													"pm.collectionVariables.set(\"orderId\", response.id)\r",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\t\"combo\": {\r\n\t\t\"items\": [\r\n\t\t]\r\n\t}\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/orders",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"orders"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Order With Items",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const response = pm.response.json();\r",
+													"\r",
+													"pm.collectionVariables.set(\"orderId\", response.id)\r",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\t\"combo\": {\r\n\t\t\"items\": [\r\n\t\t\t{\r\n\t\t\t\t\"id\": 1,\r\n\t\t\t\t\"name\": \"X-Burger\",\r\n\t\t\t\t\"type\": \"SNACK\",\r\n\t\t\t\t\"price\": 32.9900,\r\n\t\t\t\t\"quantity\": 1\r\n\t\t\t}\r\n\t\t]\r\n\t}\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/orders",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"orders"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Create Identified",
+							"item": [
+								{
+									"name": "Create Empty Order",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const response = pm.response.json();\r",
+													"\r",
+													"pm.collectionVariables.set(\"orderId\", response.id)\r",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"combo\": {\r\n        \"items\": []\r\n    },\r\n    \"requester\": {\r\n        \"id\": {{clientId}},\r\n        \"cpf\": \"{{cpf}}\",\r\n        \"name\": \"{{clientName}}\",\r\n        \"email\": \"{{email}}\"\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/orders",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"orders"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Order With Items",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const response = pm.response.json();\r",
+													"\r",
+													"pm.collectionVariables.set(\"orderId\", response.id)\r",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"combo\": {\r\n        \"items\": [\r\n            {\r\n                \"id\": 1,\r\n                \"name\": \"X-Burger\",\r\n                \"type\": \"SNACK\",\r\n                \"price\": 32.9900,\r\n                \"quantity\": 1\r\n            }\r\n        ]\r\n    },\r\n    \"requester\": {\r\n        \"id\": {{clientId}},\r\n        \"cpf\": \"{{cpf}}\",\r\n        \"name\": \"{{clientName}}\",\r\n        \"email\": \"{{email}}\"\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/orders",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"orders"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Get Order",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/orders/:id",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{orderId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Order",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"combo\": {\r\n        \"items\": [\r\n            {\r\n                \"id\": 1,\r\n                \"name\": \"X-Burger\",\r\n                \"type\": \"SNACK\",\r\n                \"price\": 32.9900,\r\n                \"quantity\": 1\r\n            },\r\n            {\r\n                \"id\": 5,\r\n                \"name\": \"Coke\",\r\n                \"type\": \"BEVERAGE\",\r\n                \"price\": 7.9900,\r\n                \"quantity\": 1\r\n            }\r\n        ]\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/orders/:id",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{orderId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Confirm Order",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"type\": \"QR_CODE\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/orders/:id/payment",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders",
+										":id",
+										"payment"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{orderId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pay Order",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/orders/:id/payment",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders",
+										":id",
+										"payment"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{orderId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Advance Order Status",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/orders/:id/status",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders",
+										":id",
+										"status"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{orderId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Followup",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/followup",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"followup"
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "IN_PREPARATION",
+											"disabled": true
+										},
+										{
+											"key": "user_id",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "status",
+											"value": "CREATED",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search Order",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/orders?from=2024-05-04&to=2024-05-31",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "client_id",
+											"value": "5",
+											"disabled": true
+										},
+										{
+											"key": "from",
+											"value": "2024-05-04"
+										},
+										{
+											"key": "to",
+											"value": "2024-05-31"
+										},
+										{
+											"key": "status",
+											"value": "CREATED",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Fase 2 - V2",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Authenticate",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const result = pm.response.json();\r",
+											"pm.collectionVariables.set(\"token\", result.token);\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/auth",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "# Processo de Autenticação\n\nGeração de Token de Acesso para integração com a API"
+				},
+				{
+					"name": "UTIL - Cadastrar Itens",
+					"item": [
+						{
+							"name": "Create Items",
+							"item": [
+								{
+									"name": "Create Snack X-Burger",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"item\": {\r\n        \"name\": \"X-Burger\",\r\n        \"type\": \"SNACK\",\r\n        \"price\": 32.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"Hamburger and Cheese\",\r\n        \"images\": [\r\n            \"https://imageurl.com/x-burger-1.png\",\r\n            \"https://imageurl.com/x-burger-2.png\"\r\n        ]\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/items",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"items"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Snack X-Egg",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"item\": {\r\n        \"name\": \"X-Egg\",\r\n        \"type\": \"SNACK\",\r\n        \"price\": 42.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"Hamburger with Cheese and Friend Eggs\",\r\n        \"images\": [\r\n            \"https://imageurl.com/x-egg-burger-1.png\",\r\n            \"https://imageurl.com/x-egg-burger-2.png\"\r\n        ]\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/items",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"items"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Snack Simple Hotdog",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Hotdog\",\r\n        \"type\": \"SNACK\",\r\n        \"price\": 12.99,\r\n        \"quantity\": 100,\r\n        \"description\": \"1 Saussage Hotdog, Smashed Potato and Shoestring Potatoes\",\r\n        \"images\": [\r\n            \"https://imageurl.com/simple-hotdog-1.png\"\r\n        ]\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/items",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"items"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Snack Double Hotdog",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Double Hotdog\",\r\n        \"type\": \"SNACK\",\r\n        \"price\": 18.99,\r\n        \"quantity\": 100,\r\n        \"description\": \"2 Saussages Hotdog, Smashed Potato and Shoestring Potatoes\",\r\n        \"images\": [\r\n            \"https://imageurl.com/double-hotdog-1.png\"\r\n        ]\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/items",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"items"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Beverage Coke",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Coke\",\r\n        \"type\": \"BEVERAGE\",\r\n        \"price\": 7.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"Coca-Cola Beverage\",\r\n        \"images\": [\r\n            \"https://imageurl.com/coke.png\"\r\n        ]\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/items",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"items"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Beverage Guarana",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Guarana\",\r\n        \"type\": \"BEVERAGE\",\r\n        \"price\": 12.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"Brazilian Guarana Beverage\",\r\n        \"images\": [\r\n            \"https://imageurl.com/guarana.png\"\r\n        ]\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/items",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"items"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Beverage Orange Juice",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Orange Juice\",\r\n        \"type\": \"BEVERAGE\",\r\n        \"price\": 8.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"Orange Juice Beverage\",\r\n        \"images\": [\r\n            \"https://imageurl.com/orange-juice.png\"\r\n        ]\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/items",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"items"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Accompaniment Fries",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Fries\",\r\n        \"type\": \"ACCOMPANIMENT\",\r\n        \"price\": 12.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"French Fries\",\r\n        \"images\": [\r\n            \"https://imageurl.com/fries.png\"\r\n        ]\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/items",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"items"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Accompaniment Nuggets",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Nuggets\",\r\n        \"type\": \"ACCOMPANIMENT\",\r\n        \"price\": 12.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"French Nuggets\",\r\n        \"images\": [\r\n            \"https://imageurl.com/nuggets.png\"\r\n        ]\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/items",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"items"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Dessert Ice Cream",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Ice Cream\",\r\n        \"type\": \"DESSERT\",\r\n        \"price\": 18.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"Vanilla Ice Cream\",\r\n        \"images\": [\r\n            \"https://imageurl.com/vanilla-ice-cream.png\"\r\n        ]\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/items",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"items"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Dessert Brownie",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Brownie\",\r\n        \"type\": \"DESSERT\",\r\n        \"price\": 8.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"Chocolate Brownie\",\r\n        \"images\": [\r\n            \"https://imageurl.com/chocolate-brownie.png\"\r\n        ]\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/items",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"items"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					],
+					"description": "1. Authenticate\n    \n2. Run the `Create Items`folder to prepopulate the database with some data."
+				},
+				{
+					"name": "Items",
+					"item": [
+						{
+							"name": "Create Item",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"item\": {\r\n        \"name\": \"Chicken Burger\",\r\n        \"type\": \"SNACK\",\r\n        \"price\": 18.99,\r\n        \"quantity\": 30,\r\n        \"description\": \"Simple Chicken Hamburger\",\r\n        \"images\": [\r\n            \"https://imageurl.com/chicken-burger-1.png\",\r\n            \"https://imageurl.com/chicken-burger-2.png\"\r\n        ]\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/items",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"items"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Item",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"item\": {\r\n    \"name\": \"X-Burger\",\r\n    \"type\": \"SNACK\",\r\n    \"price\": 32.9900,\r\n    \"quantity\": 30.0,\r\n    \"description\": \"Hamburger and Cheese\",\r\n    \"images\": [\r\n        \"https://imageurl.com/x-burger-1.png\",\r\n        \"https://imageurl.com/x-burger-2.png\"\r\n    ]\r\n\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/items/1",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"items",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Item By Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/items/:id",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"items",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List Items",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/items",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"items"
+									],
+									"query": [
+										{
+											"key": "itemType",
+											"value": "ACCOMPANIMENT",
+											"disabled": true
+										},
+										{
+											"key": "itemType",
+											"value": "DESSERT",
+											"disabled": true
+										},
+										{
+											"key": "itemType",
+											"value": "BEVERAGE",
+											"disabled": true
+										},
+										{
+											"key": "itemType",
+											"value": "SNACK",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Client",
+					"item": [
+						{
+							"name": "Cadastrar Cliente",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"function generateCPF() {\r",
+											"    function randomize(n) {\r",
+											"        var ranNum = Math.round(Math.random() * n);\r",
+											"        return ranNum;\r",
+											"    }\r",
+											"\r",
+											"    function mod(dividendo, divisor) {\r",
+											"        return Math.round(dividendo - (Math.floor(dividendo / divisor) * divisor));\r",
+											"    }\r",
+											"\r",
+											"    var n = 9;\r",
+											"    var n1 = randomize(n);\r",
+											"    var n2 = randomize(n);\r",
+											"    var n3 = randomize(n);\r",
+											"    var n4 = randomize(n);\r",
+											"    var n5 = randomize(n);\r",
+											"    var n6 = randomize(n);\r",
+											"    var n7 = randomize(n);\r",
+											"    var n8 = randomize(n);\r",
+											"    var n9 = randomize(n);\r",
+											"\r",
+											"    var d1 = n9 * 2 + n8 * 3 + n7 * 4 + n6 * 5 + n5 * 6 + n4 * 7 + n3 * 8 + n2 * 9 + n1 * 10;\r",
+											"    d1 = 11 - (mod(d1, 11));\r",
+											"    if (d1 >= 10) d1 = 0;\r",
+											"\r",
+											"    var d2 = d1 * 2 + n9 * 3 + n8 * 4 + n7 * 5 + n6 * 6 + n5 * 7 + n4 * 8 + n3 * 9 + n2 * 10 + n1 * 11;\r",
+											"    d2 = 11 - (mod(d2, 11));\r",
+											"    if (d2 >= 10) d2 = 0;\r",
+											"\r",
+											"    return '' + n1 + n2 + n3 + '.' + n4 + n5 + n6 + '.' + n7 + n8 + n9 + '-' + d1 + d2;\r",
+											"}\r",
+											"\r",
+											"pm.collectionVariables.set(\"randomCPF\", generateCPF());\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.collectionVariables.set(\"clientId\", response.id)\r",
+											"pm.collectionVariables.set(\"cpf\", response.cpf)\r",
+											"pm.collectionVariables.set(\"clientName\", response.name)\r",
+											"pm.collectionVariables.set(\"email\", response.email)\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cpf\": \"{{randomCPF}}\",\r\n    \"name\": \"{{$randomFullName}}\",\r\n    \"email\": \"{{$randomEmail}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/clients",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"clients"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Client By Id",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.collectionVariables.set(\"clientId\", response.id)\r",
+											"pm.collectionVariables.set(\"cpf\", response.cpf)\r",
+											"pm.collectionVariables.set(\"clientName\", response.name)\r",
+											"pm.collectionVariables.set(\"email\", response.email)\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/clients/:id",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"clients",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{clientId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Client By CPF",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.collectionVariables.set(\"clientId\", response.id)\r",
+											"pm.collectionVariables.set(\"cpf\", response.cpf)\r",
+											"pm.collectionVariables.set(\"clientName\", response.name)\r",
+											"pm.collectionVariables.set(\"email\", response.email)\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/clients?cpf={{cpf}}",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"clients"
+									],
+									"query": [
+										{
+											"key": "cpf",
+											"value": "{{cpf}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "This collection uses a library inside postman pre-script.\n\nTo run it first add a library named 'brutils' with postman:  \n1\\. Go to `Cadastrar Cliente`\n\n2\\. Go to `scripts`\n\n3\\. On the right side, you will see libraries\n\n...\n\n<img src=\"https://content.pstmn.io/d681f250-fd1d-480a-8cd2-382ed20af3f9/aW1hZ2UucG5n\" width=\"986\" height=\"491\">\n\n4\\. Click on `open package library`\n\n5\\. Click on `add new package` and past the following code to a library named `brutils`:\n\n``` javascript\nfunction generateCPF() {\n    function randomize(n) {\n        var ranNum = Math.round(Math.random() * n);\n        return ranNum;\n    }\n    function mod(dividendo, divisor) {\n        return Math.round(dividendo - (Math.floor(dividendo / divisor) * divisor));\n    }\n    var n = 9;\n    var n1 = randomize(n);\n    var n2 = randomize(n);\n    var n3 = randomize(n);\n    var n4 = randomize(n);\n    var n5 = randomize(n);\n    var n6 = randomize(n);\n    var n7 = randomize(n);\n    var n8 = randomize(n);\n    var n9 = randomize(n);\n    var d1 = n9 * 2 + n8 * 3 + n7 * 4 + n6 * 5 + n5 * 6 + n4 * 7 + n3 * 8 + n2 * 9 + n1 * 10;\n    d1 = 11 - (mod(d1, 11));\n    if (d1 >= 10) d1 = 0;\n    var d2 = d1 * 2 + n9 * 3 + n8 * 4 + n7 * 5 + n6 * 6 + n5 * 7 + n4 * 8 + n3 * 9 + n2 * 10 + n1 * 11;\n    d2 = 11 - (mod(d2, 11));\n    if (d2 >= 10) d2 = 0;\n    return '' + n1 + n2 + n3 + '.' + n4 + n5 + n6 + '.' + n7 + n8 + n9 + '-' + d1 + d2;\n}\nmodule.exports = {\n    generateCPF\n}\n\n ```"
+				},
+				{
+					"name": "Orders",
+					"item": [
+						{
+							"name": "Create Anonymous",
+							"item": [
+								{
+									"name": "Create Empty Order",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const response = pm.response.json();\r",
+													"\r",
+													"pm.collectionVariables.set(\"orderId\", response.id)\r",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\t\"combo\": {\r\n\t\t\"items\": [\r\n\t\t]\r\n\t}\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/orders",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"orders"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Order With Items",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const response = pm.response.json();\r",
+													"\r",
+													"pm.collectionVariables.set(\"orderId\", response.id)\r",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\t\"combo\": {\r\n\t\t\"items\": [\r\n\t\t\t{\r\n\t\t\t\t\"id\": 1,\r\n\t\t\t\t\"name\": \"X-Burger\",\r\n\t\t\t\t\"type\": \"SNACK\",\r\n\t\t\t\t\"price\": 32.9900,\r\n\t\t\t\t\"quantity\": 1\r\n\t\t\t}\r\n\t\t]\r\n\t}\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/orders",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"orders"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Create Identified",
+							"item": [
+								{
+									"name": "Create Empty Order",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const response = pm.response.json();\r",
+													"\r",
+													"pm.collectionVariables.set(\"orderId\", response.id)\r",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"combo\": {\r\n        \"items\": []\r\n    },\r\n    \"requester\": {\r\n        \"id\": {{clientId}},\r\n        \"cpf\": \"{{cpf}}\",\r\n        \"name\": \"{{clientName}}\",\r\n        \"email\": \"{{email}}\"\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/orders",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"orders"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Order With Items",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const response = pm.response.json();\r",
+													"\r",
+													"pm.collectionVariables.set(\"orderId\", response.id)\r",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"combo\": {\r\n        \"items\": [\r\n            {\r\n                \"id\": 1,\r\n                \"name\": \"X-Burger\",\r\n                \"type\": \"SNACK\",\r\n                \"price\": 32.9900,\r\n                \"quantity\": 1\r\n            }\r\n        ]\r\n    },\r\n    \"requester\": {\r\n        \"id\": {{clientId}},\r\n        \"cpf\": \"{{cpf}}\",\r\n        \"name\": \"{{clientName}}\",\r\n        \"email\": \"{{email}}\"\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/orders",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"orders"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Get Order",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/orders/:id",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{orderId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Order",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"combo\": {\r\n        \"items\": [\r\n            {\r\n                \"id\": 1,\r\n                \"name\": \"X-Burger\",\r\n                \"type\": \"SNACK\",\r\n                \"price\": 32.9900,\r\n                \"quantity\": 1\r\n            },\r\n            {\r\n                \"id\": 5,\r\n                \"name\": \"Coke\",\r\n                \"type\": \"BEVERAGE\",\r\n                \"price\": 7.9900,\r\n                \"quantity\": 1\r\n            }\r\n        ]\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/orders/:id",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{orderId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Confirm Order",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"type\": \"QR_CODE\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/orders/:id/payment",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders",
+										":id",
+										"payment"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{orderId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Webhook - Order Payment - Success",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/orders/:id/payment/:status",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders",
+										":id",
+										"payment",
+										":status"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{orderId}}"
+										},
+										{
+											"key": "status",
+											"value": "success"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Webhook - Order Payment - Failure",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/orders/:id/payment/:status",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders",
+										":id",
+										"payment",
+										":status"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{orderId}}"
+										},
+										{
+											"key": "status",
+											"value": "failed"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Advance Order Status",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/orders/:id/status",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders",
+										":id",
+										"status"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{orderId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Followup",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/followup",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"followup"
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "IN_PREPARATION",
+											"disabled": true
+										},
+										{
+											"key": "user_id",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "status",
+											"value": "CREATED",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search Order",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/orders?from=2024-05-04&to=2024-05-31",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "client_id",
+											"value": "5",
+											"disabled": true
+										},
+										{
+											"key": "from",
+											"value": "2024-05-04"
+										},
+										{
+											"key": "to",
+											"value": "2024-05-31"
+										},
+										{
+											"key": "status",
+											"value": "CREATED",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "CPF",
+			"value": ""
+		},
+		{
+			"key": "randomCPF",
+			"value": ""
+		},
+		{
+			"key": "$$randomCPF",
+			"value": ""
+		},
+		{
+			"key": "cpf",
+			"value": ""
+		},
+		{
+			"key": "name",
+			"value": ""
+		},
+		{
+			"key": "email",
+			"value": ""
+		},
+		{
+			"key": "userId",
+			"value": ""
+		},
+		{
+			"key": "clientName",
+			"value": ""
+		},
+		{
+			"key": "clientId",
+			"value": ""
+		},
+		{
+			"key": "orderId",
+			"value": ""
+		}
+	]
+}
