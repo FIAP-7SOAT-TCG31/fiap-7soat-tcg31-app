@@ -2,7 +2,7 @@ package com.cleanarchitecture.techchallenge.application.services;
 
 import com.cleanarchitecture.techchallenge.domain.entities.item.Item;
 import com.cleanarchitecture.techchallenge.domain.usecases.CreateItemUseCase;
-import com.cleanarchitecture.techchallenge.infra.gateways.item.CreateItemGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.CreateItemGateway;
 
 public class CreateItemService implements CreateItemUseCase {
 

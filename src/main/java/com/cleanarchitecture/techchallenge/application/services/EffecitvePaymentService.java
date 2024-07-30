@@ -4,7 +4,7 @@ import com.cleanarchitecture.techchallenge.application.exceptions.OrderCannotBeU
 import com.cleanarchitecture.techchallenge.domain.entities.order.Order;
 import com.cleanarchitecture.techchallenge.domain.entities.order.Status;
 import com.cleanarchitecture.techchallenge.domain.usecases.EffecitvePaymentUseCase;
-import com.cleanarchitecture.techchallenge.infra.gateways.order.UpdateOrderGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.UpdateOrderGateway;
 
 import java.time.Instant;
 

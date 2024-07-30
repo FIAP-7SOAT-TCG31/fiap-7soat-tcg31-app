@@ -5,7 +5,7 @@ import java.util.List;
 import com.cleanarchitecture.techchallenge.domain.entities.item.Item;
 import com.cleanarchitecture.techchallenge.domain.entities.item.ItemType;
 import com.cleanarchitecture.techchallenge.domain.usecases.ListItemsUseCase;
-import com.cleanarchitecture.techchallenge.infra.gateways.item.ListItemsGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.ListItemsGateway;
 
 public class ListItemsService implements ListItemsUseCase {
 

@@ -4,7 +4,7 @@ import com.cleanarchitecture.techchallenge.domain.entities.order.Order;
 import com.cleanarchitecture.techchallenge.domain.entities.order.Status;
 import com.cleanarchitecture.techchallenge.domain.entities.client.Client;
 import com.cleanarchitecture.techchallenge.domain.usecases.SearchOrderUseCase;
-import com.cleanarchitecture.techchallenge.infra.gateways.order.SearchOrderGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.SearchOrderGateway;
 
 import java.time.ZonedDateTime;
 import java.util.List;

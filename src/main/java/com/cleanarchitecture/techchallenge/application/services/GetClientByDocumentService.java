@@ -2,7 +2,7 @@ package com.cleanarchitecture.techchallenge.application.services;
 
 import com.cleanarchitecture.techchallenge.domain.entities.client.Client;
 import com.cleanarchitecture.techchallenge.domain.usecases.GetClientByDocumentUseCase;
-import com.cleanarchitecture.techchallenge.infra.gateways.client.GetClientByDocumentGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.GetClientByDocumentGateway;
 
 import java.util.Optional;
 

@@ -1,19 +1,15 @@
 package com.cleanarchitecture.techchallenge.application.services;
 
 import com.cleanarchitecture.techchallenge.application.exceptions.PaymentNotValidException;
-import com.cleanarchitecture.techchallenge.application.validation.PaymentExistsHandler;
 import com.cleanarchitecture.techchallenge.application.validation.PaymentValidationHandler;
 import com.cleanarchitecture.techchallenge.domain.entities.client.Client;
 import com.cleanarchitecture.techchallenge.domain.entities.order.Order;
 import com.cleanarchitecture.techchallenge.domain.entities.payment.Payment;
 import com.cleanarchitecture.techchallenge.domain.factories.PaymentFactory;
 import com.cleanarchitecture.techchallenge.domain.usecases.GeneratePaymentUseCase;
-import com.cleanarchitecture.techchallenge.infra.gateways.payment.GeneratePaymentGateway;
-import com.cleanarchitecture.techchallenge.infra.gateways.order.UpdateOrderGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.GeneratePaymentGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.UpdateOrderGateway;
 
-import java.math.BigDecimal;
-import java.time.Instant;
-import java.util.HashMap;
 import java.util.List;
 
 

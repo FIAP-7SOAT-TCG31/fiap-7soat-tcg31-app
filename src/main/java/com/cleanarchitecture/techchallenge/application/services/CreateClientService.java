@@ -2,7 +2,7 @@ package com.cleanarchitecture.techchallenge.application.services;
 
 import com.cleanarchitecture.techchallenge.domain.entities.client.Client;
 import com.cleanarchitecture.techchallenge.domain.usecases.CreateClientUseCase;
-import com.cleanarchitecture.techchallenge.infra.gateways.client.CreateClientGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.CreateClientGateway;
 
 public class CreateClientService implements CreateClientUseCase {
 

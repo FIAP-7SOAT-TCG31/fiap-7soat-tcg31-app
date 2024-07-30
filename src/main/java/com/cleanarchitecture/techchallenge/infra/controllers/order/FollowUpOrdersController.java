@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -34,12 +36,33 @@ public class FollowUpOrdersController {
                 statusList,
                 null);
 
+
+        Comparator<String> keyComparator = Comparator.comparingInt(key -> {
+            return switch (key) {
+                case "READY" -> 1;
+                case "IN_PREPARATION" -> 2;
+                case "RECEIVED" -> 3;
+                default -> 4;
+            };
+        });
+
+        Comparator<ResponseFollowupDto> waitingTimeComparator = Comparator.comparing(ResponseFollowupDto::getWaitingTime).reversed();
+
         return orders.isEmpty()
                 ? Map.of()
                 : orders
                 .stream()
                 .map(orderPresenter::toFollowUpDto)
-                .collect(Collectors.groupingBy(ResponseFollowupDto::getStatus));
+                .collect(Collectors.groupingBy(ResponseFollowupDto::getStatus))
+                .entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByKey(keyComparator))
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        entry -> entry.getValue().stream().sorted(waitingTimeComparator).collect(Collectors.toList()),
+                        (e1, e2) -> e1,
+                        LinkedHashMap::new
+                ));
 
     }
 
