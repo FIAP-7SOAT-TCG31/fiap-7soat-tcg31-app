@@ -2,6 +2,7 @@ package com.cleanarchitecture.techchallenge.infra.controllers.order;
 
 
 import com.cleanarchitecture.techchallenge.api.rest.dtos.order.ResponseFollowupDto;
+import com.cleanarchitecture.techchallenge.domain.entities.order.Order;
 import com.cleanarchitecture.techchallenge.domain.entities.order.Status;
 import com.cleanarchitecture.techchallenge.domain.usecases.SearchOrderUseCase;
 import com.cleanarchitecture.techchallenge.infra.presenters.order.OrderPresenter;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -34,10 +36,22 @@ public class FollowUpOrdersController {
                 statusList,
                 null);
 
+
+        Comparator<Status> statusComparator = Comparator.comparingInt(status -> {
+            return switch (status) {
+                case READY -> 1;
+                case IN_PREPARATION -> 2;
+                case RECEIVED -> 3;
+                default -> 4;
+            };
+        });
+
         return orders.isEmpty()
                 ? Map.of()
                 : orders
                 .stream()
+                .sorted(Comparator.comparing(Order::getUpdatedAt))
+                .sorted(Comparator.comparing(Order::getStatus, statusComparator))
                 .map(orderPresenter::toFollowUpDto)
                 .collect(Collectors.groupingBy(ResponseFollowupDto::getStatus));
 

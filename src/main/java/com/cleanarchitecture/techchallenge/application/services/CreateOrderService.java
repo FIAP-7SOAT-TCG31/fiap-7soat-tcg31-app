@@ -6,9 +6,7 @@ import com.cleanarchitecture.techchallenge.domain.entities.order.Status;
 import com.cleanarchitecture.techchallenge.domain.entities.client.Client;
 import com.cleanarchitecture.techchallenge.domain.factories.OrderFactory;
 import com.cleanarchitecture.techchallenge.domain.usecases.CreateOrderUseCase;
-import com.cleanarchitecture.techchallenge.infra.gateways.order.SaveOrderGateway;
-
-import java.time.Instant;
+import com.cleanarchitecture.techchallenge.application.gateways.SaveOrderGateway;
 
 public class CreateOrderService implements CreateOrderUseCase {
 

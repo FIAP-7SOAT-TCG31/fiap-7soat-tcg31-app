@@ -3,7 +3,7 @@ package com.cleanarchitecture.techchallenge.application.services;
 
 import com.cleanarchitecture.techchallenge.domain.entities.order.Order;
 import com.cleanarchitecture.techchallenge.domain.usecases.GetOrderUseCase;
-import com.cleanarchitecture.techchallenge.infra.gateways.order.GetOrderByIdGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.GetOrderByIdGateway;
 
 import java.util.Optional;
 

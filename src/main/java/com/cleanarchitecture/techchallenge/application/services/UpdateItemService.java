@@ -2,8 +2,8 @@ package com.cleanarchitecture.techchallenge.application.services;
 
 import com.cleanarchitecture.techchallenge.domain.entities.item.Item;
 import com.cleanarchitecture.techchallenge.domain.usecases.UpdateItemUseCase;
-import com.cleanarchitecture.techchallenge.infra.gateways.item.GetItemGateway;
-import com.cleanarchitecture.techchallenge.infra.gateways.item.UpdateItemGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.GetItemGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.UpdateItemGateway;
 
 public class UpdateItemService implements UpdateItemUseCase {
 

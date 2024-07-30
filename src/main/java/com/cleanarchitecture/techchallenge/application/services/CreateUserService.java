@@ -2,8 +2,8 @@ package com.cleanarchitecture.techchallenge.application.services;
 
 import com.cleanarchitecture.techchallenge.domain.entities.user.User;
 import com.cleanarchitecture.techchallenge.domain.usecases.CreateUserUseCase;
-import com.cleanarchitecture.techchallenge.infra.gateways.user.CreateUserGateway;
-import com.cleanarchitecture.techchallenge.infra.gateways.user.EncodePasswordGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.CreateUserGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.EncodePasswordGateway;
 
 public class CreateUserService implements CreateUserUseCase {
 

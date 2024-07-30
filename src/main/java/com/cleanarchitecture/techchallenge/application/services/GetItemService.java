@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import com.cleanarchitecture.techchallenge.domain.entities.item.Item;
 import com.cleanarchitecture.techchallenge.domain.usecases.GetItemUseCase;
-import com.cleanarchitecture.techchallenge.infra.gateways.item.GetItemGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.GetItemGateway;
 
 public class GetItemService implements GetItemUseCase {
 

@@ -2,8 +2,8 @@ package com.cleanarchitecture.techchallenge.application.services;
 
 import com.cleanarchitecture.techchallenge.domain.entities.user.User;
 import com.cleanarchitecture.techchallenge.domain.usecases.GetUserUseCase;
-import com.cleanarchitecture.techchallenge.infra.gateways.user.EncodePasswordGateway;
-import com.cleanarchitecture.techchallenge.infra.gateways.user.GetUserGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.EncodePasswordGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.GetUserGateway;
 
 import java.util.Optional;
 

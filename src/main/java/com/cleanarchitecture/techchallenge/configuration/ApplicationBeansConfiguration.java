@@ -1,7 +1,6 @@
 package com.cleanarchitecture.techchallenge.configuration;
 
 import com.cleanarchitecture.techchallenge.api.rest.provider.UserDetailsServiceImpl;
-import com.cleanarchitecture.techchallenge.application.exceptions.PaymentNotValidException;
 import com.cleanarchitecture.techchallenge.application.services.AdvanceStatusService;
 import com.cleanarchitecture.techchallenge.application.services.CreateClientService;
 import com.cleanarchitecture.techchallenge.application.services.CreateItemService;
@@ -44,27 +43,26 @@ import com.cleanarchitecture.techchallenge.domain.usecases.RefusedPaymentUseCase
 import com.cleanarchitecture.techchallenge.domain.usecases.SearchOrderUseCase;
 import com.cleanarchitecture.techchallenge.domain.usecases.UpdateItemUseCase;
 import com.cleanarchitecture.techchallenge.domain.usecases.UpdateOrderUseCase;
-import com.cleanarchitecture.techchallenge.infra.gateways.client.CreateClientGateway;
-import com.cleanarchitecture.techchallenge.infra.gateways.client.GetClientByDocumentGateway;
-import com.cleanarchitecture.techchallenge.infra.gateways.client.GetClientByIdGateway;
-import com.cleanarchitecture.techchallenge.infra.gateways.item.CreateItemGateway;
-import com.cleanarchitecture.techchallenge.infra.gateways.item.GetItemGateway;
-import com.cleanarchitecture.techchallenge.infra.gateways.item.ListItemsGateway;
-import com.cleanarchitecture.techchallenge.infra.gateways.item.UpdateItemGateway;
-import com.cleanarchitecture.techchallenge.infra.gateways.order.GetOrderByIdGateway;
-import com.cleanarchitecture.techchallenge.infra.gateways.order.SaveOrderGateway;
-import com.cleanarchitecture.techchallenge.infra.gateways.order.SearchOrderGateway;
-import com.cleanarchitecture.techchallenge.infra.gateways.order.UpdateOrderGateway;
-import com.cleanarchitecture.techchallenge.infra.gateways.payment.GeneratePaymentGateway;
-import com.cleanarchitecture.techchallenge.infra.gateways.user.CreateUserGateway;
-import com.cleanarchitecture.techchallenge.infra.gateways.user.EncodePasswordGateway;
-import com.cleanarchitecture.techchallenge.infra.gateways.user.GetUserGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.CreateClientGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.GetClientByDocumentGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.GetClientByIdGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.CreateItemGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.GetItemGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.ListItemsGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.UpdateItemGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.GetOrderByIdGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.SaveOrderGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.SearchOrderGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.UpdateOrderGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.GeneratePaymentGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.CreateUserGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.EncodePasswordGateway;
+import com.cleanarchitecture.techchallenge.application.gateways.GetUserGateway;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Configuration

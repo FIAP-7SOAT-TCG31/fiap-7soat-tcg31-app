@@ -5,9 +5,7 @@ import com.cleanarchitecture.techchallenge.domain.entities.item.Combo;
 import com.cleanarchitecture.techchallenge.domain.entities.order.Order;
 import com.cleanarchitecture.techchallenge.domain.entities.order.Status;
 import com.cleanarchitecture.techchallenge.domain.usecases.UpdateOrderUseCase;
-import com.cleanarchitecture.techchallenge.infra.gateways.order.UpdateOrderGateway;
-
-import java.math.BigDecimal;
+import com.cleanarchitecture.techchallenge.application.gateways.UpdateOrderGateway;
 
 public class UpdateOrderService implements UpdateOrderUseCase {
 
