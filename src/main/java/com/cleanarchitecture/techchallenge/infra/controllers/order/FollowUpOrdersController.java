@@ -2,7 +2,6 @@ package com.cleanarchitecture.techchallenge.infra.controllers.order;
 
 
 import com.cleanarchitecture.techchallenge.api.rest.dtos.order.ResponseFollowupDto;
-import com.cleanarchitecture.techchallenge.domain.entities.order.Order;
 import com.cleanarchitecture.techchallenge.domain.entities.order.Status;
 import com.cleanarchitecture.techchallenge.domain.usecases.SearchOrderUseCase;
 import com.cleanarchitecture.techchallenge.infra.presenters.order.OrderPresenter;
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -37,23 +37,32 @@ public class FollowUpOrdersController {
                 null);
 
 
-        Comparator<Status> statusComparator = Comparator.comparingInt(status -> {
-            return switch (status) {
-                case READY -> 1;
-                case IN_PREPARATION -> 2;
-                case RECEIVED -> 3;
+        Comparator<String> keyComparator = Comparator.comparingInt(key -> {
+            return switch (key) {
+                case "READY" -> 1;
+                case "IN_PREPARATION" -> 2;
+                case "RECEIVED" -> 3;
                 default -> 4;
             };
         });
+
+        Comparator<ResponseFollowupDto> waitingTimeComparator = Comparator.comparing(ResponseFollowupDto::getWaitingTime).reversed();
 
         return orders.isEmpty()
                 ? Map.of()
                 : orders
                 .stream()
-                .sorted(Comparator.comparing(Order::getUpdatedAt))
-                .sorted(Comparator.comparing(Order::getStatus, statusComparator))
                 .map(orderPresenter::toFollowUpDto)
-                .collect(Collectors.groupingBy(ResponseFollowupDto::getStatus));
+                .collect(Collectors.groupingBy(ResponseFollowupDto::getStatus))
+                .entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByKey(keyComparator))
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        entry -> entry.getValue().stream().sorted(waitingTimeComparator).collect(Collectors.toList()),
+                        (e1, e2) -> e1,
+                        LinkedHashMap::new
+                ));
 
     }
 
