@@ -10,15 +10,13 @@ services:
       - db
     environment:
       TZ: "America/Sao_Paulo"
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/testdb
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/postgres
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: mysecretpassword
 
   db:
     image: postgres:13
     environment:
-      POSTGRES_DB: testdb
-      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: mysecretpassword
     volumes:
       - postgres_data:/var/lib/postgresql/data/
