@@ -2,12 +2,12 @@ name: CI-CD app
 
 on:
   push: 
-    branches: ["feature/pipeline"]
+    branches: ["master","develop","feature/pipeline"]
   pull_request:
     branches: ["master", "develop"]
 
   # Run Unit Test
-  
+
 jobs:
   test:
     runs-on: ubuntu-latest
