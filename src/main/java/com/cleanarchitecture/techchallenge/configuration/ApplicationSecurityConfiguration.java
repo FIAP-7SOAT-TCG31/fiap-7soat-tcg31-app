@@ -24,6 +24,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 public class ApplicationSecurityConfiguration {
 
+    private static final String[] ENDPOINTS_WITH_AUTHENTICATION_REQUIRED = {};
+    private static final String[] ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED = {};
+    private static final String[] ENDPOINTS_ADMIN = {};
+
     @Autowired
     JwtAuthFilter jwtAuthFilter;
     @Autowired
@@ -33,14 +37,15 @@ public class ApplicationSecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
-                .authorizeHttpRequests()
-                .requestMatchers("/api/v1/**").permitAll()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().authorizeHttpRequests()
+                .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED).permitAll()
+                .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_REQUIRED).authenticated()
+                .requestMatchers(ENDPOINTS_ADMIN).hasRole("ADMIN")
+                .anyRequest().denyAll()
                 .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authenticationProvider(authenticationProvider())
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class).build();
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
     }
 
     @Bean
