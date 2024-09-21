@@ -68,33 +68,33 @@ jobs:
 
   #CHECK REPOSITORY EXIST / CREATE REPOSITORY
 
-    # - name: Check Repository Exists
-    #   id: check_repo
-    #   run: |
-    #     if aws ecr describe-repositories --repository-names app --region us-east-1; then
-    #       echo "repo-exists=true" >> $GITHUB_ENV
-    #     else
-    #       echo "repo-exists=false" >> $GITHUB_ENV
-    #     fi
+    - name: Check Repository Exists
+      id: check_repo
+      run: |
+        if aws ecr describe-repositories --repository-names app --region us-east-1; then
+          echo "repo-exists=true" >> $GITHUB_ENV
+        else
+          echo "repo-exists=false" >> $GITHUB_ENV
+        fi
     
-    # - name: Create a Repository
-    #   if: env.repo-exists == 'false'
-    #   run: |
-    #     aws ecr --region us-east-1 create-repository --repository-name app
+    - name: Create a Repository
+      if: env.repo-exists == 'false'
+      run: |
+        aws ecr --region us-east-1 create-repository --repository-name app
 
   #PUSH IMAGE TO AWS ECR
 
-    # - name: Login to ECR
-    #   run: |
-    #     aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com
+    - name: Login to ECR
+      run: |
+        aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com
 
-    # - name: Tag Docker Image
-    #   run: |
-    #     docker tag app:latest ${{env.AWS_ACCOUNT_ID}}.dkr.ecr.us-east-1.amazonaws.com/app:app
+    - name: Tag Docker Image
+      run: |
+        docker tag app:latest ${{env.AWS_ACCOUNT_ID}}.dkr.ecr.us-east-1.amazonaws.com/app:app
 
-    # - name: Docker push
-    #   run: |
-    #     docker push ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/app:app
+    - name: Docker push
+      run: |
+        docker push ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/app:app
 
     - name: Image deploy
       run: echo 'deploy done successfully'
