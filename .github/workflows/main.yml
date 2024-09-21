@@ -13,7 +13,7 @@ permissions:
   id-token: write
 
 env:
-  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID}}
+  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID_TEST}}
   AWS_ACCESS_KEY: ${{secrets.AWS_ACCESS_KEY_TEST}}
   AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY_TEST}}
 
