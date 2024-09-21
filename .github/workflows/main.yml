@@ -16,6 +16,9 @@ env:
   AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID_TEST}}
   AWS_ACCESS_KEY: ${{secrets.AWS_ACCESS_KEY_TEST}}
   AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY_TEST}}
+  K8S_SECRET: "secret"
+  K8S_EMAIL:  "email"
+  K8S_CLUSTER: "nome cluster"
 
 jobs:
   test:
@@ -48,18 +51,38 @@ jobs:
     - name: Build Project
       run: mvn clean package
 
-# Build and deploy docker image on AWS
+  # DEPLOY TEST
 
-  image-deploy:
+  deploy-test:
     runs-on: ubuntu-latest
     needs: build
+    if: github.ref == 'refs/heads/feature/pipeline'
+    steps:
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v2
+
+    - name: Terraform Init
+      run: terraform init
+
+      # TESTS COMMANDS
+
+    - name: Deploy success return
+      run: echo 'Deploy success'
+
+
+# Build and deploy docker image on AWS
+
+  deploy-homolog:
+    runs-on: ubuntu-latest
+    needs: deploy-test
+    if: github.ref == 'refs/heads/develop'
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
     - name: Set up Docker
       uses: docker/setup-buildx-action@v2
     - name: Build Docker Image
-      run:  docker build -t app:latest .
+      run:  docker build -t fiap-burger-app:latest .
 
   # AWS CONFIGURE CREDENTIAL
 
@@ -70,12 +93,27 @@ jobs:
         aws-secret-access-key: ${{env.AWS_SECRET_ACCESS_KEY}}
         aws-region: us-east-1
 
+  # BUILD INFRA TERRAFORM PLAN
+    
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v2
+
+    - name: Terraform Init
+      run: terraform init
+
+    - name: Terraform Plan
+      run: |
+        terraform plan \
+          -var="aws_access_key=${{ env.AWS_ACCESS_KEY }}" \
+          -var="aws_secret_key=${{ env.AWS_SECRET_ACCESS_KEY }}" \
+          -var="aws_region=us-east-1"
+
   #CHECK REPOSITORY EXIST / CREATE REPOSITORY
 
     - name: Check Repository Exists
       id: check_repo
       run: |
-        if aws ecr describe-repositories --repository-names app --region us-east-1; then
+        if aws ecr describe-repositories --repository-names fiap-burger-app --region us-east-1; then
           echo "repo-exists=true" >> $GITHUB_ENV
         else
           echo "repo-exists=false" >> $GITHUB_ENV
@@ -84,7 +122,7 @@ jobs:
     - name: Create a Repository
       if: env.repo-exists == 'false'
       run: |
-        aws ecr --region us-east-1 create-repository --repository-name app
+        aws ecr --region us-east-1 create-repository --repository-name fiap-burger-app
 
   #PUSH IMAGE TO AWS ECR
 
@@ -94,101 +132,73 @@ jobs:
 
     - name: Tag Docker Image
       run: |
-        docker tag app:latest ${{env.AWS_ACCOUNT_ID}}.dkr.ecr.us-east-1.amazonaws.com/app:app
+        docker tag fiap-burger-app:latest ${{env.AWS_ACCOUNT_ID}}.dkr.ecr.us-east-1.amazonaws.com/fiap-burger-app:fiap-burger-app
 
     - name: Docker push
       run: |
-        docker push ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/app:app
+        docker push ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/fiap-burger-app:fiap-burger-app
 
     - name: Image deploy
       run: echo 'deploy done successfully'
 
-  deploy-test:
-    runs-on: ubuntu-latest
-    needs: image-deploy
-    if: github.ref == 'refs/heads/feature/pipeline'
-    steps:
-    - name: Set up Terraform
-      uses: hashicorp/setup-terraform@v2
-
-    - name: Terraform Init
-      run: terraform init
-
-    # - name: Terraform Plan
-    #   run: |
-    #     terraform plan \
-    #       -var="aws_access_key=${{ env.AWS_ACCESS_KEY }}" \
-    #       -var="aws_secret_key=${{ env.AWS_SECRET_ACCESS_KEY }}" \
-    #       -var="aws_region=us-east-1"
-
-    #- name: Terraform Apply
-    #  if: github.ref == 'refs/heads/feature/pipeline'
-    #  run: |
-    #    terraform apply \
-    #      -var="aws_access_key=${{ env.AWS_ACCESS_KEY }}" \
-    #      -var="aws_secret_key=${{ env.AWS_SECRET_ACCESS_KEY }}" \
-    #      -var="aws_region=us-east-1" \
-    #      -auto-approve
-
-    - name: Deploy success return
-      run: echo 'Deploy success'
-
-  deploy-homolog:
-    runs-on: ubuntu-latest
-    needs: image-deploy
-    if: github.ref == 'refs/heads/develop'
-    steps:
-    - name: Set up Terraform
-      uses: hashicorp/setup-terraform@v2
-
-    - name: Terraform Init
-      run: terraform init
-
-    # - name: Terraform Plan
-    #   run: |
-    #     terraform plan \
-    #       -var="aws_access_key=${{ secrets.AWS_ACCESS_KEY }}" \
-    #       -var="aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" \
-    #       -var="aws_region=us-east-1"
-
-    #- name: Terraform Apply
-    #  if: github.ref == 'refs/heads/develop'
-    #  run: |
-    #    terraform apply \
-    #      -var="aws_access_key=${{ secrets.AWS_ACCESS_KEY }}" \
-    #      -var="aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" \
-    #      -var="aws_region=us-east-1" \
-    #      -auto-approve
-
-    - name: Deploy success return
-      run: echo 'Deploy success' 
+  # DEPLOY IMAGE TO K8S
   
   deploy-prod:
     runs-on: ubuntu-latest
-    needs: image-deploy
+    needs: deploy-homolog
     if: github.ref == 'refs/heads/master'
     steps:
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v2
+    
+    - name: Setup kubectl
+      uses: azure/setup-kubectl@v4
+      with:
+        version: 'latest'
+      
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{env.AWS_ACCESS_KEY}}
+        aws-secret-access-key: ${{env.AWS_SECRET_ACCESS_KEY}}
+        aws-region: us-east-1
+
+  # INFRA BUILD TERRAFORM
 
     - name: Terraform Init
       run: terraform init
 
-    # - name: Terraform Plan
-    #   run: |
-    #     terraform plan \
-    #       -var="aws_access_key=${{ secrets.AWS_ACCESS_KEY }}" \
-    #       -var="aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" \
-    #       -var="aws_region=us-east-1"
-
-    #- name: Terraform Apply
-    #  if: github.ref == 'refs/heads/master'
-    #  run: |
-    #    terraform apply \
-    #      -var="aws_access_key=${{ secrets.AWS_ACCESS_KEY }}" \
-    #      -var="aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" \
-    #      -var="aws_region=us-east-1" \
-    #      -auto-approve
-
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/develop'
+      run: |
+        terraform apply \
+          -var="aws_access_key=${{ env.AWS_ACCESS_KEY }}" \
+          -var="aws_secret_key=${{ env.AWS_SECRET_ACCESS_KEY }}" \
+          -var="aws_region=us-east-1" \
+          -auto-approve    
+       
+  #SET CLUSTER CONFIG
+    - name: Update kubeconfig
+      run: aws eks update-kubeconfig --name ${{env.K8S_CLUSTER}}
+  
+  # CREATE SECRET K8S
+    - name: Create ECR login secret
+      id: ecr-login
+      run: |
+        aws ecr get-login-password --region us-east-1 | kubectl create secret docker-registry ${{env.K8S_SECRET}} \
+        --docker-server=${{env.AWS_ACCOUNT_ID}}.dkr.ecr.us-east-1.amazonaws.com \
+        --docker-username=AWS \
+        --docker-password=$(aws ecr get-login-password --region us-east-1) \
+        --docker-email= ${{env.K8S_EMAIL}}
+    
+  # APPLY MANIFEST TO CLUSTER
+    - name: Apply Kubernetes manifests
+      run: kubectl apply -f k8s-manifests/
+  
+  #DEPLOY IMAGE ON
+    - name: Deploy application using ECR image
+      run: |
+        kubectl set image deployment/fiap-burger-app fiap-burger-app=${{env.AWS_ACCOUNT_ID}}.dkr.ecr.us-west-2.amazonaws.com/fiap-burger-app:fiap-burger-app
+    
     - name: Deploy success return
-      run: echo 'Deploy success'
+      run: echo 'Deploy success' 
