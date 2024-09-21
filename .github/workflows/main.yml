@@ -8,6 +8,11 @@ on:
 
   # Run Unit Test
 
+env:
+  AWS_ACCOUNT_ID: ${{secrets.AWS_ACCOUNT_ID}}
+  AWS_ACCESS_KEY: ${{secrets.AWS_ACCESS_KEY_ID}}
+  AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -50,23 +55,23 @@ jobs:
     - name: Set up Docker
       uses: docker/setup-buildx-action@v2
     - name: Build Docker Image
-      run:  docker build -t testimage:latest .
+      run:  docker build -t app:latest .
 
   # AWS CONFIGURE CREDENTIAL
 
-    # - name: Configure AWS credentials
-    #   uses: aws-actions/configure-aws-credentials@v2
-    #   with:
-    #     aws-access-key-id: ${{secrets.AWS_ACCESS_KEY}}
-    #     aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-    #     aws-region: us-east-1
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{env.AWS_ACCESS_KEY}}
+        aws-secret-access-key: ${{env.AWS_SECRET_ACCESS_KEY}}
+        aws-region: us-east-1
 
   #CHECK REPOSITORY EXIST / CREATE REPOSITORY
 
     # - name: Check Repository Exists
     #   id: check_repo
     #   run: |
-    #     if aws ecr describe-repositories --repository-names testimage --region us-east-1; then
+    #     if aws ecr describe-repositories --repository-names app --region us-east-1; then
     #       echo "repo-exists=true" >> $GITHUB_ENV
     #     else
     #       echo "repo-exists=false" >> $GITHUB_ENV
@@ -75,21 +80,21 @@ jobs:
     # - name: Create a Repository
     #   if: env.repo-exists == 'false'
     #   run: |
-    #     aws ecr --region us-east-1 create-repository --repository-name testimage
+    #     aws ecr --region us-east-1 create-repository --repository-name app
 
   #PUSH IMAGE TO AWS ECR
 
     # - name: Login to ECR
     #   run: |
-    #     aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com
+    #     aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com
 
     # - name: Tag Docker Image
     #   run: |
-    #     docker tag testimage:latest ${{secrets.AWS_ACCOUNT_ID}}.dkr.ecr.us-east-1.amazonaws.com/testimage:testimage
+    #     docker tag app:latest ${{env.AWS_ACCOUNT_ID}}.dkr.ecr.us-east-1.amazonaws.com/app:app
 
     # - name: Docker push
     #   run: |
-    #     docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/testimage:testimage
+    #     docker push ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/app:app
 
     - name: Image deploy
       run: echo 'deploy done successfully'
@@ -108,16 +113,16 @@ jobs:
     # - name: Terraform Plan
     #   run: |
     #     terraform plan \
-    #       -var="aws_access_key=${{ secrets.AWS_ACCESS_KEY }}" \
-    #       -var="aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" \
+    #       -var="aws_access_key=${{ env.AWS_ACCESS_KEY }}" \
+    #       -var="aws_secret_key=${{ env.AWS_SECRET_ACCESS_KEY }}" \
     #       -var="aws_region=us-east-1"
 
     #- name: Terraform Apply
     #  if: github.ref == 'refs/heads/feature/pipeline'
     #  run: |
     #    terraform apply \
-    #      -var="aws_access_key=${{ secrets.AWS_ACCESS_KEY }}" \
-    #      -var="aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" \
+    #      -var="aws_access_key=${{ env.AWS_ACCESS_KEY }}" \
+    #      -var="aws_secret_key=${{ env.AWS_SECRET_ACCESS_KEY }}" \
     #      -var="aws_region=us-east-1" \
     #      -auto-approve
 
