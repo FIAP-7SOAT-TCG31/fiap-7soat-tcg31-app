@@ -8,6 +8,10 @@ on:
 
   # Run Unit Test
 
+permissions:
+  contents: read
+  id-token: write
+
 env:
   AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID}}
   AWS_ACCESS_KEY: ${{secrets.AWS_ACCESS_KEY_TEST}}
