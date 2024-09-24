@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
@@ -26,14 +27,20 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         Optional.ofNullable(request.getHeader("Authorization"))
                 .filter(authHeader -> authHeader.startsWith("Bearer "))
-                .map(authHeader -> authHeader.substring(7)).flatMap(token -> Optional.ofNullable(jwtService.extractUsername(token))
-                        .map(userDetailsService::loadUserByUsername)
-                        .filter(userDetails -> jwtService.validateToken(token, userDetails))).ifPresent(userDetails -> {
+                .map(authHeader -> authHeader.substring(7))
+                .flatMap(this::decodeToken)
+                .ifPresent(userDetails -> {
                     UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                     authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                 });
 
         filterChain.doFilter(request, response);
+    }
+
+    private Optional<UserDetails> decodeToken(String token) {
+        return Optional.ofNullable(token)
+                .map(userDetailsService::loadUserByUsername)
+                .filter(userDetails -> jwtService.validateToken(token));
     }
 }
