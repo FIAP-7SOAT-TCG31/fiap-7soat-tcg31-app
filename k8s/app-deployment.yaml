@@ -17,7 +17,7 @@ spec:
       automountServiceAccountToken: false
       containers:
         - name: fiap-burger-app
-          image: gm50x/fiap-burger:v2-monolith
+          image: gm50x/fiap-burger:latest
           imagePullPolicy: Always
           envFrom:
             - secretRef:
