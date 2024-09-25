@@ -73,8 +73,8 @@ public class ApplicationBeansConfiguration {
     }
 
     @Bean
-    public CreateClientUseCase beanCreateClientPortIn(CreateClientGateway createClientGateway) {
-        return new CreateClientService(createClientGateway);
+    public CreateClientUseCase beanCreateClientPortIn(CreateClientGateway createClientGateway, GetClientByDocumentGateway getClientByDocumentGateway) {
+        return new CreateClientService(createClientGateway, getClientByDocumentGateway);
     }
 
     @Bean
