@@ -1,6 +1,5 @@
 package com.cleanarchitecture.techchallenge.api.rest.dtos.order;
 
-import com.cleanarchitecture.techchallenge.api.rest.dtos.client.ClientDto;
 import com.cleanarchitecture.techchallenge.api.rest.dtos.item.ComboDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
@@ -16,5 +15,4 @@ import lombok.NoArgsConstructor;
 public class RequestCreateOrderDto {
 
     private ComboDto combo;
-    private ClientDto requester;
 }

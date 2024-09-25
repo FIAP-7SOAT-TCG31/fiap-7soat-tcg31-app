@@ -2,6 +2,7 @@ package com.cleanarchitecture.techchallenge.api.rest.controllers.order;
 
 import com.cleanarchitecture.techchallenge.api.rest.dtos.order.OrderDto;
 import com.cleanarchitecture.techchallenge.api.rest.dtos.order.RequestCreateOrderDto;
+import com.cleanarchitecture.techchallenge.infra.controllers.client.CreateClientController;
 import com.cleanarchitecture.techchallenge.infra.controllers.order.CreateOrderController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -25,6 +26,7 @@ import java.util.Map;
 public class CreateOrderRestController {
 
     private final CreateOrderController createOrderController;
+    private final CreateClientController createClientController;
 
     @PostMapping(path = "/api/v1/orders")
     @Operation(summary = "Create order data")
@@ -37,7 +39,8 @@ public class CreateOrderRestController {
     public ResponseEntity<?> create(@RequestHeader Map<String, String> headers,
                                     @RequestBody RequestCreateOrderDto body) {
 
-        var order = createOrderController.create(body);
+        var clientDto = createClientController.create(headers.get("authorization"));
+        var order = createOrderController.create(body.getCombo(), clientDto);
 
         final var location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
